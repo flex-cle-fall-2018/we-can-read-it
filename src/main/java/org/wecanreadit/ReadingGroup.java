@@ -25,7 +25,7 @@ public class ReadingGroup {
 		this.groupName = groupName;
 		this.topic = topic;
 		for(Reader member : members) {
-			members.add(member);
+			this.members.add(member);
 		}
 	}
 	
