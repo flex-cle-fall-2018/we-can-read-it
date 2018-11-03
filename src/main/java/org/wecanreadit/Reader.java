@@ -2,6 +2,7 @@ package org.wecanreadit;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 public class Reader {
 
@@ -14,6 +15,9 @@ public class Reader {
 	private String lastName;
 	private String bio;
 	private String profileUrl;
+	
+	@ManyToOne
+	private ReadingGroup group;
 	
 	protected Reader() {}
 	

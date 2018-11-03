@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ReadingGroup {
@@ -16,6 +17,7 @@ public class ReadingGroup {
 	private String groupName;
 	private String topic;
 	
+	@OneToMany(mappedBy = "group")
 	private Collection<Reader> members;
 	
 	ReadingGroup(){
