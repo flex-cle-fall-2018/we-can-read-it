@@ -18,7 +18,7 @@ public class ReadingGroup {
 	private String topic;
 	
 	@OneToMany(mappedBy = "group")
-	private Collection<Reader> members;
+	private Collection<Reader> readingGroup;
 	
 	ReadingGroup(){
 	}
@@ -27,7 +27,7 @@ public class ReadingGroup {
 		this.groupName = groupName;
 		this.topic = topic;
 		for(Reader member : members) {
-			this.members.add(member);
+			this.readingGroup.add(member);
 		}
 	}
 	
@@ -40,7 +40,7 @@ public class ReadingGroup {
 	}
 	
 	public Collection<Reader> getAllMembers(){
-		return members;
+		return readingGroup;
 	}
 	
 	
