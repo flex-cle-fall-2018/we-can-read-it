@@ -15,5 +15,15 @@
 	<span th:text="${reader.username}"></span>
 	</div>
 	
+	
+	<div th:each="group: ${groups}">
+    <h2>Enter information below to delete a reader</h2>
+    <form method="GET" th:action="@{/deleteReader}">
+    	<input type="text" placeholder="Reader's Username" name="username">
+    	<input type="hidden" th:value="${group.id}" name="id">
+    	<input type="submit">
+    </form>
+	</div>
+	
 </body>
 </html>
