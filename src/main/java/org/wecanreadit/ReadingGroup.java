@@ -48,15 +48,15 @@ public class ReadingGroup {
 		return readingGroup;
 	}
 	
-	public Reader getSingleMemberByUserName(String username) {
-		for(Reader reader : readingGroup) {
-			if(reader.getUsername().equals(username)) {
-				Reader foundReader = reader;
-				return foundReader;
-			}
-		}
-		return null;
-	}
+//	public Reader getSingleMemberByUserName(String username) {
+//		for(Reader reader : readingGroup) {
+//			if(reader.getUsername().equals(username)) {
+//				Reader foundReader = reader;
+//				return foundReader;
+//			}
+//		}
+//		return null;
+//	}
 	
 	public void removeMember(Reader reader) {
 		readingGroup.remove(reader);

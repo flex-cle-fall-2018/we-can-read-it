@@ -54,11 +54,11 @@ public class ReaderController {
 	}
 	
 	@GetMapping("/deleteReader")
-	public String deleteSingleReader(@RequestParam(required = true) String username, Long id) {
+	public String deleteSingleReader(@RequestParam(required = true) String username, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		Reader toDelete = group.getSingleMemberByUserName(username);
-		group.removeMember(toDelete);
-		return "redirect:/group";
+		group.removeMember(readerRepo.findByUsername(username));
+		groupRepo.save(group);
+		return "redirect:/group?id="+id;
 	}
 	
 }
