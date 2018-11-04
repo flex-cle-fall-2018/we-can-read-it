@@ -1,9 +1,14 @@
 package org.wecanreadit;
 
+import java.util.Collection;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Reader {
 
 	@Id
@@ -16,8 +21,8 @@ public class Reader {
 	private String bio;
 	private String profileUrl;
 	
-	@ManyToOne
-	private ReadingGroup group;
+	@ManyToMany
+	private Collection<ReadingGroup> groups;
 	
 	protected Reader() {}
 	
