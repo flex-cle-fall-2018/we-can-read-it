@@ -1,13 +1,21 @@
 package org.wecanreadit;
 
-public class Librarian {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Librarian {
+	
+	@Id
+	@GeneratedValue
+	private long id;
 	private String firstName;
 	private String lastName;
 	private String library;
 	private String email;
 	private String favoriteGenre;
-	private long id;
+	
 	
 	public Librarian(String firstName, String lastName, String library, String email, String favoriteGenre) {
 		this.firstName = firstName;
