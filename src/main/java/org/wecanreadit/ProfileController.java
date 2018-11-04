@@ -22,6 +22,7 @@ public class ProfileController {
     public Iterable<Reader> collection() {
     	return readerRepo.findAll();
     }
+    
     @RequestMapping("/updateBio")
     public Reader updateBio(String name, String bio) {
     	Reader reader = readerRepo.findByFirstName(name);
@@ -29,6 +30,7 @@ public class ProfileController {
     	readerRepo.save(reader);
     	return reader;
     }
+
 }
 	
 
