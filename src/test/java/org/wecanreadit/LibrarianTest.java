@@ -12,12 +12,12 @@ public class LibrarianTest {
 
 	@Before
 	public void setup() {
-		librarian = new Librarian("firstName", "lastName", "library", "email", "favoriteGenre");
+		librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password", "favoriteGenre");
 	}
 
 	@Test
 	public void shouldBeAbleToCreateLibrarian() {
-		Librarian librarian = new Librarian("firstName", "lastName", "library", "email", "favoriteGenre");
+		Librarian librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password", "favoriteGenre");
 
 	}
 
@@ -46,9 +46,21 @@ public class LibrarianTest {
 		String email = librarian.getEmail();
 		assertThat(email, is("email"));
 	}
+	@Test 
+	public void shouldBeAbleToGetUsername() {
+		String username = librarian.getUsername();
+		assertThat(username, is("username"));
+	}
+
+	@Test
+	public void shouldBeAbleToGetPassword() {
+		String password = librarian.getPassword();
+		assertThat(password, is("password"));
+	}
+
 	@Test
 	public void shouldBeAbleToGetFavoriteGenre() {
 		String favoriteGenre = librarian.getFavoriteGenre();
-		assertThat(favoriteGenre, is ("favoriteGenre"));
+		assertThat(favoriteGenre, is("favoriteGenre"));
 	}
 }
