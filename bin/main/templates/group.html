@@ -15,5 +15,12 @@
 	<span th:text="${reader.username}"></span>
 	</div>
 	
+	
+    <h2>Enter information below to delete a reader</h2>
+    <form method="GET" th:action="@{/deleteReader}">
+    	<input type="text" placeholder="Reader's Username" name="username">
+    	<input type="submit">
+    </form>
+	
 </body>
 </html>
