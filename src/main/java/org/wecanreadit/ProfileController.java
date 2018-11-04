@@ -19,16 +19,15 @@ public class ProfileController {
 	ReaderRepository readerRepo;
 
     @RequestMapping("/profileInfo")
-    public Collection<Reader> collection(@RequestParam(value="firstName", defaultValue="World") String name) {
-    	Reader reader = new Reader("zackm","12e", "zackName", "Meinke");
-    	Reader reader2 = new Reader("zackm","12e", "zackName", "Meinke");
-
-    	ReadingGroup readingGroup = new ReadingGroup("group", "Fantasy", reader, reader2);
-    	
-    	reader = readerRepo.save(reader);
-    	return readingGroup.getAllMembers();
-    	
-
+    public Iterable<Reader> collection() {
+    	return readerRepo.findAll();
+    }
+    @RequestMapping("/updateBio")
+    public Reader updateBio(String name, String bio) {
+    	Reader reader = readerRepo.findByFirstName(name);
+    	reader.setBio(bio);
+    	readerRepo.save(reader);
+    	return reader;
     }
 }
 	
