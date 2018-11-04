@@ -12,12 +12,18 @@
 	<span th:text="${group.groupName}"></span>
 	</div>
 	
-	<p>Input the following information to create a new reading group</p>
 
+	<h2>Enter information below to create a new group</p>
     <form method="POST" th:action="@{/addGroup}">
         <input type="text" placeholder="Group Name" name="groupName">
         <input type="text" placeholder="Group Topic" name="topic">
         <input type="submit">
+    </form>
+    
+    <h2>Enter information below to delete a group</h2>
+    <form method="GET" th:action="@{/deleteGroup}">
+    	<input type="text" placeholder="Group Name" name="groupName">
+    	<input type="submit">
     </form>
 </body>
 </html>

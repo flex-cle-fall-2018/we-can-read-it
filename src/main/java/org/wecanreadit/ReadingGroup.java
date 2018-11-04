@@ -32,6 +32,10 @@ public class ReadingGroup {
 		this.readingGroup = new HashSet<>(Arrays.asList(members));
 	}
 	
+	public long getId() {
+		return id;
+	}
+	
 	public String getGroupName() {
 		return groupName;
 	}
