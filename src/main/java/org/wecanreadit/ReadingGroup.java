@@ -20,7 +20,7 @@ public class ReadingGroup {
 	private String groupName;
 	private String topic;
 	
-	@ManyToMany(mappedBy = "groups")
+	@ManyToMany
 	private Collection<Reader> readingGroup;
 	
 	ReadingGroup(){

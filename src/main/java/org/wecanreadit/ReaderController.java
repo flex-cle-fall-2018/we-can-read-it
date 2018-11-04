@@ -26,7 +26,7 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/groups")
-	public String findAllGRoups(Model model) {
+	public String findAllGroups(Model model) {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("groups");
 	}

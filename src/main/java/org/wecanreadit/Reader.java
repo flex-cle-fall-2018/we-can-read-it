@@ -20,7 +20,7 @@ public class Reader {
 	private String bio;
 	private String profileUrl;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
 	
 	protected Reader() {}
