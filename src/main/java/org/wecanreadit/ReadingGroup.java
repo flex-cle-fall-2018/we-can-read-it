@@ -1,11 +1,14 @@
 package org.wecanreadit;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+
+import java.util.Arrays;
 
 @Entity
 public class ReadingGroup {
@@ -13,40 +16,40 @@ public class ReadingGroup {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private String groupName;
 	private String topic;
-	
-	@OneToMany(mappedBy = "group")
+
+	@ManyToMany
 	private Collection<Reader> readingGroup;
-	
-	ReadingGroup(){
+
+	ReadingGroup() {
 	}
-	
-	ReadingGroup(String groupName, String topic, Reader...members){
+
+	ReadingGroup(String groupName, String topic, Reader... members) {
 		this.groupName = groupName;
 		this.topic = topic;
-		for(Reader member : members) {
-			this.readingGroup.add(member);
-		}
+		this.readingGroup = new HashSet<>(Arrays.asList(members));
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
 	public String getGroupName() {
 		return groupName;
 	}
-	
+
 	public String getTopic() {
 		return topic;
 	}
-	
-	public Collection<Reader> getAllMembers(){
+
+	public Collection<Reader> getAllMembers() {
 		return readingGroup;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public void removeMember(Reader reader) {
+		readingGroup.remove(reader);
+	}
+
 }
