@@ -11,5 +11,13 @@
 	<div th:each="group: ${groups}">
 	<span th:text="${group.groupName}"></span>
 	</div>
+	
+	<p>Input the following information to create a new reading group</p>
+
+    <form method="POST" th:action="@{/addGroup}">
+        <input type="text" placeholder="Group Name" name="groupName">
+        <input type="text" placeholder="Group Topic" name="topic">
+        <input type="submit">
+    </form>
 </body>
 </html>

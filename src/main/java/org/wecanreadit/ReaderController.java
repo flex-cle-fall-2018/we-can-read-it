@@ -10,30 +10,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ReaderController {
-	
+
 	@Resource
 	ReaderRepository readerRepo;
-	
+
 	@Resource
 	GroupRepository groupRepo;
-	
+
 	@RequestMapping("/")
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
 		return ("readers");
 	}
-	
+
 	@RequestMapping("/group")
 	public String findAllGRoups(Model model) {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("groups");
 	}
-	
+
 	@PostMapping("/addGroup")
 	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
-		if (groupRepo.findByGroupName(groupName) == null) {
-			groupRepo.save(new ReadingGroup(groupName, topic));
-		}
+		groupRepo.save(new ReadingGroup(groupName, topic));
+
 		return "redirect:/group";
 	}
 }
