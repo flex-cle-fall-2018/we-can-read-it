@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface GroupRepository extends CrudRepository<ReadingGroup, Long> {
 
-	ReadingGroup findByName(String groupName);
+	ReadingGroup findByGroupName(String groupName);
 	
 	
 }
