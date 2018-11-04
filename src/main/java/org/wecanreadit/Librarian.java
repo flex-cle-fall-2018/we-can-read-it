@@ -7,6 +7,7 @@ public class Librarian {
 	private String library;
 	private String email;
 	private String favoriteGenre;
+	private long id;
 	
 	public Librarian(String firstName, String lastName, String library, String email, String favoriteGenre) {
 		this.firstName = firstName;
