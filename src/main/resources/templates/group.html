@@ -7,16 +7,12 @@
 
 </head>
 <body>
-	
-	<h2>These are our readers</h2>
-	<div th:each="reader: ${readers}">
-	<span th:text="${reader.username}"></span>
+	<div th:each="group: ${groups}">
+	<h2 th:text="${group.groupName}"></h2>
 	</div>
 	
-	
-	<h2>These are the available groups</h2>
-	<div th:each="group: ${groups}">
-	<a th:href="@{group(id=${group.id})}" th:text="${group.groupName}"></a>
+	<div th:each="reader: ${readers}">
+	<span th:text="${reader.username}"></span>
 	</div>
 	
 </body>

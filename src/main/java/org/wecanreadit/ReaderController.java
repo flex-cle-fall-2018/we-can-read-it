@@ -18,17 +18,27 @@ public class ReaderController {
 	@Resource
 	GroupRepository groupRepo;
 
-	@RequestMapping("/")
+	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
+		model.addAttribute("groups", groupRepo.findAll());
 		return ("readers");
 	}
 
-	@RequestMapping("/group")
+	@RequestMapping("/groups")
 	public String findAllGRoups(Model model) {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("groups");
 	}
+	
+	@RequestMapping("/group")
+	public String findAGroup(@RequestParam(required = true) long id, Model model) {
+		ReadingGroup group = groupRepo.findById(id).get();
+		model.addAttribute("groups", group);
+		model.addAttribute("readers", group.getAllMembers());
+		return "group";
+	}
+	
 
 	@PostMapping("/addGroup")
 	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
