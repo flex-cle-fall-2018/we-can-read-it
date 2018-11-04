@@ -30,7 +30,7 @@ public class ReaderController {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("groups");
 	}
-	
+
 	@RequestMapping("/group")
 	public String findAGroup(@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
@@ -38,7 +38,6 @@ public class ReaderController {
 		model.addAttribute("readers", group.getAllMembers());
 		return "group";
 	}
-	
 
 	@PostMapping("/addGroup")
 	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
@@ -46,19 +45,19 @@ public class ReaderController {
 
 		return "redirect:/groups";
 	}
-	
+
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
 		groupRepo.deleteById(groupRepo.findByGroupName(groupName).getId());
 		return "redirect:/groups";
 	}
-	
+
 	@GetMapping("/deleteReader")
 	public String deleteSingleReader(@RequestParam(required = true) String username, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.removeMember(readerRepo.findByUsername(username));
 		groupRepo.save(group);
-		return "redirect:/group?id="+id;
+		return "redirect:/group?id=" + id;
 	}
-	
+
 }

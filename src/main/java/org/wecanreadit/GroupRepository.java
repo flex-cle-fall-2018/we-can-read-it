@@ -7,6 +7,5 @@ public interface GroupRepository extends CrudRepository<ReadingGroup, Long> {
 	ReadingGroup findByGroupName(String groupName);
 
 	void deleteByGroupName(String groupName);
-	
-	
+
 }

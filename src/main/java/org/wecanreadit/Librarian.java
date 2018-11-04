@@ -6,7 +6,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Librarian {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -17,12 +17,13 @@ public class Librarian {
 	private String username;
 	private String password;
 	private String favoriteGenre;
-	
-	
+
 	public Librarian() {
-		
+
 	}
-	public Librarian(String firstName, String lastName, String library, String email, String username, String password, String favoriteGenre) {
+
+	public Librarian(String firstName, String lastName, String library, String email, String username, String password,
+			String favoriteGenre) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.library = library;
@@ -33,34 +34,35 @@ public class Librarian {
 	}
 
 	public String getFirstName() {
-		
+
 		return firstName;
 	}
 
 	public String getLastName() {
-		
+
 		return lastName;
 	}
 
 	public String getLibrary() {
-	
+
 		return library;
 	}
 
 	public String getEmail() {
-		
+
 		return email;
 	}
+
 	public String getUsername() {
 		return username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
 
 	public String getFavoriteGenre() {
-	
+
 		return favoriteGenre;
 	}
 

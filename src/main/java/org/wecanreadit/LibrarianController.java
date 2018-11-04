@@ -14,21 +14,30 @@ public class LibrarianController {
 
 	@Resource
 	LibrarianRepository librarianRepo;
-	
+
 	@RequestMapping("/librarian")
 	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws LibrarianNotFoundException {
 		Optional<Librarian> librarian = librarianRepo.findById(id);
-		if(librarian.isPresent()) {
+		if (librarian.isPresent()) {
 			model.addAttribute("librarian", librarian.get());
 			return "librarian";
 		}
 		throw new LibrarianNotFoundException();
 	}
-@RequestMapping("/show-librarians")
+
+	@RequestMapping("/show-librarians")
 	public String findAllLibrarians(Model model) {
 		model.addAttribute("librarians", librarianRepo.findAll());
 		return "librarians";
-		
+
+	}
+
+	@RequestMapping
+	public String addComment(String firstName, String lastName, String email, String username, String password,
+			String library, String favoriteGenre, Model model) {
+		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
+		librarianRepo.save(newLibrarian);
+		return "redirect:/show-librarians";
 	}
 @RequestMapping("/add-librarian")
 public String addLibrarian(String firstName, String lastName, String email, String username, String password, String library, String favoriteGenre, Model model) {

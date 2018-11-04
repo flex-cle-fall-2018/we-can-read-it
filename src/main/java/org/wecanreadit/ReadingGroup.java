@@ -16,50 +16,40 @@ public class ReadingGroup {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private String groupName;
 	private String topic;
-	
+
 	@ManyToMany
 	private Collection<Reader> readingGroup;
-	
-	ReadingGroup(){
+
+	ReadingGroup() {
 	}
-	
-	ReadingGroup(String groupName, String topic, Reader...members){
+
+	ReadingGroup(String groupName, String topic, Reader... members) {
 		this.groupName = groupName;
 		this.topic = topic;
 		this.readingGroup = new HashSet<>(Arrays.asList(members));
 	}
-	
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public String getGroupName() {
 		return groupName;
 	}
-	
+
 	public String getTopic() {
 		return topic;
 	}
-	
-	public Collection<Reader> getAllMembers(){
+
+	public Collection<Reader> getAllMembers() {
 		return readingGroup;
 	}
-	
-//	public Reader getSingleMemberByUserName(String username) {
-//		for(Reader reader : readingGroup) {
-//			if(reader.getUsername().equals(username)) {
-//				Reader foundReader = reader;
-//				return foundReader;
-//			}
-//		}
-//		return null;
-//	}
-	
+
 	public void removeMember(Reader reader) {
 		readingGroup.remove(reader);
 	}
-	
+
 }

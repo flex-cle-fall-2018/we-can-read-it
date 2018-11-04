@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ProfileController {
-	
+
 	@Resource
 	ReadingGroupRepository groupRepo;
-	
+
 	@Resource
 	ReaderRepository readerRepo;
 
@@ -34,3 +34,11 @@ public class ProfileController {
 }
 	
 
+	@RequestMapping("/updateBio")
+	public Reader updateBio(String name, String bio) {
+		Reader reader = readerRepo.findByFirstName(name);
+		reader.setBio(bio);
+		readerRepo.save(reader);
+		return reader;
+	}
+}
