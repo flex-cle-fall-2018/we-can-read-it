@@ -44,13 +44,13 @@ public class ReaderController {
 	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
 		groupRepo.save(new ReadingGroup(groupName, topic));
 
-		return "redirect:/group";
+		return "redirect:/groups";
 	}
 	
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
 		groupRepo.deleteById(groupRepo.findByGroupName(groupName).getId());
-		return "redirect:/group";
+		return "redirect:/groups";
 	}
 	
 	@GetMapping("/deleteReader")
