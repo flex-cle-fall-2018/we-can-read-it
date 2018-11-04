@@ -16,7 +16,9 @@ public class Librarian {
 	private String email;
 	private String favoriteGenre;
 	
-	
+	public Librarian() {
+		
+	}
 	public Librarian(String firstName, String lastName, String library, String email, String favoriteGenre) {
 		this.firstName = firstName;
 		this.lastName = lastName;

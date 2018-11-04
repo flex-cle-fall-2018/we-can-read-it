@@ -30,5 +30,11 @@ public class LibrarianController {
 		return "librarians";
 		
 	}
+@RequestMapping
+public String addComment(String firstName, String lastName, String email, String library, String favoriteGenre, Model model) {
+	Librarian newLibrarian = new Librarian(firstName, lastName, email, library, favoriteGenre);
+	librarianRepo.save(newLibrarian);
+	return "redirect:/show-librarians";
+}
 
 }
