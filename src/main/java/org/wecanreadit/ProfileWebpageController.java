@@ -16,4 +16,8 @@ public class ProfileWebpageController {
 		readerRepo.findAll();
 		return ("profile");
 	}
+	@RequestMapping("/ReaderLogin")
+	public String ReaderLoginPage() {
+		return ("ReaderLogin");
+	}
 }

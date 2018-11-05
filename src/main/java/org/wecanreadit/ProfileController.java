@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ProfileController {
 
-	
-
-
 	@Resource
 	ReadingGroupRepository groupRepo;
 
@@ -35,6 +32,14 @@ public class ProfileController {
     	Reader reader = readerRepo.findByUsername(name);
     	reader.setBio(bio);
     	readerRepo.save(reader);
+    	return reader;
+    }
+    @RequestMapping("/verifyLogin")
+    public Reader verifyLogin(String userName, String password) {
+    	Reader reader = readerRepo.findByUsername(userName);
+    	if(reader.getUsername() == userName && reader.getPassword() == password) {
+    		return reader;
+    	}
     	return reader;
     }
 	

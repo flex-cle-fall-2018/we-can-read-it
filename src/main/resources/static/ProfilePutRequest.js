@@ -1,6 +1,6 @@
 (function loadProfiles(){
 
-    fetch('http://localhost:8080/profileInfo')
+    fetch('profileInfo')
         .then(function(response) {
             return response.json();
         })
