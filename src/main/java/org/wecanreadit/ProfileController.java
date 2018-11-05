@@ -37,16 +37,6 @@ public class ProfileController {
     	readerRepo.save(reader);
     	return reader;
     }
-
-}
 	
-
-	@RequestMapping("/updateBio")
-	public Reader updateBio(String name, String bio) {
-		Reader reader = readerRepo.findByFirstName(name);
-		reader.setBio(bio);
-		readerRepo.save(reader);
-		return reader;
-	}
 }
 
