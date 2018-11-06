@@ -32,18 +32,12 @@ public class LibrarianController {
 
 	}
 
-	@RequestMapping
-	public String addComment(String firstName, String lastName, String email, String username, String password,
+	@RequestMapping("/add-librarian")
+	public String addLibrarian(String firstName, String lastName, String email, String username, String password,
 			String library, String favoriteGenre, Model model) {
 		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
 		librarianRepo.save(newLibrarian);
 		return "redirect:/show-librarians";
 	}
-@RequestMapping("/add-librarian")
-public String addLibrarian(String firstName, String lastName, String email, String username, String password, String library, String favoriteGenre, Model model) {
-	Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
-	librarianRepo.save(newLibrarian);
-	return "redirect:/show-librarians";
-}
 
 }

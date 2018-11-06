@@ -24,6 +24,14 @@ public class ReaderController {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("readers");
 	}
+	
+	@RequestMapping("/reader")
+	public String findAReader(@RequestParam(required = true) long id, Model model) {
+		Reader reader = readerRepo.findById(id).get();
+		model.addAttribute("reader", reader);
+		model.addAttribute("books", reader.getBooks());
+		return "reader";
+	}
 
 	@RequestMapping("/groups")
 	public String findAllGroups(Model model) {
