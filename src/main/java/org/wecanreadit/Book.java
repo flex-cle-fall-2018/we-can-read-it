@@ -1,9 +1,14 @@
 package org.wecanreadit;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Book {
@@ -15,7 +20,7 @@ public class Book {
 	private String title;
 	private int totalPages;
 	private int pagesRead;
-	private long dateFinished;
+	private Calendar dateFinished;
 	
 	@ManyToOne
 	private Reader reader;
@@ -24,7 +29,7 @@ public class Book {
 		
 	}
 	
-	public Book(String title, int totalPages, int pagesRead, long dateFinished, Reader reader) {
+	public Book(String title, int totalPages, int pagesRead, Calendar dateFinished, Reader reader) {
 		this.title = title;
 		this.totalPages = totalPages;
 		this.pagesRead = pagesRead;
@@ -48,7 +53,7 @@ public class Book {
 		return pagesRead;
 	}
 
-	public long getDateFinished() {
+	public Calendar getDateFinished() {
 		return dateFinished;
 	}
 	

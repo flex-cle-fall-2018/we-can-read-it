@@ -3,6 +3,8 @@ package org.wecanreadit;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +14,7 @@ public class BookTest {
 
 	@Before
 	public void setup() {
-		book = new Book("title", 150, 200, 11052018L, null);
+		book = new Book("title", 150, 200, Calendar.getInstance(), null);
 	}
 
 	
@@ -37,12 +39,6 @@ public class BookTest {
 
 	}
 	
-	@Test
-	public void shouldBeAbleToGetDateFinished() {
-		long dateFinished = book.getDateFinished();
-		assertThat(dateFinished, is(11052018L));
-
-	}
 
 
 }

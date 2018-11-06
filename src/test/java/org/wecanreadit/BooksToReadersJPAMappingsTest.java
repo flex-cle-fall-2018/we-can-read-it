@@ -8,6 +8,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class BooksToReadersJPAMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadBook() {
-		Book book = bookRepo.save(new Book("title", 200, 150, 11052018, null));
+		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
@@ -48,7 +49,7 @@ public class BooksToReadersJPAMappingsTest {
 	
 	@Test
 	public void shouldGenerateBookId() {
-		Book book = bookRepo.save(new Book("title", 200, 150, 11052018, null));
+		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
@@ -78,8 +79,8 @@ public class BooksToReadersJPAMappingsTest {
 		reader = readerRepo.save(reader);
 		long readerId = reader.getId();
 		
-		Book book = bookRepo.save(new Book("title", 200, 150, 11052018, reader));
-		Book book2 = bookRepo.save(new Book("title2", 350, 75, 10192018, reader));
+		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
+		Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -96,9 +97,9 @@ public class BooksToReadersJPAMappingsTest {
 				Reader reader = new Reader("username", "password", "firstName", "lastName");
 				reader = readerRepo.save(reader);
 				
-				Book book = bookRepo.save(new Book("title", 200, 150, 11052018L, reader));
-				Book book2 = bookRepo.save(new Book("title2", 350, 75, 10192018L, reader));
-				Book book3 = bookRepo.save(new Book("title3", 700, 340, 11082017L, reader));
+				Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
+				Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
+				Book book3 = bookRepo.save(new Book("title3", 700, 340, Calendar.getInstance(), reader));
 				book = bookRepo.save(book);
 				book2 = bookRepo.save(book2);
 				book3 = bookRepo.save(book3);
@@ -117,8 +118,9 @@ public class BooksToReadersJPAMappingsTest {
 		Reader reader = new Reader("username", "password", "firstName", "lastName");
 		reader = readerRepo.save(reader);
 		
-		Book book = bookRepo.save(new Book("title", 200, 150, 11052018L, reader));
-		Book book2 = bookRepo.save(new Book("title2", 350, 75, 10192018L, reader));
+	
+		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
+		Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
 		book = bookRepo.save(book);
 		book2 = bookRepo.save(book2);
 		
