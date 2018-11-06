@@ -34,10 +34,13 @@ public class ProfileController {
     	readerRepo.save(reader);
     	return reader;
     }
+    //Find a way to get readerPassword to verify if user/password are matching
     @RequestMapping("/verifyLogin")
     public Reader verifyLogin(String name, String password) {
     	Reader reader = readerRepo.findByUsername(name);
-    	//reader.getUsername();
+    	String readerPassword = reader.getPassword();
+    	//System.out.println(readerPassword);
+//    	System.out.println(password);
     	return reader;
     }
 	

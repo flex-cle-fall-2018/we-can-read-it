@@ -7,9 +7,12 @@ btn.addEventListener('click', function(){
     var url = `verifyLogin?name=${name}&password=${password}`;
     fetch(url)
     .then(function(response) {
-         return response.json();
+        return response.json();
     })
     .then(function(myJson) {
+        if(myJson.password == password){
+            console.log('success');
+        }
         console.log(JSON.stringify(myJson));
     });
 });
