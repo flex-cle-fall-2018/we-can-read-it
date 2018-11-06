@@ -1,14 +1,13 @@
 var btn = document.getElementById('submit');
 
-
 btn.addEventListener('click', function(){
 
     var name = document.getElementById('readerLogin').value;
     var password = document.getElementById('password').value;
-
-    fetch(`/verifyLogin`, data = {name: `${name}`, password: `${password}`})
+    var url = `verifyLogin?name=${name}&password=${password}`;
+    fetch(url)
     .then(function(response) {
-        return response.json();
+         return response.json();
     })
     .then(function(myJson) {
         console.log(JSON.stringify(myJson));
@@ -32,3 +31,4 @@ btn.addEventListener('click', function(){
       })
       .then(response => response.json()); // parses response to JSON
   }
+  

@@ -32,7 +32,7 @@ public class LibrarianController {
 
 	}
 
-	@RequestMapping
+	@RequestMapping("/add-librarian-mapping")
 	public String addComment(String firstName, String lastName, String email, String username, String password,
 			String library, String favoriteGenre, Model model) {
 		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
