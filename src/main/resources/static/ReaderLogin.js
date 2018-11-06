@@ -1,18 +1,19 @@
-(function(){
-var userName = document.getElementById('readerLogin');
-var password = document.getElementById('password');
 var btn = document.getElementById('submit');
-var url = `/verifyLogin?=userName=${userName}&password=${password}`;
 
-console.log('load test');
 
 btn.addEventListener('click', function(){
-    console.log('Button Event');
-    verifyLogin(url, { })
-    .then(res => console.log('success')) // JSON-string from `response.json()` call
-    .catch(error => console.error(error));
-    console.log('button event');
+
+    var name = document.getElementById('readerLogin').value;
+    var password = document.getElementById('password').value;
+
+    fetch(`/verifyLogin`, data = {name: `${name}`, password: `${password}`})
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(myJson) {
+        console.log(JSON.stringify(myJson));
     });
+});
 
   function verifyLogin(url = ``, data = {}) {
     // Default options are marked with *
@@ -31,5 +32,3 @@ btn.addEventListener('click', function(){
       })
       .then(response => response.json()); // parses response to JSON
   }
-
-});

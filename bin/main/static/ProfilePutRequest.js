@@ -21,7 +21,6 @@
         .then(res => {
             //update FirstName Area Needs Done
             console.log(res);
-
         });
         
     //Sending PUT request to upload and retrieve data from api

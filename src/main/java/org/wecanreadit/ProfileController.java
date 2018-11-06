@@ -35,11 +35,9 @@ public class ProfileController {
     	return reader;
     }
     @RequestMapping("/verifyLogin")
-    public Reader verifyLogin(String userName, String password) {
-    	Reader reader = readerRepo.findByUsername(userName);
-    	if(reader.getUsername() == userName && reader.getPassword() == password) {
-    		return reader;
-    	}
+    public Reader verifyLogin(String name, String password) {
+    	Reader reader = readerRepo.findByUsername(name);
+    	//reader.getUsername();
     	return reader;
     }
 	
