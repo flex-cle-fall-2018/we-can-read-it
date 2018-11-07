@@ -43,6 +43,16 @@ public class ReaderController {
 		return "group";
 	}
 	
+	@GetMapping("/deleteGoal")
+	public String deleteGoal(@RequestParam(required = true)String name, long id) {
+		ReadingGroup group = groupRepo.findById(id).get();
+		Goal goal = goalRepo.findByName(name);
+		group.removeGoal(goal);
+		groupRepo.save(group);
+		goalRepo.deleteById(goalRepo.findByName(name).getId());
+		return "redirect:/group?id=" + id;
+	}
+	
 	@PostMapping("/addGoal")
 	public String addAGoal(@RequestParam(required = true)String name, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();

@@ -33,4 +33,8 @@ public class Goal {
 	public Collection<ReadingGroup> getGroups() {
 		return groups;
 	}
+
+	public Long getId() {
+		return id;
+	}
 }

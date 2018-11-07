@@ -53,9 +53,17 @@ public class ReadingGroup {
 	public void removeMember(Reader reader) {
 		readingGroup.remove(reader);
 	}
+	
+	public void addMember(Reader reader) {
+		readingGroup.add(reader);
+	}
 
 	public void addGoal(Goal goal) {
 		goals.add(goal);
+	}
+	
+	public void removeGoal(Goal goal) {
+		goals.remove(goal);
 	}
 
 	public Collection<Goal> getGoals() {
