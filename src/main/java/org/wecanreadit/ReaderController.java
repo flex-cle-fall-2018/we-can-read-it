@@ -17,6 +17,9 @@ public class ReaderController {
 
 	@Resource
 	GroupRepository groupRepo;
+	
+	@Resource
+	GoalRepository goalRepo;
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -36,7 +39,16 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findById(id).get();
 		model.addAttribute("groups", group);
 		model.addAttribute("readers", group.getAllMembers());
+		model.addAttribute("goals", group.getGoals());
 		return "group";
+	}
+	
+	@PostMapping("/addGoal")
+	public String addAGoal(@RequestParam(required = true)String name, long id) {
+		ReadingGroup group = groupRepo.findById(id).get();
+		group.addGoal(goalRepo.save(new Goal(name)));
+		groupRepo.save(group);
+		return "redirect:/group?id=" + id;
 	}
 
 	@PostMapping("/addGroup")

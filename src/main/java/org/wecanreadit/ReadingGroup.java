@@ -1,5 +1,6 @@
 package org.wecanreadit;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -7,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-
-import java.util.Arrays;
 
 @Entity
 public class ReadingGroup {
@@ -22,6 +21,9 @@ public class ReadingGroup {
 
 	@ManyToMany
 	private Collection<Reader> readingGroup;
+
+	@ManyToMany
+	private Collection<Goal> goals;
 
 	ReadingGroup() {
 	}
@@ -50,6 +52,14 @@ public class ReadingGroup {
 
 	public void removeMember(Reader reader) {
 		readingGroup.remove(reader);
+	}
+
+	public void addGoal(Goal goal) {
+		goals.add(goal);
+	}
+
+	public Collection<Goal> getGoals() {
+		return goals;
 	}
 
 }

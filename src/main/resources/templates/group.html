@@ -25,6 +25,21 @@
     </form>
 	</div>
 	
+	
+	
+	<div th:each="group: ${groups}">
+	<h2>Enter information below to create a new goal</p>
+    <form method="POST" th:action="@{/addGoal}">
+        <input type="text" placeholder="Goal Name" name="name">
+        <input type="hidden" th:value="${group.id}" name="id">
+        <input type="submit">
+    </form>
+    </div>
+	
+	<h2> Here are the group goals </h2>
+	<div th:each = "goal: ${goals}">
+	<span th:text = "${goal.name}"></span>
+	</div>
 	<a href="http://localhost:8080/groups">Back to Groups.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	
