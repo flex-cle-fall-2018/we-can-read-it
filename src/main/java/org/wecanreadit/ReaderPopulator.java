@@ -1,5 +1,7 @@
 package org.wecanreadit;
 
+import java.util.Calendar;
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +15,9 @@ public class ReaderPopulator implements CommandLineRunner {
 
 	@Resource
 	private GroupRepository groupRepo;
+	
+	@Resource
+	private BookRepository bookRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -36,6 +41,9 @@ public class ReaderPopulator implements CommandLineRunner {
 		test1 = groupRepo.save(test1);
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
+		
+		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", 850, 176, Calendar.getInstance(), bob));
+		Book mistborn = bookRepo.save(new Book("Mistborn", 350, 75, Calendar.getInstance(), bob));
 	}
 
 }

@@ -1,5 +1,6 @@
 package org.wecanreadit;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,6 +22,8 @@ public class Book {
 	private int totalPages;
 	private int pagesRead;
 	private Calendar dateFinished;
+	private String author;
+	
 	
 	@ManyToOne
 	private Reader reader;
@@ -29,11 +32,11 @@ public class Book {
 		
 	}
 	
-	public Book(String title, int totalPages, int pagesRead, Calendar dateFinished, Reader reader) {
+	public Book(String title, String author, int totalPages, int pagesRead, int monthFinished, int dayFinished, int yearFinished, Reader reader) {
 		this.title = title;
+		this.author = author;
 		this.totalPages = totalPages;
 		this.pagesRead = pagesRead;
-		this.dateFinished = dateFinished;
 		this.reader = reader;
 	}
 
@@ -43,6 +46,10 @@ public class Book {
 
 	public String getTitle() {
 		return title;
+	}
+	
+	public String getAuthor() {
+		return author;
 	}
 
 	public int getTotalPages() {
@@ -83,7 +90,8 @@ public class Book {
 		return true;
 	}
 	
-	
-	
-	
+	public String getStringDateFinished() {
+		return new SimpleDateFormat("MMM dd, YYYY").format(this.dateFinished.getTime());
+	}
+
 }

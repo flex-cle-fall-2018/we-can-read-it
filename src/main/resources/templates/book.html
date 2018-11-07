@@ -7,14 +7,15 @@
 
 </head>
 <body>
-	<h1 th:text="${reader.firstName}"></h1>
-	<div th:each="book: ${books}">
-	<a th:href="@{book(id=${book.id})}"><span th:text="${book.title}"></span></a>
+	<h1 th:text="${book.title}"></h1>
+	<p th:text="${book.totalPages} + ' total pages'"></p>
+	<p th:text="${book.pagesRead}  + ' pages read'"></p>
+	<p th:text="${book.stringDateFinished}  + ' date finished'"></p>
+		
 	
-	</div>
 	
-	<br />
 	
+
 	
 
 	
