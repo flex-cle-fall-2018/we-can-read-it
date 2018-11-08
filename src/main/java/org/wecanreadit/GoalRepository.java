@@ -6,4 +6,5 @@ public interface GoalRepository extends CrudRepository<Goal, Long> {
 
 	Goal findByName(String name);
 
+
 }

@@ -36,12 +36,13 @@
     </form>
     </div>
 	
+	<div th:each="group: ${groups}">
 	<h2> Here are the group goals </h2>
 	<div th:each = "goal: ${goals}">
 	<span th:text = "${goal.name}"></span>
+	<a th:href ="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
 	</div>
-	<a href="http://localhost:8080/groups">Back to Groups.</a>
-	<a href="http://localhost:8080/readers">Back to Readers.</a>
+	</div>
 	
 	<div th:each="group: ${groups}">
     <h2>Enter information below to delete a goal</h2>
@@ -50,6 +51,9 @@
     	<input type="hidden" th:value="${group.id}" name="id">
     	<input type="submit">
     </form>
+    
+    <a href="http://localhost:8080/groups">Back to Groups.</a>
+	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	</div>
 	
 </body>
