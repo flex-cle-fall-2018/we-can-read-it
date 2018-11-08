@@ -60,6 +60,7 @@ public class ReaderController {
 		Goal goal = goalRepo.findById(goalId).get();
 		group.removeGoal(goal);
 		groupRepo.save(group);
+		goalRepo.deleteById(goalId);
 		return "redirect:/group?id=" + groupId;
 	}
 	
