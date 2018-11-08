@@ -7,7 +7,6 @@
         .then(function(myJson) {
             console.log(JSON.stringify(myJson));
         });
-
 })();
 
 (function(){
