@@ -87,8 +87,18 @@ public class ReaderController {
 
 	@GetMapping("/deleteReader")
 	public String deleteSingleReader(@RequestParam(required = true) String username, long id) {
+
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.removeMember(readerRepo.findByUsername(username));
+		groupRepo.save(group);
+		return "redirect:/group?id=" + id;
+	}
+	
+	@PostMapping("/addReader")
+	public String addReaderToGroup(@RequestParam(required = true) String username, long id) {
+		ReadingGroup group = groupRepo.findById(id).get();
+		Reader reader = readerRepo.findByUsername(username);
+		group.addMember(reader);
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
