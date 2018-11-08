@@ -65,7 +65,7 @@ public class ReaderController {
 	}
 	
 	@PostMapping("/addGoal")
-	public String addAGoal(@RequestParam(required = true)String name, long id) {
+	public String addAGoalToAGroup(@RequestParam(required = true)String name, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.addGoal(goalRepo.save(new Goal(name)));
 		groupRepo.save(group);
@@ -73,7 +73,7 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGroup")
-	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
+	public String createGroup(@RequestParam(required = true) String groupName, String topic) {
 		groupRepo.save(new ReadingGroup(groupName, topic));
 
 		return "redirect:/groups";
@@ -86,7 +86,7 @@ public class ReaderController {
 	}
 
 	@GetMapping("/deleteReader")
-	public String deleteSingleReader(@RequestParam(required = true) String username, long id) {
+	public String deleteSingleReaderFromGroup(@RequestParam(required = true) String username, long id) {
 
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.removeMember(readerRepo.findByUsername(username));
