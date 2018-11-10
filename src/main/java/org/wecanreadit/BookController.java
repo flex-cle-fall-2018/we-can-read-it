@@ -17,10 +17,12 @@ public class BookController {
 
 	
 	@RequestMapping("/book")
-	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws BookNotFoundException {
-		Optional<Book> book = bookRepo.findById(id);
-		if (book.isPresent()) {
-			model.addAttribute("book", book.get());
+	public String findOneBook(@RequestParam(value = "id") long id, Model model) throws BookNotFoundException {
+		Optional<Book> result = bookRepo.findById(id);
+		Book book = result.get();
+		if (result.isPresent()) {
+			model.addAttribute("book", book);
+			model.addAttribute("reader", book.getReader());
 			return "book";
 		}
 		throw new BookNotFoundException();

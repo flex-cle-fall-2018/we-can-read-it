@@ -42,8 +42,8 @@ public class ReaderPopulator implements CommandLineRunner {
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
 		
-		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", 850, 176, Calendar.getInstance(), bob));
-		Book mistborn = bookRepo.save(new Book("Mistborn", 350, 75, Calendar.getInstance(), bob));
+		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", "George R.R. Martin", 850, 176, 11, 9, 2018, bob));
+		Book mistborn = bookRepo.save(new Book("Mistborn", "Brandon Sanderson", 350, 75, 10, 25, 2018, bob));
 	}
 
 }

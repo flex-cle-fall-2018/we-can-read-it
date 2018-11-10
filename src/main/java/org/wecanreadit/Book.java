@@ -1,6 +1,8 @@
 package org.wecanreadit;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,8 +23,9 @@ public class Book {
 	private String title;
 	private int totalPages;
 	private int pagesRead;
-	private Calendar dateFinished;
+	private LocalDate dateFinished;
 	private String author;
+	private boolean isFinished;
 	
 	
 	@ManyToOne
@@ -32,12 +35,13 @@ public class Book {
 		
 	}
 	
-	public Book(String title, String author, int totalPages, int pagesRead, int monthFinished, int dayFinished, int yearFinished, Reader reader) {
+	public Book(String title, String author, int totalPages, int pagesRead, int monthFinished, int dayOfMonthFinished, int yearFinished, Reader reader) {
 		this.title = title;
 		this.author = author;
 		this.totalPages = totalPages;
 		this.pagesRead = pagesRead;
 		this.reader = reader;
+		this.dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 	}
 
 	public long getId() {
@@ -60,7 +64,7 @@ public class Book {
 		return pagesRead;
 	}
 
-	public Calendar getDateFinished() {
+	public LocalDate getDateFinished() {
 		return dateFinished;
 	}
 	
@@ -91,7 +95,13 @@ public class Book {
 	}
 	
 	public String getStringDateFinished() {
-		return new SimpleDateFormat("MMM dd, YYYY").format(this.dateFinished.getTime());
+		return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+			
 	}
+	
+	public void setIsFinished(boolean isFinished) {
+		this.isFinished = isFinished;
+	}
+
 
 }

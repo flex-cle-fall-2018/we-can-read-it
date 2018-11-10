@@ -36,7 +36,7 @@ public class BooksToReadersJPAMappingsTest {
 	
 	@Test
 	public void shouldSaveAndLoadBook() {
-		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), null));
+		Book book = bookRepo.save(new Book("title", "author",200, 150, 11 , 9, 2018, null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
@@ -49,7 +49,7 @@ public class BooksToReadersJPAMappingsTest {
 	
 	@Test
 	public void shouldGenerateBookId() {
-		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), null));
+		Book book = bookRepo.save(new Book("title", "author",200, 150, 11 , 9, 2018, null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
@@ -79,8 +79,8 @@ public class BooksToReadersJPAMappingsTest {
 		reader = readerRepo.save(reader);
 		long readerId = reader.getId();
 		
-		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
-		Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
+		Book book = bookRepo.save(new Book("title", "author",200, 150, 11 , 9, 2018, reader));
+		Book book2 = bookRepo.save(new Book("title2", "author", 350, 75, 10, 25, 2018,  reader));
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -97,9 +97,9 @@ public class BooksToReadersJPAMappingsTest {
 				Reader reader = new Reader("username", "password", "firstName", "lastName");
 				reader = readerRepo.save(reader);
 				
-				Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
-				Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
-				Book book3 = bookRepo.save(new Book("title3", 700, 340, Calendar.getInstance(), reader));
+				Book book = bookRepo.save(new Book("title", "author",200, 150, 11 , 9, 2018, reader));
+				Book book2 = bookRepo.save(new Book("title2", "author", 350, 75, 10, 25, 2018,  reader));
+				Book book3 = bookRepo.save(new Book("title3", "author", 700, 340, 8, 3, 2017, reader));
 				book = bookRepo.save(book);
 				book2 = bookRepo.save(book2);
 				book3 = bookRepo.save(book3);
@@ -119,8 +119,8 @@ public class BooksToReadersJPAMappingsTest {
 		reader = readerRepo.save(reader);
 		
 	
-		Book book = bookRepo.save(new Book("title", 200, 150, Calendar.getInstance(), reader));
-		Book book2 = bookRepo.save(new Book("title2", 350, 75, Calendar.getInstance(), reader));
+		Book book = bookRepo.save(new Book("title", "author",200, 150, 11 , 9, 2018, reader));
+		Book book2 = bookRepo.save(new Book("title2", "author", 350, 75, 10, 25, 2018,  reader));
 		book = bookRepo.save(book);
 		book2 = bookRepo.save(book2);
 		

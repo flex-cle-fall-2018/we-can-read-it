@@ -14,7 +14,7 @@ public class BookTest {
 
 	@Before
 	public void setup() {
-		book = new Book("title", 150, 200, Calendar.getInstance(), null);
+		book = new Book("title", "author", 150, 200, 11, 9, 2018, null);
 	}
 
 	
