@@ -18,15 +18,29 @@ public class ReaderController {
 
 	@Resource
 	GroupRepository groupRepo;
-	
+
 	@Resource
 	GoalRepository goalRepo;
-	
+
 	@Resource
 	DiscussionQuestionRepository questRepo;
-	
+
 	@Resource
 	DiscussionQuestionRepository ansRepo;
+
+	@RequestMapping("/questionlist")
+	public String findQuestions(Model model) {
+		model.addAttribute("groups", groupRepo.findAll());
+		return "groupquestionlist";
+	}
+
+	@RequestMapping("/singlegroupquestions")
+	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, Model model) {
+		ReadingGroup group = groupRepo.findById(id).get();
+		model.addAttribute("groups", group);
+		model.addAttribute("questions", group.getQuestions());
+		return "singlegroupquestions";
+	}
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -38,7 +52,7 @@ public class ReaderController {
 	@RequestMapping("/groups")
 	public String findAllGroups(Model model) {
 		model.addAttribute("groups", groupRepo.findAll());
-		return ("groups");
+		return "groups";
 	}
 
 	@RequestMapping("/group")
@@ -50,29 +64,29 @@ public class ReaderController {
 		model.addAttribute("questions", group.getQuestions());
 		return "group";
 	}
-	
+
 	@PostMapping("/addQuestion")
-	public String addQuestion(@RequestParam(required = true)String content, long id) {
+	public String addQuestion(@RequestParam(required = true) String content, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.addQuestion(questRepo.save(new DiscussionQuestion(content)));
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
-	@RequestMapping(value="/removeQuestion/{questId}/{groupId}")
+
+	@RequestMapping(value = "/removeQuestion/{questId}/{groupId}")
 	public String removeQuestion(@PathVariable("questId") long questId, @PathVariable("groupId") long groupId) {
 		ReadingGroup group = groupRepo.findById(groupId).get();
 		DiscussionQuestion quest = questRepo.findById(questId).get();
 		group.removeQuestion(quest);
 		groupRepo.save(group);
 		questRepo.deleteById(questId);
-		
+
 		return "redirect:/group?id=" + groupId;
 
 	}
-	
+
 	@GetMapping("/deleteGoal")
-	public String deleteGoal(@RequestParam(required = true)String name, long id) {
+	public String deleteGoal(@RequestParam(required = true) String name, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		Goal goal = goalRepo.findByName(name);
 		group.removeGoal(goal);
@@ -80,9 +94,9 @@ public class ReaderController {
 		goalRepo.deleteById(goalRepo.findByName(name).getId());
 		return "redirect:/group?id=" + id;
 	}
-	
+
 	@RequestMapping(value = "/removeGoal/{goalId}/{groupId}")
-	public String removeGoal(@PathVariable("goalId") long goalId, @PathVariable("groupId")long groupId) {
+	public String removeGoal(@PathVariable("goalId") long goalId, @PathVariable("groupId") long groupId) {
 		ReadingGroup group = groupRepo.findById(groupId).get();
 		Goal goal = goalRepo.findById(goalId).get();
 		group.removeGoal(goal);
@@ -90,9 +104,9 @@ public class ReaderController {
 		goalRepo.deleteById(goalId);
 		return "redirect:/group?id=" + groupId;
 	}
-	
+
 	@PostMapping("/addGoal")
-	public String addAGoalToAGroup(@RequestParam(required = true)String name, long id) {
+	public String addAGoalToAGroup(@RequestParam(required = true) String name, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		group.addGoal(goalRepo.save(new Goal(name)));
 		groupRepo.save(group);
@@ -120,7 +134,7 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
+
 	@PostMapping("/addReader")
 	public String addReaderToGroup(@RequestParam(required = true) String username, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();
