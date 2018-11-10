@@ -13,9 +13,15 @@ public class ReaderPopulator implements CommandLineRunner {
 
 	@Resource
 	private GroupRepository groupRepo;
-	
+
 	@Resource
 	private GoalRepository goalRepo;
+
+	@Resource
+	private DiscussionQuestionRepository questRepo;
+
+	@Resource
+	private DiscussionAnswerRepository ansRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -31,21 +37,21 @@ public class ReaderPopulator implements CommandLineRunner {
 		joe = readerRepo.save(joe);
 		vi = readerRepo.save(vi);
 		doug = readerRepo.save(doug);
-		
 
 		ReadingGroup test1 = new ReadingGroup("Group 1", "Everything", shane, zack, joe);
 		ReadingGroup test2 = new ReadingGroup("Group 2", "Everything", vi, doug, joe);
 		ReadingGroup test3 = new ReadingGroup("Group 3", "Everything", zack, bob, vi, doug);
-		
-		
+
 		test1 = groupRepo.save(test1);
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
 		
+		DiscussionQuestion testquest = new DiscussionQuestion("test");
+		DiscussionAnswer testans = new DiscussionAnswer("test");
 		
-		
-		
-		
+		testquest = questRepo.save(testquest);
+		testans = ansRepo.save(testans);
+
 	}
 
 }

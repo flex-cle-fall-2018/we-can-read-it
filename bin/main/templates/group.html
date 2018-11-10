@@ -34,6 +34,22 @@
     </form>
 	</div>
 	
+	<div th:each="group: ${groups}">
+	<h2>Enter information below to create a new question</p>
+    <form method="POST" th:action="@{/addQuestion}">
+        <input type="text" placeholder="Question" name="content">
+        <input type="hidden" th:value="${group.id}" name="id">
+        <input type="submit">
+    </form>
+    </div>
+	
+	<div th:each="group: ${groups}">
+	<h2>Here are the groups discussion questions</h2>
+	<div th:each = "question: ${questions}">
+	<span th:text = "${question.content}"></span>
+	</div>
+	</div>
+	
 	
 	
 	<div th:each="group: ${groups}">
