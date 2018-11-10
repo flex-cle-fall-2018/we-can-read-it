@@ -79,7 +79,11 @@ public class ReadingGroup {
 
 	public void addQuestion(DiscussionQuestion question) {
 		questions.add(question);
-		
+
+	}
+
+	public void removeQuestion(DiscussionQuestion quest) {
+		questions.remove(quest);
 	}
 
 }

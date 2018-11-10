@@ -59,6 +59,18 @@ public class ReaderController {
 		return "redirect:/group?id=" + id;
 	}
 	
+	@RequestMapping(value="/removeQuestion/{questId}/{groupId}")
+	public String removeQuestion(@PathVariable("questId") long questId, @PathVariable("groupId") long groupId) {
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		DiscussionQuestion quest = questRepo.findById(questId).get();
+		group.removeQuestion(quest);
+		groupRepo.save(group);
+		questRepo.deleteById(questId);
+		
+		return "redirect:/group?id=" + groupId;
+
+	}
+	
 	@GetMapping("/deleteGoal")
 	public String deleteGoal(@RequestParam(required = true)String name, long id) {
 		ReadingGroup group = groupRepo.findById(id).get();

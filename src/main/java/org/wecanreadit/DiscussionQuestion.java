@@ -16,10 +16,10 @@ public class DiscussionQuestion {
 	private long id;
 
 	private String content;
-	
+
 	@OneToMany(mappedBy = "question")
 	private Collection<DiscussionAnswer> answers;
-	
+
 	@ManyToMany(mappedBy = "questions")
 	private Collection<ReadingGroup> groups;
 
@@ -33,13 +33,17 @@ public class DiscussionQuestion {
 	public String getContent() {
 		return content;
 	}
-	
-	public Collection<DiscussionAnswer> getAnswers(){
+
+	public Collection<DiscussionAnswer> getAnswers() {
 		return answers;
 	}
-	
-	public Collection<ReadingGroup> getGroups(){
+
+	public Collection<ReadingGroup> getGroups() {
 		return groups;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 }

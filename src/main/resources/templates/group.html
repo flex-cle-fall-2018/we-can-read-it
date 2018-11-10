@@ -47,6 +47,8 @@
 	<h2>Here are the groups discussion questions</h2>
 	<div th:each = "question: ${questions}">
 	<span th:text = "${question.content}"></span>
+	<a th:href ="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
+	
 	</div>
 	</div>
 	

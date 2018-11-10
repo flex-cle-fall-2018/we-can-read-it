@@ -46,11 +46,6 @@ public class ReaderPopulator implements CommandLineRunner {
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
 		
-		DiscussionQuestion testquest = new DiscussionQuestion("test");
-		DiscussionAnswer testans = new DiscussionAnswer("test");
-		
-		testquest = questRepo.save(testquest);
-		testans = ansRepo.save(testans);
 
 	}
 
