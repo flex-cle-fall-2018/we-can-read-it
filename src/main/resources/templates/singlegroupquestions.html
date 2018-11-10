@@ -9,14 +9,19 @@
 <body>
     <div th:each="group: ${groups}">
         <h2 th:text="${group.groupName}"></h2>
-        </div>
-
-
+       
+			
             <h2>Here are the groups discussion questions</h2>
             <div th:each = "question: ${questions}">
             <span th:text = "${question.content}"></span>
-            
+            <form method="POST" th:action="@{/saveanswer}">
+       		 <input type="text" name="answer" placeholder = "Answer here" required>
+      		  <input type="hidden" th:value="${question.id}" name="id">
+      		  <input type="hidden" th:value="${group.id}" name="groupid">
+       		 <input type="submit">
+   			 </form>
             </div>
+        </div>
 
 
 

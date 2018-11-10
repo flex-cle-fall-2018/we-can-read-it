@@ -1,9 +1,11 @@
 package org.wecanreadit;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class DiscussionAnswer {
@@ -14,8 +16,8 @@ public class DiscussionAnswer {
 
 	private String content;
 
-	@ManyToOne
-	private DiscussionQuestion question;
+	@ManyToMany(mappedBy = "answers")
+	private Collection<DiscussionQuestion> questions;
 
 	DiscussionAnswer() {
 	}
@@ -28,8 +30,8 @@ public class DiscussionAnswer {
 		return content;
 	}
 
-	public DiscussionQuestion getQuestion() {
-		return question;
+	public Collection<DiscussionQuestion> getQuestion() {
+		return questions;
 	}
 
 }

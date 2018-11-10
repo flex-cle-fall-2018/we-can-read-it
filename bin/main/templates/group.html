@@ -49,6 +49,10 @@
 	<span th:text = "${question.content}"></span>
 	<a th:href ="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
 	
+	<div th:each ="answer:${question.getAnswers()}">
+	<span th:text = "${answer.content}"></span>
+	</div>
+	
 	</div>
 	</div>
 	

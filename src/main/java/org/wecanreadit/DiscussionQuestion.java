@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class DiscussionQuestion {
@@ -17,7 +16,7 @@ public class DiscussionQuestion {
 
 	private String content;
 
-	@OneToMany(mappedBy = "question")
+	@ManyToMany
 	private Collection<DiscussionAnswer> answers;
 
 	@ManyToMany(mappedBy = "questions")
@@ -44,6 +43,10 @@ public class DiscussionQuestion {
 
 	public long getId() {
 		return id;
+	}
+
+	public void addAnswer(DiscussionAnswer ans) {
+		answers.add(ans);
 	}
 
 }

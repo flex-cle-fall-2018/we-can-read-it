@@ -26,7 +26,7 @@ public class ReaderController {
 	DiscussionQuestionRepository questRepo;
 
 	@Resource
-	DiscussionQuestionRepository ansRepo;
+	DiscussionAnswerRepository ansRepo;
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(Model model) {
@@ -142,6 +142,14 @@ public class ReaderController {
 		group.addMember(reader);
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
+	}
+	
+	@PostMapping("/saveanswer")
+	public String saveAnswer(@RequestParam(required = true)String answer, long id, long groupid) {
+		DiscussionQuestion quest = questRepo.findById(id).get();
+		quest.addAnswer(ansRepo.save(new DiscussionAnswer(answer)));
+		questRepo.save(quest);
+		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
 }
