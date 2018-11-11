@@ -7,8 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BookRepository extends CrudRepository<Book, Long> {
 
-	Collection<Book> findByReader(Reader reader);
+	Collection<Book> findByReadingGroup(ReadingGroup readingGroup);
 
 	Optional<Book> findByTitle(String bookTitle);
+
 
 }

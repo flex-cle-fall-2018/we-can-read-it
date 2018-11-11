@@ -15,6 +15,26 @@
 	<span th:text="${reader.username}"></span>
 	</div>
 	
+	<h2>Books</h2>
+	<div th:each="book: ${books}">
+	<span th:text="${book.title}"></span>
+	<form method="POST" id="add-readerFinishedBook">
+	<input type="hidden" id="reader-id" name="readerId" value = 1 />
+	<input type="hidden" name="readingGroupId" value = 1 />
+	<input type="hidden" id="book-title" name="title" th:attr="value = ${book.title}" />
+	<input type="hidden" id="book-author" name="author" th:attr="value = ${book.author}" />
+	<label>Month:</label>
+	<input type="text" name="monthFinished" />
+	<label>Day:</label>
+	<input type="text" name="dayOfMonthFinished" />
+	<label>Year:</label>
+	<input type="text" name="yearFinished"/>
+	<button th:formaction="@{add-readerFinishedBook}">add to my books</button>
+	</form> 
+
+
+	</div>
+	
 	
 	<div th:each="group: ${groups}">
     <h2>Enter information below to delete a reader</h2>
@@ -25,6 +45,7 @@
     </form>
 	</div>
 	
+
 	<a href="http://localhost:8080/groups">Back to Groups.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	

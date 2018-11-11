@@ -1,17 +1,10 @@
 package org.wecanreadit;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Book {
@@ -21,27 +14,20 @@ public class Book {
 	private long id;
 	
 	private String title;
-	private int totalPages;
-	private int pagesRead;
-	private LocalDate dateFinished;
 	private String author;
-	private boolean isFinished;
-	
 	
 	@ManyToOne
-	private Reader reader;
+	private ReadingGroup readingGroup;
+
 	
 	public Book() {
 		
 	}
 	
-	public Book(String title, String author, int totalPages, int pagesRead, int monthFinished, int dayOfMonthFinished, int yearFinished, Reader reader) {
+	public Book(String title, String author, ReadingGroup readingGroup) {
 		this.title = title;
 		this.author = author;
-		this.totalPages = totalPages;
-		this.pagesRead = pagesRead;
-		this.reader = reader;
-		this.dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
+		this.readingGroup = readingGroup;
 	}
 
 	public long getId() {
@@ -56,21 +42,13 @@ public class Book {
 		return author;
 	}
 
-	public int getTotalPages() {
-		return totalPages;
-	}
 
-	public int getPagesRead() {
-		return pagesRead;
-	}
-
-	public LocalDate getDateFinished() {
-		return dateFinished;
+	
+	public ReadingGroup getReadingGroup() {
+		return readingGroup;
 	}
 	
-	public Reader getReader() {
-		return reader;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -94,14 +72,9 @@ public class Book {
 		return true;
 	}
 	
-	public String getStringDateFinished() {
-		return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
-			
-	}
+
 	
-	public void setIsFinished(boolean isFinished) {
-		this.isFinished = isFinished;
-	}
+
 
 
 }

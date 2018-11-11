@@ -25,8 +25,9 @@ public class Reader {
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
 	
-	@OneToMany(mappedBy = "reader")
-	private Collection<Book> books;
+	@OneToMany(mappedBy ="reader")
+	private Collection<ReaderFinishedBook> readerFinishedBooks;
+	
 
 	protected Reader() {
 	}
@@ -86,8 +87,8 @@ public class Reader {
 		this.profileUrl = profileUrl;
 	}
 
-	public Collection<Book> getBooks() {
-		return books;
+	public Collection<ReaderFinishedBook> getReaderFinishedBooks() {
+		return readerFinishedBooks;
 	}
 
 	@Override
@@ -111,6 +112,7 @@ public class Reader {
 			return false;
 		return true;
 	}
+
 	
 	
 

@@ -1,5 +1,7 @@
 package org.wecanreadit;
 
+import java.util.Optional;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 public class ReaderController {
 
@@ -17,6 +20,9 @@ public class ReaderController {
 
 	@Resource
 	GroupRepository groupRepo;
+	
+	@Resource
+	ReaderFinishedBookRepository readerFinishedBookRepo;
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -29,7 +35,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("books", reader.getBooks());
+		model.addAttribute("finishedBooks", reader.getReaderFinishedBooks());
 		return "reader";
 	}
 
@@ -44,6 +50,7 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findById(id).get();
 		model.addAttribute("groups", group);
 		model.addAttribute("readers", group.getAllMembers());
+		model.addAttribute("books", group.getAllBooks());
 		return "group";
 	}
 
@@ -66,6 +73,15 @@ public class ReaderController {
 		group.removeMember(readerRepo.findByUsername(username));
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
+	}
+	
+	@RequestMapping("/add-readerFinishedBook")
+	public String addReaderFinishedBook(String author, String title, int monthFinished, int dayOfMonthFinished, int yearFinished, long readerId, Model model) {
+			Optional<Reader> reader = readerRepo.findById(1L);
+			Reader readerResult = reader.get();
+			ReaderFinishedBook readerFinishedBook = new ReaderFinishedBook(title, author, dayOfMonthFinished, monthFinished, yearFinished, readerResult);
+			readerFinishedBookRepo.save(readerFinishedBook);
+			return "redirect:/groups";
 	}
 
 }

@@ -14,7 +14,7 @@ public class BookTest {
 
 	@Before
 	public void setup() {
-		book = new Book("title", "author", 150, 200, 11, 9, 2018, null);
+		book = new Book("title", "author", null);
 	}
 
 	
@@ -25,19 +25,7 @@ public class BookTest {
 		assertThat(title, is("title"));
 	}
 
-	@Test
-	public void shouldBeAbleToGetPagesRead() {
-		int pagesRead = book.getPagesRead();
-		assertThat(pagesRead, is(200));
 
-	}
-	
-	@Test
-	public void shouldBeAbleToGetTotalPages() {
-		int totalPages = book.getTotalPages();
-		assertThat(totalPages, is(150));
-
-	}
 	
 
 
