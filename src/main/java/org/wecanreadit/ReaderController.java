@@ -1,5 +1,6 @@
 package org.wecanreadit;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -20,9 +21,12 @@ public class ReaderController {
 
 	@Resource
 	GroupRepository groupRepo;
-	
+
 	@Resource
-	ReaderFinishedBookRepository readerFinishedBookRepo;
+	BookRepository bookRepo;
+
+	@Resource
+	ReaderBookRepository readerBookRepo;
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -30,12 +34,12 @@ public class ReaderController {
 		model.addAttribute("groups", groupRepo.findAll());
 		return ("readers");
 	}
-	
+
 	@RequestMapping("/reader")
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("finishedBooks", reader.getReaderFinishedBooks());
+		model.addAttribute("finishedBooks", reader.getReaderBooks());
 		return "reader";
 	}
 
@@ -74,14 +78,24 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
-	@RequestMapping("/add-readerFinishedBook")
-	public String addReaderFinishedBook(String author, String title, int monthFinished, int dayOfMonthFinished, int yearFinished, long readerId, Model model) {
-			Optional<Reader> reader = readerRepo.findById(1L);
-			Reader readerResult = reader.get();
-			ReaderFinishedBook readerFinishedBook = new ReaderFinishedBook(title, author, dayOfMonthFinished, monthFinished, yearFinished, readerResult);
-			readerFinishedBookRepo.save(readerFinishedBook);
-			return "redirect:/groups";
+
+	@RequestMapping("/addReaderFinishedBook")
+	public String addReaderFinishedBook(long bookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
+			long readerId, Model model) {
+		Optional<Reader> reader = readerRepo.findById(1L);
+		Reader readerResult = reader.get();
+		Optional<Book> book = bookRepo.findById(bookId);
+		Book bookResult = book.get();
+		Collection<ReaderBook> readerBooks = readerResult.getReaderBooks();
+		for (ReaderBook readerBook : readerBooks) {
+			if (readerBook.getBook().equals(bookResult)) {
+				return "redirect:/groups";
+			}
+		}
+		ReaderBook readerBook = new ReaderBook(bookResult, readerResult, monthFinished, dayOfMonthFinished,
+				yearFinished);
+		readerBookRepo.save(readerBook);
+		return "redirect:/groups";
 	}
 
 }

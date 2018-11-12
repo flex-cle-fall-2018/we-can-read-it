@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
 @Entity
 public class Reader {
 
@@ -24,10 +23,9 @@ public class Reader {
 
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
-	
-	@OneToMany(mappedBy ="reader")
-	private Collection<ReaderFinishedBook> readerFinishedBooks;
-	
+
+	@OneToMany(mappedBy = "reader")
+	private Collection<ReaderBook> readerBooks;
 
 	protected Reader() {
 	}
@@ -87,8 +85,8 @@ public class Reader {
 		this.profileUrl = profileUrl;
 	}
 
-	public Collection<ReaderFinishedBook> getReaderFinishedBooks() {
-		return readerFinishedBooks;
+	public Collection<ReaderBook> getReaderBooks() {
+		return readerBooks;
 	}
 
 	@Override
@@ -112,8 +110,5 @@ public class Reader {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }

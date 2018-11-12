@@ -1,29 +1,33 @@
 package org.wecanreadit;
 
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Book {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private String title;
 	private String author;
-	
+
 	@ManyToOne
 	private ReadingGroup readingGroup;
 
-	
+	@OneToMany(mappedBy = "book")
+	private Collection<ReaderBook> readerBooks;
+
 	public Book() {
-		
+
 	}
-	
+
 	public Book(String title, String author, ReadingGroup readingGroup) {
 		this.title = title;
 		this.author = author;
@@ -37,18 +41,14 @@ public class Book {
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public String getAuthor() {
 		return author;
 	}
 
-
-	
 	public ReadingGroup getReadingGroup() {
 		return readingGroup;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -71,10 +71,5 @@ public class Book {
 			return false;
 		return true;
 	}
-	
-
-	
-
-
 
 }

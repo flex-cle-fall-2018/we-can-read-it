@@ -15,7 +15,7 @@ public class ReaderPopulator implements CommandLineRunner {
 
 	@Resource
 	private GroupRepository groupRepo;
-	
+
 	@Resource
 	private BookRepository bookRepo;
 
@@ -41,8 +41,8 @@ public class ReaderPopulator implements CommandLineRunner {
 		test1 = groupRepo.save(test1);
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
-		
-		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", "George R.R. Martin",  test1));
+
+		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", "George R.R. Martin", test1));
 		Book mistborn = bookRepo.save(new Book("Mistborn", "Brandon Sanderson", test1));
 	}
 
