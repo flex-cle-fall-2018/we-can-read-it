@@ -59,14 +59,5 @@ public class ProfileController {
     	public String password;
     }	
     
-    @RequestMapping("/readerProfile")
-    public String readerProfile(String id) {
-    	if(!id.equals(id)) {
-    		return "redirect:/ReaderLogin";
-    	}else {
-    		
-    		return "redirect:/readerHomePage";
-    	}	
-    }
 }
 
