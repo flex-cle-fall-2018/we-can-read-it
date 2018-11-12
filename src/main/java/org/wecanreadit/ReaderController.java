@@ -39,6 +39,7 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findById(id).get();
 		model.addAttribute("groups", group);
 		model.addAttribute("questions", group.getQuestions());
+		model.addAttribute("goals", group.getGoals());
 		return "singlegroupquestions";
 	}
 
