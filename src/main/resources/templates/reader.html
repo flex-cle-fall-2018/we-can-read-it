@@ -8,14 +8,14 @@
 </head>
 <body>
 	<h1 th:text="${reader.firstName}"></h1>
-	<div th:each="book: ${books}">
-	<span th:text="${book.title}"></span>
-	</div>
+	
 	
 	<br />
-	<div th:each="finishedBook: ${finishedBooks}">
-	<span th:text="${finishedBook.title}"></span>
-	<span th:text="${finishedBook.stringDateFinished}"></span>
+	<div th:each="readerBook: ${readerBooks}">
+	<a th:href="@{readerBook(id=${readerBook.id})}"><span th:text="${readerBook.title}"></span></a>
+	<p th:text="${readerBook.author}"></p>
+	<p th:text="${readerBook.stringDateFinished}"></p>
+	<br/>
 	</div>
 	
 

@@ -22,7 +22,7 @@ public class BookController {
 		Book book = result.get();
 		if (result.isPresent()) {
 			model.addAttribute("book", book);
-			model.addAttribute("readingGroup", book.getReadingGroup());
+			model.addAttribute("group", book.getReadingGroup());
 			return "book";
 		}
 		throw new BookNotFoundException();

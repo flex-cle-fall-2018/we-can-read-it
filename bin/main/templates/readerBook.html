@@ -7,20 +7,16 @@
 
 </head>
 <body>
-	<h1 th:text="${reader.firstName}"></h1>
-	
-	
-	<br />
-	<div th:each="readerBook: ${readerBooks}">
-	<a th:href="@{readerBook(id=${readerBook.id})}"><span th:text="${readerBook.title}"></span></a>
+
+	<h1 th:text="${readerBook.title}"></h1>
 	<p th:text="${readerBook.author}"></p>
 	<p th:text="${readerBook.stringDateFinished}"></p>
 	<br/>
-	</div>
+	
 	
 
 	
-	<a href="http://localhost:8080/readers">Back to Readers.</a>
+	<a href="http://localhost:8080/reader?id=1">Back to all books.</a>
 	
 </body>
 </html>

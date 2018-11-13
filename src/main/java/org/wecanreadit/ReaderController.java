@@ -39,7 +39,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("finishedBooks", reader.getReaderBooks());
+		model.addAttribute("readerBooks", reader.getReaderBooks());
 		return "reader";
 	}
 
@@ -89,13 +89,13 @@ public class ReaderController {
 		Collection<ReaderBook> readerBooks = readerResult.getReaderBooks();
 		for (ReaderBook readerBook : readerBooks) {
 			if (readerBook.getBook().equals(bookResult)) {
-				return "redirect:/groups";
+				return "redirect:/book?id=" + bookId;
 			}
 		}
 		ReaderBook readerBook = new ReaderBook(bookResult, readerResult, monthFinished, dayOfMonthFinished,
 				yearFinished);
 		readerBookRepo.save(readerBook);
-		return "redirect:/groups";
+		return "redirect:/book?id=" + bookId;
 	}
 
 }

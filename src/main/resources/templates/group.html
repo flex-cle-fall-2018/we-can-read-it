@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<style>
+		
+	</style>
 </head>
 <body>
 	<div th:each="group: ${groups}">
@@ -12,25 +14,13 @@
 	</div>
 	
 	<div th:each="reader: ${readers}">
-	<span th:text="${reader.username}"></span>
+	<a th:href="@{reader(id=${reader.id})}"><span th:text="${reader.username}"></span></a>
 	</div>
 	
 	<h2>Books</h2>
 	<div th:each="book: ${books}">
-	<span th:text="${book.title}"></span>
-	<form method="POST" id="addReaderFinishedBook">
-	<input type="hidden" name="readerId" value = 1 />
-	<input type="hidden" name="bookId" th:value ="${book.id}" />
-	<label>Month:</label>
-	<input type="text" name="monthFinished" />
-	<label>Day:</label>
-	<input type="text" name="dayOfMonthFinished" />
-	<label>Year:</label>
-	<input type="text" name="yearFinished"/>
-	<button th:formaction="@{addReaderFinishedBook}">add to my books</button>
-	</form> 
-
-
+	<a th:href="@{book(id=${book.id})}"><span th:text="${book.title}"></span></a>
+	<span th:text="${book.author}"></span>
 	</div>
 	
 	
@@ -46,6 +36,7 @@
 
 	<a href="http://localhost:8080/groups">Back to Groups.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
+
 	
 </body>
 </html>

@@ -38,7 +38,11 @@ public class ReaderBook {
 	}
 
 	public String getStringDateFinished() {
+		if(dateFinished.getDayOfMonth() < 10) {
+			return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"));
+		} else {
 		return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+		}
 	}
 
 	public LocalDate getDateFinished() {

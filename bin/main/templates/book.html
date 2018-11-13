@@ -9,10 +9,27 @@
 <body>
 	<h1 th:text="${book.title}"></h1>
 	<h2 th:text="${book.author}"></h2>
-	<p th:text="${book.stringDateFinished}  + ' date finished'"></p>
-
-	<a th:href="@{reader(id=${reader.id})}">Back to Reader's Books.</a>
-	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	
+	<form method="POST" id="addReaderFinishedBook">
+	<input type="hidden" name="readerId" value = 1 />
+	<input type="hidden" name="bookId" th:value ="${book.id}" />
+	<label>Year:</label>
+	<select name="yearFinished" id="yearFinished">
+  	<option value=2018>2018</option>
+</select>
+<label>Month:</label>
+<select name="monthFinished" id="monthFinished">
+	</select>
+	
+	<label>Day:</label>
+	<select name="dayOfMonthFinished" id="dayOfMonthFinished">
+	</select>
+	
+	<button th:formaction="@{addReaderFinishedBook}">add to my books</button>
+	</form> 
+
+	<a th:href="@{group(id=${group.id})}">Back to Group</a>
+	
+	<script src='./saveReaderBook.js'></script>
 </body>
 </html>
