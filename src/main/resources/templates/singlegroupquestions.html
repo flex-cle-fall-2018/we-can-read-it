@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+		<h2>Members of this group</h2>
+		<div th:each="group: ${groups}">
+		<div th:each="reader: ${group.getAllMembers()}">
+		<span th:text="${reader.username}"></span>
+		</div>
+		</div>
+
+
+
     <div th:each="group: ${groups}">
         <h2 th:text="${group.groupName}"></h2>	
             <h2>Here are the groups discussion questions</h2>

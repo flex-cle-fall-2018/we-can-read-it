@@ -144,9 +144,9 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
+
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@RequestParam(required = true)String answer, long id, long groupid) {
+	public String saveAnswer(@RequestParam(required = true) String answer, long id, long groupid) {
 		DiscussionQuestion quest = questRepo.findById(id).get();
 		quest.addAnswer(ansRepo.save(new DiscussionAnswer(answer)));
 		questRepo.save(quest);
