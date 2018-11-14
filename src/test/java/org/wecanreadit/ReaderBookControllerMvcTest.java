@@ -63,7 +63,9 @@ public class ReaderBookControllerMvcTest {
 		public void shouldPutAReaderBookIntoModel() throws Exception {
 			when(readerBookRepo.findById(1L)).thenReturn(Optional.of(readerBook));	
 			mvc.perform(get("/readerBook?id=1")).andExpect(model().attribute("readerBook",is(readerBook)));
-	}
+		}
+		
+		
 
 }
 

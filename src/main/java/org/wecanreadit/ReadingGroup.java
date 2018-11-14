@@ -25,7 +25,7 @@ public class ReadingGroup {
 	private Collection<Reader> readingGroup;
 	
 	@OneToMany(mappedBy = "readingGroup")
-	private Collection<Book> books;
+	private Collection<GroupBook> books;
 
 	ReadingGroup() {
 	}
@@ -56,7 +56,7 @@ public class ReadingGroup {
 		readingGroup.remove(reader);
 	}
 	
-	public Collection<Book> getAllBooks() {
+	public Collection<GroupBook> getAllBooks() {
 		return books;
 	}
 

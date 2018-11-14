@@ -8,6 +8,6 @@ public interface ReaderBookRepository extends CrudRepository<ReaderBook, Long> {
 
 	Collection<ReaderBook> findByReader(Reader reader);
 
-	Collection<ReaderBook> findByBook(Book book);
+	Collection<ReaderBook> findByBook(GroupBook book);
 
 }

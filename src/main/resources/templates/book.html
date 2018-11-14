@@ -13,10 +13,8 @@
 	<form method="POST" id="addReaderFinishedBook">
 	<input type="hidden" name="readerId" value = 1 />
 	<input type="hidden" name="bookId" th:value ="${book.id}" />
-	<label>Year:</label>
-	<select name="yearFinished" id="yearFinished">
-  	<option value=2018>2018</option>
-</select>
+	
+
 <label>Month:</label>
 <select name="monthFinished" id="monthFinished">
 	</select>
@@ -25,6 +23,10 @@
 	<select name="dayOfMonthFinished" id="dayOfMonthFinished">
 	</select>
 	
+	<label>Year:</label>
+	<select name="yearFinished" id="yearFinished">
+  	<option value=2018>2018</option>
+	</select>
 	<button th:formaction="@{addReaderFinishedBook}">add to my books</button>
 	</form> 
 

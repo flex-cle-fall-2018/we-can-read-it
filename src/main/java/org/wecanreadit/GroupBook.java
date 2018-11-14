@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Book {
+public class GroupBook {
 
 	@Id
 	@GeneratedValue
@@ -17,18 +19,20 @@ public class Book {
 
 	private String title;
 	private String author;
-
+	
+	@JsonIgnore
 	@ManyToOne
 	private ReadingGroup readingGroup;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "book")
 	private Collection<ReaderBook> readerBooks;
 
-	public Book() {
+	public GroupBook() {
 
 	}
 
-	public Book(String title, String author, ReadingGroup readingGroup) {
+	public GroupBook(String title, String author, ReadingGroup readingGroup) {
 		this.title = title;
 		this.author = author;
 		this.readingGroup = readingGroup;
@@ -66,7 +70,7 @@ public class Book {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Book other = (Book) obj;
+		GroupBook other = (GroupBook) obj;
 		if (id != other.id)
 			return false;
 		return true;

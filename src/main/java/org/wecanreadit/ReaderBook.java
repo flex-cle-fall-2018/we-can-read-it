@@ -16,9 +16,9 @@ public class ReaderBook {
 	private long id;
 
 	private LocalDate dateFinished;
-
+	
 	@ManyToOne
-	private Book book;
+	private GroupBook book;
 
 	@ManyToOne
 	private Reader reader;
@@ -27,7 +27,7 @@ public class ReaderBook {
 
 	}
 
-	public ReaderBook(Book book, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
+	public ReaderBook(GroupBook book, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 		this.reader = reader;
 		this.book = book;
@@ -57,8 +57,12 @@ public class ReaderBook {
 		return book.getAuthor();
 	}
 	
-	public Book getBook() {
+	public GroupBook getBook() {
 		return book;
+	}
+	
+	protected void setDateFinished(int monthFinished, int dayOfMonthFinished, int yearFinished) {
+		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 	}
 
 	@Override

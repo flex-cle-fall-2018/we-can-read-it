@@ -10,13 +10,32 @@
 
 	<h1 th:text="${readerBook.title}"></h1>
 	<p th:text="${readerBook.author}"></p>
-	<p th:text="${readerBook.stringDateFinished}"></p>
+	<p th:text="${readerBook.stringDateFinished}" id="dateFinishedParagraph"></p>
+	
+	<input type="hidden" name="readerId" value = 1 />
+	<input type="hidden" name="readerBookId" id="readerBookId" th:value ="${readerBook.id}" />
+	
+	<label>Month:</label>
+	<select name="monthFinished" id="monthFinished">
+	</select>
+
+	<label>Day:</label>
+	<select name="dayOfMonthFinished" id="dayOfMonthFinished">
+	</select>
+	
+	<label>Year:</label>
+	<select name="yearFinished" id="yearFinished">
+  	<option value=2018>2018</option>
+	</select>
+	
+	<button id="updateDateFinishedButton">update date finished</button>
+	
 	<br/>
 	
 	
 
 	
 	<a href="http://localhost:8080/reader?id=1">Back to all books.</a>
-	
+	<script src='./saveReaderBook.js'></script>
 </body>
 </html>

@@ -8,13 +8,13 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BookTest {
+public class GroupBookTest {
 	
-	Book book;
+	GroupBook book;
 
 	@Before
 	public void setup() {
-		book = new Book("title", "author", null);
+		book = new GroupBook("title", "author", null);
 	}
 
 	

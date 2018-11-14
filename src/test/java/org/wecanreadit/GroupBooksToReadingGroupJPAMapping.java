@@ -20,10 +20,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-public class BooksToReadingGroupJPAMapping {
+public class GroupBooksToReadingGroupJPAMapping {
 	
 	@Resource
-	BookRepository bookRepo;
+	GroupBookRepository bookRepo;
 	
 	@Resource
 	ReadingGroupRepository readingGroupRepo;
@@ -33,20 +33,20 @@ public class BooksToReadingGroupJPAMapping {
 	
 	@Test
 	public void shouldSaveAndLoadBook() {
-		Book book = bookRepo.save(new Book("title", "author",null));
+		GroupBook book = bookRepo.save(new GroupBook("title", "author",null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
 		entityManager.clear();
 		
-		Optional<Book> result = bookRepo.findById(bookId);
-		Book resultBook = result.get();
+		Optional<GroupBook> result = bookRepo.findById(bookId);
+		GroupBook resultBook = result.get();
 		assertThat(resultBook.getTitle(), is("title"));
 	}
 	
 	@Test
 	public void shouldGenerateBookId() {
-		Book book = bookRepo.save(new Book("title", "author",null));
+		GroupBook book = bookRepo.save(new GroupBook("title", "author",null));
 		long bookId = book.getId();
 		
 		entityManager.flush();
@@ -76,8 +76,8 @@ public class BooksToReadingGroupJPAMapping {
 		readingGroup = readingGroupRepo.save(readingGroup);
 		long readingGroupId = readingGroup.getId();
 		
-		Book book = bookRepo.save(new Book("title", "author",readingGroup));
-		Book book2 = bookRepo.save(new Book("title2", "author", readingGroup));
+		GroupBook book = bookRepo.save(new GroupBook("title", "author",readingGroup));
+		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
 		
 		entityManager.flush();
 		entityManager.clear();
@@ -94,9 +94,9 @@ public class BooksToReadingGroupJPAMapping {
 				ReadingGroup readingGroup = new ReadingGroup("group name", "topic");
 				readingGroup = readingGroupRepo.save(readingGroup);
 				
-				Book book = bookRepo.save(new Book("title", "author", readingGroup));
-				Book book2 = bookRepo.save(new Book("title2", "author", readingGroup));
-				Book book3 = bookRepo.save(new Book("title3", "author", readingGroup));
+				GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
+				GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
+				GroupBook book3 = bookRepo.save(new GroupBook("title3", "author", readingGroup));
 				book = bookRepo.save(book);
 				book2 = bookRepo.save(book2);
 				book3 = bookRepo.save(book3);
@@ -104,7 +104,7 @@ public class BooksToReadingGroupJPAMapping {
 				entityManager.flush();
 				entityManager.clear();
 				
-				Collection<Book> result = bookRepo.findByReadingGroup(readingGroup);
+				Collection<GroupBook> result = bookRepo.findByReadingGroup(readingGroup);
 				
 				assertThat(result, containsInAnyOrder(book, book2, book3));
 	}
@@ -116,8 +116,8 @@ public class BooksToReadingGroupJPAMapping {
 		readingGroup = readingGroupRepo.save(readingGroup);
 		
 	
-		Book book = bookRepo.save(new Book("title", "author", readingGroup));
-		Book book2 = bookRepo.save(new Book("title2", "author", readingGroup));
+		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
+		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
 		book = bookRepo.save(book);
 		book2 = bookRepo.save(book2);
 		

@@ -23,7 +23,7 @@ public class ReaderController {
 	GroupRepository groupRepo;
 
 	@Resource
-	BookRepository bookRepo;
+	GroupBookRepository bookRepo;
 
 	@Resource
 	ReaderBookRepository readerBookRepo;
@@ -84,8 +84,8 @@ public class ReaderController {
 			long readerId, Model model) {
 		Optional<Reader> reader = readerRepo.findById(1L);
 		Reader readerResult = reader.get();
-		Optional<Book> book = bookRepo.findById(bookId);
-		Book bookResult = book.get();
+		Optional<GroupBook> book = bookRepo.findById(bookId);
+		GroupBook bookResult = book.get();
 		Collection<ReaderBook> readerBooks = readerResult.getReaderBooks();
 		for (ReaderBook readerBook : readerBooks) {
 			if (readerBook.getBook().equals(bookResult)) {

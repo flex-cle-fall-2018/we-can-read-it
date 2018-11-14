@@ -17,7 +17,7 @@ public class ReaderPopulator implements CommandLineRunner {
 	private GroupRepository groupRepo;
 
 	@Resource
-	private BookRepository bookRepo;
+	private GroupBookRepository bookRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -42,10 +42,10 @@ public class ReaderPopulator implements CommandLineRunner {
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
 
-		Book gameOfThrones = bookRepo.save(new Book("Game of Thrones", "George R.R. Martin", test1));
-		Book mistborn = bookRepo.save(new Book("Mistborn", "Brandon Sanderson", test1));
-		Book harryPotter = bookRepo.save(new Book("Harry Potter", "JK Rowling", test1));
-		Book lordOfTheRings = bookRepo.save(new Book("Lord of the Rings", "JRR Tolkein", test1));
+		GroupBook gameOfThrones = bookRepo.save(new GroupBook("A Game of Thrones", "George R.R. Martin", test1));
+		GroupBook nameOfTheWind = bookRepo.save(new GroupBook("The Name of the Wind", "Patrick Rothfuss", test1));
+		GroupBook harryPotter = bookRepo.save(new GroupBook("Harry Potter and the Sorcerer's Stone", "JK Rowling", test1));
+		GroupBook lordOfTheRings = bookRepo.save(new GroupBook("The Fellowship of the Ring", "JRR Tolkein", test1));
 				
 	}
 

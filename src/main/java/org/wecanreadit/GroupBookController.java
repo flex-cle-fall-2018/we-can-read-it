@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class BookController {
+public class GroupBookController {
 	
 	@Resource
-	BookRepository bookRepo;
+	GroupBookRepository bookRepo;
 
 	
 	@RequestMapping("/book")
-	public String findOneBook(@RequestParam(value = "id") long id, Model model) throws BookNotFoundException {
-		Optional<Book> result = bookRepo.findById(id);
-		Book book = result.get();
+	public String findOneBook(@RequestParam(value = "id") long id, Model model) throws GroupBookNotFoundException {
+		Optional<GroupBook> result = bookRepo.findById(id);
+		GroupBook book = result.get();
 		if (result.isPresent()) {
 			model.addAttribute("book", book);
 			model.addAttribute("group", book.getReadingGroup());
 			return "book";
 		}
-		throw new BookNotFoundException();
+		throw new GroupBookNotFoundException();
 	}
 }

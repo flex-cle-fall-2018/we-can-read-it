@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reader {
 
@@ -24,6 +26,7 @@ public class Reader {
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "reader")
 	private Collection<ReaderBook> readerBooks;
 
