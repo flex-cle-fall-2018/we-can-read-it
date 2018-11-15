@@ -34,7 +34,7 @@ public class ReaderBookToReaderJPAMappingsTest {
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 
 	@Resource
 	EntityManager entityManager;
@@ -65,8 +65,8 @@ public class ReaderBookToReaderJPAMappingsTest {
 		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
 		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
 
-		ReaderBook readerBook = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
-		ReaderBook readerBook2 = readerBookRepo.save(new ReaderBook(book2, reader, 11, 06, 2018));
+		ReaderBookProgress readerBook = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook2 = readerBookRepo.save(new ReaderBookProgress(book2, reader, 11, 06, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
@@ -93,14 +93,14 @@ public class ReaderBookToReaderJPAMappingsTest {
 		book2 = bookRepo.save(book2);
 		book3 = bookRepo.save(book3);
 
-		ReaderBook readerBook1 = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
-		ReaderBook readerBook2 = readerBookRepo.save(new ReaderBook(book2, reader, 11, 06, 2018));
-		ReaderBook readerBook3 = readerBookRepo.save(new ReaderBook(book3, reader, 10, 20, 2018));
+		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook2 = readerBookRepo.save(new ReaderBookProgress(book2, reader, 11, 06, 2018));
+		ReaderBookProgress readerBook3 = readerBookRepo.save(new ReaderBookProgress(book3, reader, 10, 20, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
 
-		Collection<ReaderBook> result = readerBookRepo.findByReader(reader);
+		Collection<ReaderBookProgress> result = readerBookRepo.findByReader(reader);
 
 		assertThat(result, containsInAnyOrder(readerBook1, readerBook2, readerBook3));
 	}
@@ -119,7 +119,7 @@ public class ReaderBookToReaderJPAMappingsTest {
 		book = bookRepo.save(book);
 		book2 = bookRepo.save(book2);
 
-		ReaderBook readerBook1 = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
 
 		entityManager.flush();
 		entityManager.clear();

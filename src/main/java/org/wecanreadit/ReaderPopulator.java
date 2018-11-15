@@ -18,13 +18,16 @@ public class ReaderPopulator implements CommandLineRunner {
 
 	@Resource
 	private GroupBookRepository bookRepo;
+	
+	@Resource
+	private ReaderBookProgressRepository readerBookRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
 		Reader zack = new Reader("Zack", "Mike", "Zeke", "Am");
 		Reader bob = new Reader("Bob", "Em", "Shane", "Em");
-		Reader joe = new Reader("Joe", "Mike", "Zeke", "Am");
+		Reader joe = new Reader("Joe", "Mike", "Joe", "Am");
 		Reader vi = new Reader("Vi", "Em", "Shane", "Em");
 		Reader doug = new Reader("Dough", "Mike", "Zeke", "Am");
 		shane = readerRepo.save(shane);
@@ -46,7 +49,15 @@ public class ReaderPopulator implements CommandLineRunner {
 		GroupBook nameOfTheWind = bookRepo.save(new GroupBook("The Name of the Wind", "Patrick Rothfuss", test1));
 		GroupBook harryPotter = bookRepo.save(new GroupBook("Harry Potter and the Sorcerer's Stone", "JK Rowling", test1));
 		GroupBook lordOfTheRings = bookRepo.save(new GroupBook("The Fellowship of the Ring", "JRR Tolkein", test1));
-				
+		
+		GroupBook dune = bookRepo.save(new GroupBook("Dune", "Frank Herbert", test2));
+		GroupBook frankenstein = bookRepo.save(new GroupBook("Frankenstein", "Mary Shelley", test2));
+		GroupBook leftHandOfDarkness = bookRepo.save(new GroupBook("Left Hand of Darkness", "Ursula Le Guin", test2));
+		GroupBook endersGame = bookRepo.save(new GroupBook("Ender's Game", "Orson Scott Card", test2));
+		
+		ReaderBookProgress joeBook1 = readerBookRepo.save(new ReaderBookProgress(gameOfThrones, joe, 2, 2, 2018));
+		ReaderBookProgress joeBook2 = readerBookRepo.save(new ReaderBookProgress(dune, joe, 5, 25, 2018));
+		ReaderBookProgress joeBook3 = readerBookRepo.save(new ReaderBookProgress(nameOfTheWind, joe, 10, 18, 2018));
 	}
 
 }

@@ -16,15 +16,15 @@ import junit.framework.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-public class ReaderBookTest {
+public class ReaderBookProgressTest {
 	
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 
 	
 	@Test
 	 public void testFindById(){
-	     Optional<ReaderBook> byId = readerBookRepo.findById(1L);
+	     Optional<ReaderBookProgress> byId = readerBookRepo.findById(1L);
 	     assertTrue(byId != null);
 	 }
 }

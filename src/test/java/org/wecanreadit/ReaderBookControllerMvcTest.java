@@ -23,23 +23,29 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 
-@WebMvcTest(ReaderBookController.class)
+@WebMvcTest(ReaderBookProgressController.class)
 public class ReaderBookControllerMvcTest {
 
 		@Mock
-		private ReaderBook readerBook;
+		private ReaderBookProgress readerBook;
 
 		@Mock
-		private ReaderBook readerBook2;
+		private ReaderBookProgress readerBook2;
 		
 		@Mock
 		private Reader reader;
+		
+		@Mock
+		private GroupBook groupBook;
 
 		@MockBean
-		private ReaderBookRepository readerBookRepo;
+		private ReaderBookProgressRepository readerBookRepo;
 		
 		@MockBean
 		private ReaderRepository readerRepo;
+		
+		@MockBean
+		private GroupBookRepository groupBookRepo;
 
 		@Resource
 		private MockMvc mvc;
@@ -49,6 +55,7 @@ public class ReaderBookControllerMvcTest {
 		public void shouldBeOkForSingleReaderBook() throws Exception {
 			long readerBookId = 1;
 			when(readerBookRepo.findById(readerBookId)).thenReturn(Optional.of(readerBook));
+			when(readerBook.getBook()).thenReturn(groupBook);
 			mvc.perform(get("/readerBook?id=1")).andExpect(status().isOk());
 		}
 
@@ -56,12 +63,14 @@ public class ReaderBookControllerMvcTest {
 		public void shouldRouteToSingleReaderBook() throws Exception {
 			long readerBookId = 1;
 			when(readerBookRepo.findById(readerBookId)).thenReturn(Optional.of(readerBook));
+			when(readerBook.getBook()).thenReturn(groupBook);
 			mvc.perform(get("/readerBook?id=1")).andExpect(view().name(is("readerBook")));
 		}
 
 		@Test
 		public void shouldPutAReaderBookIntoModel() throws Exception {
-			when(readerBookRepo.findById(1L)).thenReturn(Optional.of(readerBook));	
+			when(readerBookRepo.findById(1L)).thenReturn(Optional.of(readerBook));
+			when(readerBook.getBook()).thenReturn(groupBook);
 			mvc.perform(get("/readerBook?id=1")).andExpect(model().attribute("readerBook",is(readerBook)));
 		}
 		

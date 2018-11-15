@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ReaderBookController {
+public class ReaderBookProgressController {
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 
 	@Resource
 	ReaderRepository readerRepo;
 
 	@RequestMapping("/readerBook")
 	public String findOneReaderBook(@RequestParam(required = true) long id, Model model)
-			throws ReaderBookNotFoundException {
+			throws ReaderBookProgressNotFoundException {
 
-		Optional<ReaderBook> readerBook = readerBookRepo.findById(id);
+		Optional<ReaderBookProgress> readerBook = readerBookRepo.findById(id);
 		if (readerBook.isPresent()) {
 			model.addAttribute("readerBook", readerBook.get());
 			return "readerBook";
 		}
-		throw new ReaderBookNotFoundException();
+		throw new ReaderBookProgressNotFoundException();
 
 	}
 

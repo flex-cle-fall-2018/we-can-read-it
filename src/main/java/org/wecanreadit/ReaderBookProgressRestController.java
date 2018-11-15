@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class ReaderBookRestController {
+public class ReaderBookProgressRestController {
 	
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 	
 	@PutMapping("/api/updateFinishedDate")
-	public ReaderBook updateReaderBookDate(@RequestBody UpdatedDateFinished updatedDateFinished) {
-		Optional<ReaderBook> readerBook = readerBookRepo.findById(updatedDateFinished.readerBookId);
-		ReaderBook readerBookResult = readerBook.get();
+	public ReaderBookProgress updateReaderBookDate(@RequestBody UpdatedDateFinished updatedDateFinished) {
+		Optional<ReaderBookProgress> readerBook = readerBookRepo.findById(updatedDateFinished.readerBookId);
+		ReaderBookProgress readerBookResult = readerBook.get();
 		readerBookResult.setDateFinished(updatedDateFinished.monthFinished, updatedDateFinished.dayOfMonthFinished, updatedDateFinished.yearFinished);
 		return readerBookRepo.save(readerBookResult);
 	

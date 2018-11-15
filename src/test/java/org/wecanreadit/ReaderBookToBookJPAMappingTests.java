@@ -30,7 +30,7 @@ public class ReaderBookToBookJPAMappingTests {
 	ReadingGroupRepository readingGroupRepo;
 	
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 	
 	@Resource
 	EntityManager entityManager;
@@ -47,14 +47,14 @@ public class ReaderBookToBookJPAMappingTests {
 
 		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
 
-		ReaderBook readerBook = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
 		long readerBookId = readerBook.getId();
 
 		entityManager.flush();
 		entityManager.clear();
 
-		Optional<ReaderBook> result = readerBookRepo.findById(readerBookId);
-		ReaderBook readerBookResult = result.get();
+		Optional<ReaderBookProgress> result = readerBookRepo.findById(readerBookId);
+		ReaderBookProgress readerBookResult = result.get();
 
 		assertThat(readerBookResult.getBook(), is(book));
 	}
@@ -73,14 +73,14 @@ public class ReaderBookToBookJPAMappingTests {
 		GroupBook book3 = bookRepo.save(new GroupBook("title3", "author", readingGroup));
 		book = bookRepo.save(book);
 
-		ReaderBook readerBook1 = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
-		ReaderBook readerBook2 = readerBookRepo.save(new ReaderBook(book, reader, 11, 06, 2018));
-		ReaderBook readerBook3 = readerBookRepo.save(new ReaderBook(book, reader, 10, 20, 2018));
+		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook2 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 06, 2018));
+		ReaderBookProgress readerBook3 = readerBookRepo.save(new ReaderBookProgress(book, reader, 10, 20, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
 
-		Collection<ReaderBook> result = readerBookRepo.findByBook(book);
+		Collection<ReaderBookProgress> result = readerBookRepo.findByBook(book);
 
 		assertThat(result, containsInAnyOrder(readerBook1, readerBook2, readerBook3));
 	}
@@ -98,7 +98,7 @@ public class ReaderBookToBookJPAMappingTests {
 		book = bookRepo.save(book);
 		book2 = bookRepo.save(book2);
 
-		ReaderBook readerBook1 = readerBookRepo.save(new ReaderBook(book, reader, 11, 11, 2018));
+		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
 
 		entityManager.flush();
 		entityManager.clear();

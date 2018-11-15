@@ -26,7 +26,7 @@ public class ReaderController {
 	GroupBookRepository bookRepo;
 
 	@Resource
-	ReaderBookRepository readerBookRepo;
+	ReaderBookProgressRepository readerBookRepo;
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -86,13 +86,13 @@ public class ReaderController {
 		Reader readerResult = reader.get();
 		Optional<GroupBook> book = bookRepo.findById(bookId);
 		GroupBook bookResult = book.get();
-		Collection<ReaderBook> readerBooks = readerResult.getReaderBooks();
-		for (ReaderBook readerBook : readerBooks) {
+		Collection<ReaderBookProgress> readerBooks = readerResult.getReaderBooks();
+		for (ReaderBookProgress readerBook : readerBooks) {
 			if (readerBook.getBook().equals(bookResult)) {
 				return "redirect:/book?id=" + bookId;
 			}
 		}
-		ReaderBook readerBook = new ReaderBook(bookResult, readerResult, monthFinished, dayOfMonthFinished,
+		ReaderBookProgress readerBook = new ReaderBookProgress(bookResult, readerResult, monthFinished, dayOfMonthFinished,
 				yearFinished);
 		readerBookRepo.save(readerBook);
 		return "redirect:/book?id=" + bookId;

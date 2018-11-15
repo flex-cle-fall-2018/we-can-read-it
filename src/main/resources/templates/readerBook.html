@@ -8,8 +8,8 @@
 </head>
 <body>
 
-	<h1 th:text="${readerBook.title}"></h1>
-	<p th:text="${readerBook.author}"></p>
+	<h1 th:text="${readerBook.book.title}"></h1>
+	<p th:text="${readerBook.book.author}"></p>
 	<p th:text="${readerBook.stringDateFinished}" id="dateFinishedParagraph"></p>
 	
 	<input type="hidden" name="readerId" value = 1 />

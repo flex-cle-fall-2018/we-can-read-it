@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ReaderBook {
+public class ReaderBookProgress {
+	/*This class is for the reader to track when they finished a particular groupBook
+	 */
 
 	@Id
 	@GeneratedValue
@@ -23,11 +25,11 @@ public class ReaderBook {
 	@ManyToOne
 	private Reader reader;
 
-	public ReaderBook() {
+	public ReaderBookProgress() {
 
 	}
 
-	public ReaderBook(GroupBook book, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
+	public ReaderBookProgress(GroupBook book, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 		this.reader = reader;
 		this.book = book;
@@ -48,14 +50,6 @@ public class ReaderBook {
 	public LocalDate getDateFinished() {
 		return dateFinished;
 	}
-
-	public String getTitle() {
-		return book.getTitle();
-	}
-
-	public String getAuthor() {
-		return book.getAuthor();
-	}
 	
 	public GroupBook getBook() {
 		return book;
@@ -64,6 +58,7 @@ public class ReaderBook {
 	protected void setDateFinished(int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -81,7 +76,7 @@ public class ReaderBook {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReaderBook other = (ReaderBook) obj;
+		ReaderBookProgress other = (ReaderBookProgress) obj;
 		if (id != other.id)
 			return false;
 		return true;

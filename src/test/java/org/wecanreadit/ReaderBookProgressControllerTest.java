@@ -14,18 +14,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
-public class ReaderBookControllerTest {
+public class ReaderBookProgressControllerTest {
 	@InjectMocks
-	private ReaderBookController underTest;
+	private ReaderBookProgressController underTest;
 
 	@Mock
-	private ReaderBook readerBook;
+	private ReaderBookProgress readerBook;
 	
 	@Mock
-	private ReaderBook readerBook2;
+	private ReaderBookProgress readerBook2;
 	
 	@Mock
-	private ReaderBookRepository readerBookRepo;
+	private ReaderBookProgressRepository readerBookRepo;
 	
 	@Mock
 	private Model model;
@@ -36,7 +36,7 @@ public class ReaderBookControllerTest {
 	}
 	
 	@Test
-	public void shouldBeAbleToAddASingleReaderBookToModel() throws ReaderBookNotFoundException {
+	public void shouldBeAbleToAddASingleReaderBookToModel() throws ReaderBookProgressNotFoundException {
 		long readerBookId = 1; 
 		when(readerBookRepo.findById(readerBookId)).thenReturn(Optional.of(readerBook));
 		underTest.findOneReaderBook(readerBookId, model);

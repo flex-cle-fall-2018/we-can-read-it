@@ -10,6 +10,6 @@ public interface ReaderRepository extends CrudRepository<Reader, Long> {
 
 	Reader findByUsername(String username);
 
-	Optional<Reader> findByReaderBooksContains(ReaderBook readerBook);
+	Optional<Reader> findByReaderBooksContains(ReaderBookProgress readerBook);
 
 }

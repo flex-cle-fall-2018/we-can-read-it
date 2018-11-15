@@ -11,6 +11,6 @@ public interface GroupBookRepository extends CrudRepository<GroupBook, Long> {
 
 	Optional<GroupBook> findByTitle(String bookTitle);
 
-	Optional<GroupBook> findByReaderBooksContains(ReaderBook readerBook);
+	Optional<GroupBook> findByReaderBooksContains(ReaderBookProgress readerBook);
 
 }
