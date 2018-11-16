@@ -10,9 +10,12 @@ import static java.util.Arrays.asList;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -34,9 +37,29 @@ public class LibrarianControllerMvcTest {
 
 	@MockBean
 	private LibrarianRepository librarianRepo;
+	
+	@MockBean
+	private GroupRepository groupRepo;
+	
+	@MockBean
+	private ReadingGroupRepository readingGroupRepo;
+	
+	@MockBean
+	private ReaderRepository readerRepo;
 
 	@Resource
 	private MockMvc mvc;
+	
+	final Cookie adminRoleCookie = new Cookie("role", "admin");
+	final Cookie readerRoleCookie = new Cookie("role", "reader");
+	byte[] mockImageData = new byte[10 * 1024];
+
+	
+	@Before
+	public void setup() {
+		new Random().nextBytes(mockImageData);
+		
+	}
 
 	@Test
 	public void shouldBeOkForAllLibrarians() throws Exception {
@@ -73,5 +96,25 @@ public class LibrarianControllerMvcTest {
 		when(librarianRepo.findById(1L)).thenReturn(Optional.of(librarian));	
 		mvc.perform(get("/librarian?id=1")).andExpect(model().attribute("librarian",is(librarian)));
 	}
+	@Test
+	public void shouldRouteToAdminPanelIfLibrarian() throws Exception {
+		mvc.perform(get("/show-librarians").cookie(adminRoleCookie))
+		.andExpect(view().name(is("librarians")));
+		
+	}
+	
+	@Test
+	public void shouldBeOKForAdminPanelIfAdmin() throws Exception {
+		mvc.perform(get("/show-librarians").cookie(adminRoleCookie))
+		.andExpect(status().isOk()); 
+	}
+	
+	@Test
+	public void shouldRedirectToLoginFromAdminPanelIfNotAdmin() throws Exception {
+		mvc.perform(get("/admin")).andExpect(status().isFound()); // 302
+		mvc.perform(get("/admin").cookie(readerRoleCookie)).andExpect(status().isFound()); // 302
+	}
 
 }
+
+
