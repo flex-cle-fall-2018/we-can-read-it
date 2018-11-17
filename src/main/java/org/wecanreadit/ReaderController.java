@@ -47,6 +47,7 @@ public class ReaderController {
 		model.addAttribute("goals", group.getGoals());
 		return "singlegroupquestions";
 	}
+	@Resource
 	GroupBookRepository bookRepo;
 
 	@Resource
@@ -168,6 +169,8 @@ public class ReaderController {
 		quest.addAnswer(ansRepo.save(new DiscussionAnswer(answer)));
 		questRepo.save(quest);
 		return "redirect:/singlegroupquestions?id=" + groupid;
+	}
+	
 	@RequestMapping("/addReaderProgressRecord")
 	public String addReaderProgressRecord(long groupBookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
 			long readerId, Model model) {
