@@ -109,5 +109,15 @@ public class LibrarianController {
 
 		return "admin";
 	}
+	@RequestMapping("librarian/addNewReader")
+	public String addNewReader(Reader reader) {
+		if(reader.getFirstName() !=null&& reader.getLastName()!=null && reader.getUsername()!=null && reader.getPassword()!=null) {
+			readerRepo.save(reader);
+			return "Worked";
+		}else {
+			return "Nerp";
+		}
+	
+	}
 
 }

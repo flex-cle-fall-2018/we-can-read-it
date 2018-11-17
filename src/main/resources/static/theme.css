@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave');
+:root{
+    font-size: 16px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    
+
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Sedgwick Ave', cursive;
+}
+main{
+    max-width: 800px;
+    margin: 0 auto;
+}
+.panel{
+    background-color: #efefefdd;
+    border-radius: 5px;
+    padding: .5rem;
+   	margin: 1rem 0;
+}
+body {
+    padding: 1rem;
+    background-image: url(https://images.pexels.com/photos/40799/paper-colorful-color-loose-40799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+    background-position: center center;
+    background-attachment: fixed;   
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+ul,ol{
+    padding-left: 2rem;
+}
+#title{
+    color:white;
+    text-align: center;
+}
