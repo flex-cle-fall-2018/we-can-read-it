@@ -198,5 +198,12 @@ public class ReaderController {
 		readerProgressRecordRepo.delete(readerProgressResult);
 		return "redirect:/reader?id=" + readerId;
 	}
+	
+	@RequestMapping("/reader/{readerId}/friends")
+	public String readerFriends(@PathVariable long readerId, Model model) {
+		model.addAttribute("reader", readerRepo.findById(readerId).get());
+		model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+		return "readerFriends";
+	}
 
 }
