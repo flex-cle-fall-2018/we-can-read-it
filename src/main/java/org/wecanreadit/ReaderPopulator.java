@@ -14,6 +14,15 @@ public class ReaderPopulator implements CommandLineRunner {
 	@Resource
 	private GroupRepository groupRepo;
 
+	@Resource
+	private GoalRepository goalRepo;
+
+	@Resource
+	private DiscussionQuestionRepository questRepo;
+
+	@Resource
+	private DiscussionAnswerRepository ansRepo;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
@@ -36,6 +45,8 @@ public class ReaderPopulator implements CommandLineRunner {
 		test1 = groupRepo.save(test1);
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
+		
+
 	}
 
 }

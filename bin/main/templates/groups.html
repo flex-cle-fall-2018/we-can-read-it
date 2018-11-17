@@ -7,7 +7,7 @@
 
 </head>
 <body>
-	<h1>These are our groups</h1>
+	<h1>All Groups</h1>
 	<div th:each="group: ${groups}">
 	<span th:text="${group.groupName}"></span>
 	</div>
@@ -15,8 +15,8 @@
 
 	<h2>Enter information below to create a new group</p>
     <form method="POST" th:action="@{/addGroup}">
-        <input type="text" placeholder="Group Name" name="groupName">
-        <input type="text" placeholder="Group Topic" name="topic">
+        <input type="text" placeholder="Group Name" name="groupName" required>
+        <input type="text" placeholder="Group Topic" name="topic" required>
         <input type="submit">
     </form>
     
