@@ -33,6 +33,13 @@
 	<div th:each="readerProgressRecord: ${readerProgressRecords}">
 	<p><span th:text="${readerProgressRecord.reader.username}"></span> read this book <span th:text="${readerProgressRecord.stringDateFinished}"></span></p>
 	</div>
+	
+	<form method="POST" th:action="@{/changePoints}">
+		<input type="number" name="points" placeholder="Enter Point Value">
+  		<input type="hidden" name="id" th:value="${groupBook.id}">
+  		<input type="submit" value="Change Point Value">
+	</form>
+	<span th:text="${groupBook.points}"></span>
 
 	<a th:href="@{group(id=${group.id})}">Back to Group</a>
 	

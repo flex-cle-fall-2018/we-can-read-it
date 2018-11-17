@@ -1,5 +1,6 @@
 package org.wecanreadit;
 
+import java.awt.Point;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -28,4 +29,20 @@ public class GroupBookController {
 		}
 		throw new GroupBookNotFoundException();
 	}
+	
+	@RequestMapping("/changePoints")
+	public String changePointValue(long id, int points) {
+		GroupBook result = groupBookRepo.findById(id).get();
+		result.setPoints(points);
+		groupBookRepo.save(result);
+		return "redirect:/groupBook?id=" + id;
+	}
+//	@RequestMapping("/pageCount")
+//	public void getPageCount(@RequestParam(value = "id") long id, int pageCount) {
+//		int count = 0;
+//		while(pageCount > 100) {
+//			pageCount -= 100;
+//			count ++;
+//		}
+//	}
 }
