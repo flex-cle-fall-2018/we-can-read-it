@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reader {
@@ -23,6 +26,10 @@ public class Reader {
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "reader")
+	private Collection<ReaderProgressRecord> readerProgressRecords;
+
 	protected Reader() {
 	}
 
@@ -33,7 +40,7 @@ public class Reader {
 		this.lastName = lastName;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -79,6 +86,32 @@ public class Reader {
 
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
+	}
+
+	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
+		return readerProgressRecords;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reader other = (Reader) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 }

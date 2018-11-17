@@ -62,7 +62,6 @@ public class Librarian {
 	}
 
 	public String getFavoriteGenre() {
-
 		return favoriteGenre;
 	}
 

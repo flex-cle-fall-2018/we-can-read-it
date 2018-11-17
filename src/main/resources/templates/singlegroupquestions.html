@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div th:each="group: ${groups}">
+            <h2 th:text="${group.groupName}"></h2>	
+    		</div>
+    
+
+		<h2>Members of this group</h2>
+		<div th:each="group: ${groups}">
+		<div th:each="reader: ${group.getAllMembers()}">
+		<span th:text="${reader.username}"></span>
+		</div>
+		</div>
+
+
+		<h2>Here are the group's goals</h2>
+        <div th:each = "goal:${goals}">
+        <span th:text = "${goal.name}"></span>
+        </div>
+
+    <div th:each="group: ${groups}">
+            <h2>Here are the groups discussion questions</h2>
+            <div th:each = "question: ${questions}">
+            <span th:text = "${question.content}"></span>
+            <form method="POST" th:action="@{/saveanswer}">
+       		 <textarea name="answer" placeholder = "Answer here" required></textarea>
+      		  <input type="hidden" th:value="${question.id}" name="id">
+      		  <input type="hidden" th:value="${group.id}" name="groupid">
+       		 <input type="submit">
+   			 </form>
+            </div>
+        </div>
+        
+        
+
+
+
+</body>
+</html>
