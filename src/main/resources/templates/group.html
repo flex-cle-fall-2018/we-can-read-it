@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+	<style>
+		
+	</style>
 </head>
 <body>
 	<div th:each="group: ${groups}">
@@ -12,7 +14,13 @@
 	</div>
 	
 	<div th:each="reader: ${readers}">
-	<span th:text="${reader.username}"></span>
+	<a th:href="@{reader(id=${reader.id})}"><span th:text="${reader.username}"></span></a>
+	</div>
+	
+	<h2>Books</h2>
+	<div th:each="groupBook: ${groupBooks}">
+	<a th:href="@{groupBook(id=${groupBook.id})}"><span th:text="${groupBook.title}"></span></a>
+	<span th:text="${groupBook.author}"></span>
 	</div>
 	
 	<div th:each="group: ${groups}">

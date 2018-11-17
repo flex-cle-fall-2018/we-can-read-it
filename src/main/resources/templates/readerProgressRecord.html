@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+<body>
+
+	<h1 th:text="${readerProgressRecord.groupBook.title}"></h1>
+	<p th:text="${readerProgressRecord.groupBook.author}"></p>
+	<p>Finished: <span th:text="${readerProgressRecord.stringDateFinished}" id="dateFinishedParagraph"></span></p>
+	
+	<input type="hidden" name="readerId" value = 1 />
+	<input type="hidden" name="readerProgressRecordId" id="readerProgressRecordId" th:value ="${readerProgressRecord.id}" />
+	
+	<label>Month:</label>
+	<select name="monthFinished" id="monthFinished">
+	</select>
+
+	<label>Day:</label>
+	<select name="dayOfMonthFinished" id="dayOfMonthFinished">
+	</select>
+	
+	<label>Year:</label>
+	<select name="yearFinished" id="yearFinished">
+  	<option value=2018>2018</option>
+	</select>
+	
+	<button id="updateDateFinishedButton">update date finished</button>
+	<a th:href="@{/removeReaderProgressRecord(id=${readerProgressRecord.id})}"><button id="deleteReaderProgressButton">remove this book</button></a>
+	<br/>
+	
+	
+
+	
+	<a th:href="@{/reader(id=${reader.id})}">Back to all books.</a>
+	<script src='./readerProgressRecord.js'></script>
+</body>
+</html>

@@ -10,7 +10,7 @@
 	
 	<h2>These are our readers</h2>
 	<div th:each="reader: ${readers}">
-	<span th:text="${reader.username}"></span>
+	<a th:href="@{reader(id=${reader.id})}"><span th:text="${reader.username}"></span></a>
 	</div>
 	
 	

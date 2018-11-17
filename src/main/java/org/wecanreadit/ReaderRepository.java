@@ -1,5 +1,7 @@
 package org.wecanreadit;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 public interface ReaderRepository extends CrudRepository<Reader, Long> {
@@ -8,4 +10,5 @@ public interface ReaderRepository extends CrudRepository<Reader, Long> {
 
 	Reader findByUsername(String username);
 
+	Optional<Reader> findByReaderProgressRecordsContains(ReaderProgressRecord readerProgressRecords);
 }

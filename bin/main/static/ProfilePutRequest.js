@@ -1,12 +1,20 @@
 (function loadProfiles(){
 
+<<<<<<< HEAD
     fetch('profileInfo')
+=======
+    fetch('http://localhost:8080/profileInfo')
+>>>>>>> track-books
         .then(function(response) {
             return response.json();
         })
         .then(function(myJson) {
             console.log(JSON.stringify(myJson));
         });
+<<<<<<< HEAD
+=======
+
+>>>>>>> track-books
 })();
 
 (function(){
@@ -20,6 +28,10 @@
         .then(res => {
             //update FirstName Area Needs Done
             console.log(res);
+<<<<<<< HEAD
+=======
+
+>>>>>>> track-books
         });
         
     //Sending PUT request to upload and retrieve data from api

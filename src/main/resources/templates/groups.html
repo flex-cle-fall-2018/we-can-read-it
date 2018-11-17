@@ -9,7 +9,7 @@
 <body>
 	<h1>All Groups</h1>
 	<div th:each="group: ${groups}">
-	<span th:text="${group.groupName}"></span>
+	<a th:href="@{group(id=${group.id})}"><span th:text="${group.groupName}"></span></a>
 	</div>
 	
 
