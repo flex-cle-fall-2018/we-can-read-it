@@ -1,13 +1,12 @@
 (function loadProfiles(){
 
-    fetch('http://localhost:8080/profileInfo')
+    fetch('profileInfo')
         .then(function(response) {
             return response.json();
         })
         .then(function(myJson) {
             console.log(JSON.stringify(myJson));
         });
-
 })();
 
 (function(){
@@ -21,7 +20,6 @@
         .then(res => {
             //update FirstName Area Needs Done
             console.log(res);
-
         });
         
     //Sending PUT request to upload and retrieve data from api

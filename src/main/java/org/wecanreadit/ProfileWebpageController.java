@@ -12,8 +12,11 @@ public class ProfileWebpageController {
 	ReaderRepository readerRepo;
 	
 	@RequestMapping("/profile")
-	public String ProfilePage() {
-		readerRepo.findAll();
+	public String ProfilePage() {	
 		return ("profile");
+	}
+	@RequestMapping("/ReaderLogin")
+	public String ReaderLoginPage() {
+		return ("ReaderLogin");
 	}
 }
