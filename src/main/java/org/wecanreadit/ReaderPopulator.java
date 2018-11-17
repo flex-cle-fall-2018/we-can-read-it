@@ -45,21 +45,21 @@ public class ReaderPopulator implements CommandLineRunner {
 		test2 = groupRepo.save(test2);
 		test3 = groupRepo.save(test3);
 
-		GroupBook gameOfThrones = bookRepo.save(new GroupBook("A Game of Thrones", "George R.R. Martin", test1));
-		GroupBook nameOfTheWind = bookRepo.save(new GroupBook("The Name of the Wind", "Patrick Rothfuss", test1));
-		GroupBook harryPotter = bookRepo.save(new GroupBook("Harry Potter and the Sorcerer's Stone", "JK Rowling", test1));
-		GroupBook lordOfTheRings = bookRepo.save(new GroupBook("The Fellowship of the Ring", "JRR Tolkein", test1));
+		GroupBook book1 = bookRepo.save(new GroupBook("The Lightning Thief", "Rick Riordan", test1));
+		GroupBook book2 = bookRepo.save(new GroupBook("Inkheart", "Cornelia Funke", test1));
+		GroupBook book3 = bookRepo.save(new GroupBook("Harry Potter and the Sorcerer's Stone", "JK Rowling", test1));
+		GroupBook book4 = bookRepo.save(new GroupBook("The Hobbit", "J.R.R. Tolkein", test1));
 		
-		GroupBook dune = bookRepo.save(new GroupBook("Dune", "Frank Herbert", test2));
-		GroupBook frankenstein = bookRepo.save(new GroupBook("Frankenstein", "Mary Shelley", test2));
-		GroupBook leftHandOfDarkness = bookRepo.save(new GroupBook("Left Hand of Darkness", "Ursula Le Guin", test2));
-		GroupBook endersGame = bookRepo.save(new GroupBook("Ender's Game", "Orson Scott Card", test2));
+		GroupBook book5 = bookRepo.save(new GroupBook("The Hunger Games", "Suzanne Collins", test2));
+		GroupBook book6 = bookRepo.save(new GroupBook("A Wrinkle in Time", "Madeleine L'Engle", test2));
+		GroupBook book7 = bookRepo.save(new GroupBook("The Giver", "Lois Lowry", test2));
+		GroupBook book8 = bookRepo.save(new GroupBook("Ender's Game", "Orson Scott Card", test2));
 		
-		ReaderProgressRecord joeProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(gameOfThrones, joe, 2, 2, 2018));
-		ReaderProgressRecord joeProgressRecord2 = readerBookRepo.save(new ReaderProgressRecord(dune, joe, 5, 25, 2018));
-		ReaderProgressRecord joeProgressRecord3 = readerBookRepo.save(new ReaderProgressRecord(nameOfTheWind, joe, 10, 18, 2018));
-		ReaderProgressRecord viProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(endersGame, vi, 9, 23, 2018));
-		ReaderProgressRecord dougProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(endersGame, doug, 8, 14, 2018));
+		ReaderProgressRecord joeProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(book1, joe, 2, 2, 2018));
+		ReaderProgressRecord joeProgressRecord2 = readerBookRepo.save(new ReaderProgressRecord(book5, joe, 5, 25, 2018));
+		ReaderProgressRecord joeProgressRecord3 = readerBookRepo.save(new ReaderProgressRecord(book2, joe, 10, 18, 2018));
+		ReaderProgressRecord viProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(book8, vi, 9, 23, 2018));
+		ReaderProgressRecord dougProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(book8, doug, 8, 14, 2018));
 	
 	
 	}
