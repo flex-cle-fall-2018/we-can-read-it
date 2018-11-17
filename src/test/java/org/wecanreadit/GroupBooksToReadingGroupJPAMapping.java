@@ -85,7 +85,7 @@ public class GroupBooksToReadingGroupJPAMapping {
 		Optional<ReadingGroup> result = readingGroupRepo.findById(readingGroupId);
 		ReadingGroup readingGroupResult = result.get();
 		
-		assertThat(readingGroupResult.getAllBooks(), containsInAnyOrder(book, book2));
+		assertThat(readingGroupResult.getAllGroupBooks(), containsInAnyOrder(book, book2));
 	}
 	
 	@Test
@@ -125,7 +125,7 @@ public class GroupBooksToReadingGroupJPAMapping {
 		entityManager.flush();
 		entityManager.clear();
 		
-		Optional<ReadingGroup> result = readingGroupRepo.findByBooksContains(book);
+		Optional<ReadingGroup> result = readingGroupRepo.findByGroupBooksContains(book);
 		ReadingGroup readingGroupResult = result.get();
 		
 		assertEquals(readingGroupResult, readingGroup);

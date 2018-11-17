@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class ReaderController {
 	GroupBookRepository bookRepo;
 
 	@Resource
-	ReaderBookProgressRepository readerBookRepo;
+	ReaderProgressRecordRepository readerProgressRecordRepo;
 
 	@RequestMapping("/readers")
 	public String findAllReader(Model model) {
@@ -39,7 +40,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("readerBooks", reader.getReaderBooks());
+		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(reader));
 		return "reader";
 	}
 
@@ -54,14 +55,13 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findById(id).get();
 		model.addAttribute("groups", group);
 		model.addAttribute("readers", group.getAllMembers());
-		model.addAttribute("books", group.getAllBooks());
+		model.addAttribute("groupBooks", group.getAllGroupBooks());
 		return "group";
 	}
 
 	@PostMapping("/addGroup")
 	public String addGroup(@RequestParam(required = true) String groupName, String topic) {
 		groupRepo.save(new ReadingGroup(groupName, topic));
-
 		return "redirect:/groups";
 	}
 
@@ -79,23 +79,32 @@ public class ReaderController {
 		return "redirect:/group?id=" + id;
 	}
 
-	@RequestMapping("/addReaderFinishedBook")
-	public String addReaderFinishedBook(long bookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
+	@RequestMapping("/addReaderProgressRecord")
+	public String addReaderProgressRecord(long groupBookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
 			long readerId, Model model) {
-		Optional<Reader> reader = readerRepo.findById(1L);
+		Optional<Reader> reader = readerRepo.findById(readerId);
 		Reader readerResult = reader.get();
-		Optional<GroupBook> book = bookRepo.findById(bookId);
-		GroupBook bookResult = book.get();
-		Collection<ReaderBookProgress> readerBooks = readerResult.getReaderBooks();
-		for (ReaderBookProgress readerBook : readerBooks) {
-			if (readerBook.getBook().equals(bookResult)) {
-				return "redirect:/book?id=" + bookId;
+		Optional<GroupBook> groupBook = bookRepo.findById(groupBookId);
+		GroupBook groupBookResult = groupBook.get();
+		Collection<ReaderProgressRecord> readerProgressRecords = readerResult.getReaderProgressRecords();
+		for (ReaderProgressRecord readerProgressRecord : readerProgressRecords) {
+			if (readerProgressRecord.getGroupBook().equals(groupBookResult)) {
+				return "redirect:/book?id=" + groupBookId;
 			}
 		}
-		ReaderBookProgress readerBook = new ReaderBookProgress(bookResult, readerResult, monthFinished, dayOfMonthFinished,
+		ReaderProgressRecord readerProgressRecord = new ReaderProgressRecord(groupBookResult, readerResult, monthFinished, dayOfMonthFinished,
 				yearFinished);
-		readerBookRepo.save(readerBook);
-		return "redirect:/book?id=" + bookId;
+		readerProgressRecordRepo.save(readerProgressRecord);
+		return "redirect:/groupBook?id=" + groupBookId;
+	}
+	
+	@RequestMapping("/removeReaderProgressRecord")
+	public String removeReaderProgressRecord(@RequestParam long id) {
+		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(id);
+		ReaderProgressRecord readerProgressResult = readerProgressRecord.get();
+		long readerId = readerProgressResult.getReader().getId();
+		readerProgressRecordRepo.delete(readerProgressResult);
+		return "redirect:/reader?id=" + readerId;
 	}
 
 }

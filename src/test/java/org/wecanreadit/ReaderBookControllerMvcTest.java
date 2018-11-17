@@ -23,14 +23,14 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 
-@WebMvcTest(ReaderBookProgressController.class)
+@WebMvcTest(ReaderProgressRecordController.class)
 public class ReaderBookControllerMvcTest {
 
 		@Mock
-		private ReaderBookProgress readerBook;
+		private ReaderProgressRecord readerProgress;
 
 		@Mock
-		private ReaderBookProgress readerBook2;
+		private ReaderProgressRecord readerProgress2;
 		
 		@Mock
 		private Reader reader;
@@ -39,7 +39,7 @@ public class ReaderBookControllerMvcTest {
 		private GroupBook groupBook;
 
 		@MockBean
-		private ReaderBookProgressRepository readerBookRepo;
+		private ReaderProgressRecordRepository readerProgressRecordRepo;
 		
 		@MockBean
 		private ReaderRepository readerRepo;
@@ -52,26 +52,29 @@ public class ReaderBookControllerMvcTest {
 
 
 		@Test
-		public void shouldBeOkForSingleReaderBook() throws Exception {
+		public void shouldBeOkForSingleReaderProgressRecord() throws Exception {
 			long readerBookId = 1;
-			when(readerBookRepo.findById(readerBookId)).thenReturn(Optional.of(readerBook));
-			when(readerBook.getBook()).thenReturn(groupBook);
-			mvc.perform(get("/readerBook?id=1")).andExpect(status().isOk());
+			when(readerProgressRecordRepo.findById(readerBookId)).thenReturn(Optional.of(readerProgress));
+			when(readerProgress.getGroupBook()).thenReturn(groupBook);
+			when(readerProgress.getReader()).thenReturn(reader);
+			mvc.perform(get("/readerProgressRecord?id=1")).andExpect(status().isOk());
+		}
+
+		@Test 
+		public void shouldRouteToSingleReaderProgressRecord() throws Exception {
+			long readerProgressId = 1;
+			when(readerProgressRecordRepo.findById(readerProgressId)).thenReturn(Optional.of(readerProgress));
+			when(readerProgress.getGroupBook()).thenReturn(groupBook);
+			when(readerProgress.getReader()).thenReturn(reader);
+			mvc.perform(get("/readerProgressRecord?id=1")).andExpect(view().name(is("readerProgressRecord")));
 		}
 
 		@Test
-		public void shouldRouteToSingleReaderBook() throws Exception {
-			long readerBookId = 1;
-			when(readerBookRepo.findById(readerBookId)).thenReturn(Optional.of(readerBook));
-			when(readerBook.getBook()).thenReturn(groupBook);
-			mvc.perform(get("/readerBook?id=1")).andExpect(view().name(is("readerBook")));
-		}
-
-		@Test
-		public void shouldPutAReaderBookIntoModel() throws Exception {
-			when(readerBookRepo.findById(1L)).thenReturn(Optional.of(readerBook));
-			when(readerBook.getBook()).thenReturn(groupBook);
-			mvc.perform(get("/readerBook?id=1")).andExpect(model().attribute("readerBook",is(readerBook)));
+		public void shouldPutAReaderProgressRecordIntoModel() throws Exception {
+			when(readerProgressRecordRepo.findById(1L)).thenReturn(Optional.of(readerProgress));
+			when(readerProgress.getGroupBook()).thenReturn(groupBook);
+			when(readerProgress.getReader()).thenReturn(reader);
+			mvc.perform(get("/readerProgressRecord?id=1")).andExpect(model().attribute("readerProgressRecord",is(readerProgress)));
 		}
 		
 		

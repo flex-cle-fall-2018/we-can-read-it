@@ -25,7 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ReaderBookToReaderJPAMappingsTest {
 
 	@Resource
-	GroupBookRepository bookRepo;
+	GroupBookRepository groupBookRepo;
 
 	@Resource
 	ReaderRepository readerRepo;
@@ -34,7 +34,7 @@ public class ReaderBookToReaderJPAMappingsTest {
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
-	ReaderBookProgressRepository readerBookRepo;
+	ReaderProgressRecordRepository readerProgressRecordRepo;
 
 	@Resource
 	EntityManager entityManager;
@@ -62,11 +62,11 @@ public class ReaderBookToReaderJPAMappingsTest {
 		ReadingGroup readingGroup = new ReadingGroup("group name", "topic");
 		readingGroup = readingGroupRepo.save(readingGroup);
 
-		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
-		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
+		GroupBook book = groupBookRepo.save(new GroupBook("title", "author", readingGroup));
+		GroupBook book2 = groupBookRepo.save(new GroupBook("title2", "author", readingGroup));
 
-		ReaderBookProgress readerBook = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
-		ReaderBookProgress readerBook2 = readerBookRepo.save(new ReaderBookProgress(book2, reader, 11, 06, 2018));
+		ReaderProgressRecord readerBook = readerProgressRecordRepo.save(new ReaderProgressRecord(book, reader, 11, 11, 2018));
+		ReaderProgressRecord readerBook2 = readerProgressRecordRepo.save(new ReaderProgressRecord(book2, reader, 11, 06, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
@@ -74,7 +74,7 @@ public class ReaderBookToReaderJPAMappingsTest {
 		Optional<Reader> result = readerRepo.findById(readerId);
 		Reader readerResult = result.get();
 
-		assertThat(readerResult.getReaderBooks(), containsInAnyOrder(readerBook, readerBook2));
+		assertThat(readerResult.getReaderProgressRecords(), containsInAnyOrder(readerBook, readerBook2));
 	}
 
 	@Test
@@ -86,21 +86,21 @@ public class ReaderBookToReaderJPAMappingsTest {
 		ReadingGroup readingGroup = new ReadingGroup("group name", "topic");
 		readingGroup = readingGroupRepo.save(readingGroup);
 
-		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
-		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
-		GroupBook book3 = bookRepo.save(new GroupBook("title3", "author", readingGroup));
-		book = bookRepo.save(book);
-		book2 = bookRepo.save(book2);
-		book3 = bookRepo.save(book3);
+		GroupBook book = groupBookRepo.save(new GroupBook("title", "author", readingGroup));
+		GroupBook book2 = groupBookRepo.save(new GroupBook("title2", "author", readingGroup));
+		GroupBook book3 = groupBookRepo.save(new GroupBook("title3", "author", readingGroup));
+		book = groupBookRepo.save(book);
+		book2 = groupBookRepo.save(book2);
+		book3 = groupBookRepo.save(book3);
 
-		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
-		ReaderBookProgress readerBook2 = readerBookRepo.save(new ReaderBookProgress(book2, reader, 11, 06, 2018));
-		ReaderBookProgress readerBook3 = readerBookRepo.save(new ReaderBookProgress(book3, reader, 10, 20, 2018));
+		ReaderProgressRecord readerBook1 = readerProgressRecordRepo.save(new ReaderProgressRecord(book, reader, 11, 11, 2018));
+		ReaderProgressRecord readerBook2 = readerProgressRecordRepo.save(new ReaderProgressRecord(book2, reader, 11, 06, 2018));
+		ReaderProgressRecord readerBook3 = readerProgressRecordRepo.save(new ReaderProgressRecord(book3, reader, 10, 20, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
 
-		Collection<ReaderBookProgress> result = readerBookRepo.findByReader(reader);
+		Collection<ReaderProgressRecord> result = readerProgressRecordRepo.findByReader(reader);
 
 		assertThat(result, containsInAnyOrder(readerBook1, readerBook2, readerBook3));
 	}
@@ -114,17 +114,17 @@ public class ReaderBookToReaderJPAMappingsTest {
 		ReadingGroup readingGroup = new ReadingGroup("group name", "topic");
 		readingGroup = readingGroupRepo.save(readingGroup);
 
-		GroupBook book = bookRepo.save(new GroupBook("title", "author", readingGroup));
-		GroupBook book2 = bookRepo.save(new GroupBook("title2", "author", readingGroup));
-		book = bookRepo.save(book);
-		book2 = bookRepo.save(book2);
+		GroupBook groupBook = groupBookRepo.save(new GroupBook("title", "author", readingGroup));
+		GroupBook groupBook2 = groupBookRepo.save(new GroupBook("title2", "author", readingGroup));
+		groupBook = groupBookRepo.save(groupBook);
+		groupBook2 = groupBookRepo.save(groupBook2);
 
-		ReaderBookProgress readerBook1 = readerBookRepo.save(new ReaderBookProgress(book, reader, 11, 11, 2018));
+		ReaderProgressRecord readerProgress1 = readerProgressRecordRepo.save(new ReaderProgressRecord(groupBook, reader, 11, 11, 2018));
 
 		entityManager.flush();
 		entityManager.clear();
 
-		Optional<Reader> result = readerRepo.findByReaderBooksContains(readerBook1);
+		Optional<Reader> result = readerRepo.findByReaderProgressRecordsContains(readerProgress1);
 		Reader readerResult = result.get();
 
 		assertEquals(readerResult, reader);

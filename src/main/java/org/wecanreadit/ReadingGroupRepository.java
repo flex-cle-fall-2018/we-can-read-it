@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ReadingGroupRepository extends CrudRepository<ReadingGroup, Long> {
 
-	Optional<ReadingGroup> findByBooksContains(GroupBook book);
+	Optional<ReadingGroup> findByGroupBooksContains(GroupBook groupBook);
+	
+	
 
 }

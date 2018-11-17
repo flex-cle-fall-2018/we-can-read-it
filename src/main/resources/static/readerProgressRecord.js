@@ -26,59 +26,30 @@ for (var i = 1; i < 32; i++) {
     dayOfMonthList.appendChild(option);
 }
 
-/**
- * Returns the name of the month, with January = 0, February = 1, etc.
- * @param {number} monthNumber 
- */
-const monthName = function(monthNumber) {
-    if (monthNumber < 0 || monthNumber > 11) {
-        throw Error('Month index out of range.');
-    }
-    return [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ][monthNumber];
-}
-
-
-
-
-
-const addEventListener = function() {
+const addEventListeners = function() {
     const updateDateFinishedButton = document.querySelector('#updateDateFinishedButton');
     updateDateFinishedButton.addEventListener('click', newFinishedDate);
+    
   };
-  
-
-  
+ 
   const newFinishedDate = function() {
 	    const monthFinished = document.querySelector('#monthFinished').value;
 	    const dayOfMonthFinished = document.querySelector('#dayOfMonthFinished').value;
 	    const yearFinished = document.querySelector('#yearFinished').value;
-	    const readerBookId = document.querySelector('#readerBookId').value;
+	    const readerProgressRecordId = document.querySelector('#readerProgressRecordId').value;
 	    const finishedDate = {
 	    		monthFinished, 
 	    		dayOfMonthFinished, 
 	    		yearFinished,
-	    		readerBookId,
+	    		readerProgressRecordId,
 	    		
 	    };
 	    console.log(finishedDate);
-	    sendItemUpdateRequest(finishedDate);
+	    sendDateUpdateRequest(finishedDate);
 	    
 	 };
 	  
-	 sendItemUpdateRequest = function(finishedDate) {
+	 sendDateUpdateRequest = function(finishedDate) {
 		    const xhr = new XMLHttpRequest();
 		  
 		    xhr.onreadystatechange = function() {
@@ -98,22 +69,9 @@ const addEventListener = function() {
 		  };
 		  
 	const updateDateFinished = function(dateFinishedParagraph, updatedBook) {
-	/*	const {
-    		monthFinished, 
-    		dayOfMonthFinished, 
-    		yearFinished,
-    		readerBookId,
-    		
-    } = updatedFinishedDate;
-		monthName(monthFinished);
-		dateFinishedParagraph.innerText = ""
-	}
-  */
 		dateFinishedParagraph.innerText = updatedBook.stringDateFinished;
 	}
 		
-  addEventListener();
-
-
+  addEventListeners();
 
 })();

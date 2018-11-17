@@ -28,7 +28,7 @@ public class Reader {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "reader")
-	private Collection<ReaderBookProgress> readerBooks;
+	private Collection<ReaderProgressRecord> readerProgressRecords;
 
 	protected Reader() {
 	}
@@ -88,8 +88,8 @@ public class Reader {
 		this.profileUrl = profileUrl;
 	}
 
-	public Collection<ReaderBookProgress> getReaderBooks() {
-		return readerBooks;
+	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
+		return readerProgressRecords;
 	}
 
 	@Override

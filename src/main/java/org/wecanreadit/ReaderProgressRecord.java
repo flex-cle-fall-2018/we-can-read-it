@@ -7,32 +7,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
-public class ReaderBookProgress {
+public class ReaderProgressRecord {
 	/*This class is for the reader to track when they finished a particular groupBook
 	 */
 
 	@Id
 	@GeneratedValue
 	private long id;
-
+	
 	private LocalDate dateFinished;
 	
 	@ManyToOne
-	private GroupBook book;
+	private GroupBook groupBook;
 
 	@ManyToOne
 	private Reader reader;
 
-	public ReaderBookProgress() {
+	public ReaderProgressRecord() {
 
 	}
 
-	public ReaderBookProgress(GroupBook book, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
+	public ReaderProgressRecord(GroupBook groupBook, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 		this.reader = reader;
-		this.book = book;
+		this.groupBook = groupBook;
 	}
 	
 	public long getId() {
@@ -51,14 +52,17 @@ public class ReaderBookProgress {
 		return dateFinished;
 	}
 	
-	public GroupBook getBook() {
-		return book;
+	public GroupBook getGroupBook() {
+		return groupBook;
 	}
 	
 	protected void setDateFinished(int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 	}
-
+	
+	public Reader getReader() {
+		return reader;
+	}
 
 	@Override
 	public int hashCode() {
@@ -76,11 +80,13 @@ public class ReaderBookProgress {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ReaderBookProgress other = (ReaderBookProgress) obj;
+		ReaderProgressRecord other = (ReaderProgressRecord) obj;
 		if (id != other.id)
 			return false;
 		return true;
 	}
+
+	
 
 	
 

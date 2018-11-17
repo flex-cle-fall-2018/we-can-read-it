@@ -12,10 +12,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class GroupBook {
-	
-	/*This class allows a book to be created within a reading group. Note there is currently no shared repository for
-	 * librarians to access books (as of 11-17-18), so the librarian account would need to create separate
-	 * groupBooks for each group
+
+	/*
+	 * This class allows a book to be created within a reading group. Note there is
+	 * currently no shared repository for librarians to access books
+	 * (11-17-18), so the librarian would need to create separate groupBooks for each
+	 * group
 	 */
 
 	@Id
@@ -24,14 +26,14 @@ public class GroupBook {
 
 	private String title;
 	private String author;
-	
+
 	@JsonIgnore
 	@ManyToOne
 	private ReadingGroup readingGroup;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "book")
-	private Collection<ReaderBookProgress> readerBooks;
+	@OneToMany(mappedBy = "groupBook")
+	private Collection<ReaderProgressRecord> readerProgressRecords;
 
 	public GroupBook() {
 
@@ -57,6 +59,10 @@ public class GroupBook {
 
 	public ReadingGroup getReadingGroup() {
 		return readingGroup;
+	}
+
+	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
+		return readerProgressRecords;
 	}
 
 	@Override

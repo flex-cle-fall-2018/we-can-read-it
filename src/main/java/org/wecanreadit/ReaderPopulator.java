@@ -20,16 +20,16 @@ public class ReaderPopulator implements CommandLineRunner {
 	private GroupBookRepository bookRepo;
 	
 	@Resource
-	private ReaderBookProgressRepository readerBookRepo;
+	private ReaderProgressRecordRepository readerBookRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
-		Reader zack = new Reader("Zack", "Mike", "Zeke", "Am");
+		Reader zack = new Reader("Zack", "Mike", "Zack", "Am");
 		Reader bob = new Reader("Bob", "Em", "Shane", "Em");
 		Reader joe = new Reader("Joe", "Mike", "Joe", "Am");
 		Reader vi = new Reader("Vi", "Em", "Shane", "Em");
-		Reader doug = new Reader("Dough", "Mike", "Zeke", "Am");
+		Reader doug = new Reader("Doug", "Mike", "Zeke", "Am");
 		shane = readerRepo.save(shane);
 		zack = readerRepo.save(zack);
 		bob = readerRepo.save(bob);
@@ -55,9 +55,13 @@ public class ReaderPopulator implements CommandLineRunner {
 		GroupBook leftHandOfDarkness = bookRepo.save(new GroupBook("Left Hand of Darkness", "Ursula Le Guin", test2));
 		GroupBook endersGame = bookRepo.save(new GroupBook("Ender's Game", "Orson Scott Card", test2));
 		
-		ReaderBookProgress joeBook1 = readerBookRepo.save(new ReaderBookProgress(gameOfThrones, joe, 2, 2, 2018));
-		ReaderBookProgress joeBook2 = readerBookRepo.save(new ReaderBookProgress(dune, joe, 5, 25, 2018));
-		ReaderBookProgress joeBook3 = readerBookRepo.save(new ReaderBookProgress(nameOfTheWind, joe, 10, 18, 2018));
+		ReaderProgressRecord joeProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(gameOfThrones, joe, 2, 2, 2018));
+		ReaderProgressRecord joeProgressRecord2 = readerBookRepo.save(new ReaderProgressRecord(dune, joe, 5, 25, 2018));
+		ReaderProgressRecord joeProgressRecord3 = readerBookRepo.save(new ReaderProgressRecord(nameOfTheWind, joe, 10, 18, 2018));
+		ReaderProgressRecord viProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(endersGame, vi, 9, 23, 2018));
+		ReaderProgressRecord dougProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(endersGame, doug, 8, 14, 2018));
+	
+	
 	}
 
 }
