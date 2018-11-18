@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" type="text/css" href="theme.css">
+	
 
 </head>
 
@@ -15,7 +16,10 @@
 		<section  class="panel">
 		<div th:each="group: ${groups}" >
 		<h2 th:text="${group.groupName}"></h2>
+		<title th:text="${group.groupName}"></title>
 		</div>
+	
+		
 	
 		<ul>
 			<li th:each="reader: ${readers}" >

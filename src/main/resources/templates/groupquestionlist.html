@@ -21,6 +21,7 @@
    <div class="panel">
    
    <div th:each="group: ${groups}">
+   <title th:text="${group.groupName}"></title>
 	<a th:href="@{/singlegroupquestions(id=${group.id})}" th:text="${group.groupName}"></a>
 	</div>
     
