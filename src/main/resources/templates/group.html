@@ -77,7 +77,9 @@
 		<a th:href ="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
 		
 		<div th:each ="answer:${question.getAnswers()}" >
-		<span th:text = "${answer.content}"></span>
+		<ul>
+		<li th:text = "${answer.content}"></li>
+		</ul>
 		</div>
 		
 		</div>
@@ -116,8 +118,8 @@
 		</div>
 		</section>
 		<section class="panel">
-		<a href="http://localhost:8080/groups">Back to Groups.</a>
-		<a href="http://localhost:8080/readers">Back to Readers.</a>
+		<a href="http://localhost:8080/groups">Back to Groups</a></br>
+		<a href="http://localhost:8080/readers">Back to Readers</a>
 		</section>
 	</main>
 </body>
