@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    	<link rel="stylesheet" type="text/css" href="theme.css">
-    	<title th:text="${reader.firstName}"></title>
-    
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="theme.css">
+<title th:text="${reader.firstName}"></title>
+
 
 </head>
 <body>
-<main>
-	
-			<img id = "icon" src="icon.svg">
-	
-			<section  class="panel">
-	
-	<h1 th:text="${reader.firstName}"></h1>
-	
-	
-			<section  class="panel">
-	
-	<div th:each="readerProgressRecord: ${readerProgressRecords}">
-	<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}"><span th:text="${readerProgressRecord.groupBook.title}"></span></a>
-	<p th:text="${readerProgressRecord.groupBook.author}"></p>
-	<p>Finished: <span th:text="${readerProgressRecord.stringDateFinished}" id="dateFinishedParagraph"></span></p>
-	<p><span th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span></p>
-	
-	</div>
-	</section>
-	
-			<section  class="panel">
-	
-	<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">View Friends</a></br>
-	
-	
-	<a href="http://localhost:8080/readers">Back to Readers</a>
-	</section>
-	
-	
+	<main> <img id="icon" src="icon.svg">
+
+	<section class="panel">
+
+		<h1 th:text="${reader.firstName}"></h1>
+
+
+		<section class="panel">
+
+			<div th:each="readerProgressRecord: ${readerProgressRecords}">
+				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}"><span
+					th:text="${readerProgressRecord.groupBook.title}"></span></a>
+				<p th:text="${readerProgressRecord.groupBook.author}"></p>
+				<p>
+					Finished: <span
+						th:text="${readerProgressRecord.stringDateFinished}"
+						id="dateFinishedParagraph"></span>
+				</p>
+				<p>
+					<span
+						th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span>
+				</p>
+
+			</div>
+		</section>
+
+		<section class="panel">
+
+			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">View
+				Friends</a></br> <a href="http://localhost:8080/readers">Back to Readers</a>
+		</section>
 	</main>
 </body>
 </html>
