@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class ReaderProgressRecordRestController {
-	
+
 	@Resource
 	ReaderProgressRecordRepository readerProgressRecordRepo;
-	
+
 	@Resource
 	ReaderRepository readerRepo;
-	
+
 	@Resource
 	GroupBookRepository groupBookRepo;
-	
+
 	@DeleteMapping("/api/deleteReaderProgressRecord")
 	public String deleteReaderBookProgress(@RequestParam long readerProgressRecordId) {
 		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(readerProgressRecordId);
@@ -34,16 +33,17 @@ public class ReaderProgressRecordRestController {
 		readerProgressRecordRepo.delete(readerProgressResult);
 		return "redirect:/reader?id=" + readerId;
 	}
-	
+
 	@PutMapping("/api/updateFinishedDate")
 	public ReaderProgressRecord updateReaderProgressDate(@RequestBody UpdatedDateFinished updatedDateFinished) {
-		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(updatedDateFinished.readerProgressRecordId);
+		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo
+				.findById(updatedDateFinished.readerProgressRecordId);
 		ReaderProgressRecord readerProgressResult = readerProgressRecord.get();
-		readerProgressResult.setDateFinished(updatedDateFinished.monthFinished, updatedDateFinished.dayOfMonthFinished, updatedDateFinished.yearFinished);
+		readerProgressResult.setDateFinished(updatedDateFinished.monthFinished, updatedDateFinished.dayOfMonthFinished,
+				updatedDateFinished.yearFinished);
 		return readerProgressRecordRepo.save(readerProgressResult);
 	}
-	
-	
+
 	@PutMapping("/addReaderProgressRecord")
 	public ReaderProgressRecord addReaderProgressRecord(@RequestBody NewReaderProgressRecord newReaderProgressRecord) {
 		Optional<Reader> reader = readerRepo.findById(newReaderProgressRecord.readerId);
@@ -56,28 +56,26 @@ public class ReaderProgressRecordRestController {
 				return null;
 			}
 		}
-		ReaderProgressRecord readerProgressRecord = new ReaderProgressRecord(groupBookResult, readerResult, newReaderProgressRecord.monthFinished, newReaderProgressRecord.dayOfMonthFinished,
+		ReaderProgressRecord readerProgressRecord = new ReaderProgressRecord(groupBookResult, readerResult,
+				newReaderProgressRecord.monthFinished, newReaderProgressRecord.dayOfMonthFinished,
 				newReaderProgressRecord.yearFinished);
 		readerProgressRecordRepo.save(readerProgressRecord);
 		return readerProgressRecord;
 	}
-	
 
 	public static class UpdatedDateFinished {
 		public int monthFinished;
 		public int dayOfMonthFinished;
 		public int yearFinished;
-		public long readerProgressRecordId;	
+		public long readerProgressRecordId;
 	}
-	
+
 	public static class NewReaderProgressRecord {
 		public long groupBookId;
 		public int monthFinished;
 		public int dayOfMonthFinished;
 		public int yearFinished;
-		public long readerId;	
+		public long readerId;
 	}
-	
 
 }
-

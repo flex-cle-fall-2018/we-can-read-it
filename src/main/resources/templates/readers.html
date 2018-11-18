@@ -13,13 +13,10 @@
 	<a th:href="@{reader(id=${reader.id})}"><span th:text="${reader.username}"></span></a>
 	</div>
 	
-	
 	<h2>These are the available groups</h2>
 	<div th:each="group: ${groups}">
 	<a th:href="@{group(id=${group.id})}" th:text="${group.groupName}"></a>
 	</div>
-	
-	
 	
 	<a href="http://localhost:8080/groups">Back to Groups.</a>
 </body>

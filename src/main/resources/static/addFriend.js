@@ -1,12 +1,12 @@
 (function() {
 
-const addEventListeners = function() {
-    const addFriendButton = document.querySelector('#addFriendButton');
-    addFriendButton.addEventListener('click', addFriend);
+ 	const addEventListeners = function() {
+ 		const addFriendButton = document.querySelector('#addFriendButton');
+    	addFriendButton.addEventListener('click', addFriend);
     
-  };
+ 	};
  
-  const addFriend = function() {
+  	const addFriend = function() {
 	    const friendUsername = document.querySelector('#friendUsername').value;
 	    const readerId = document.querySelector('#readerId').value;
 	    const friend = {
