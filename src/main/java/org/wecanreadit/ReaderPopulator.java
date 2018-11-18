@@ -1,7 +1,5 @@
 package org.wecanreadit;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
