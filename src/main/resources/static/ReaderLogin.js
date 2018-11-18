@@ -9,7 +9,7 @@
         verifyLogin(`/verifyLogin`, {name, password})
         .then(function(myJson) {
             if(myJson.password == password){
-                console.log('success');
+               console.log('success');
                 console.log(getCookie("readerId"));
                 userCookie = getCookie("readerId");
                 window.location.href = `/profile?id=${userCookie}`;

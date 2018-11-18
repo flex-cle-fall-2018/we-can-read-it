@@ -27,7 +27,9 @@
 	<select name="yearFinished" id="yearFinished">
   	<option value=2018>2018</option>
 	</select>
+
 	<button id="addReaderProgressRecordButton">add to my books</button>
+
 	</form> 
 	
 	<div th:each="readerProgressRecord: ${readerProgressRecords}">
@@ -37,6 +39,17 @@
 
 	<a th:href="@{group(id=${group.id})}">Back to Group</a>
 	
+	<div id = "modal">
+		<div id="modal-content">
+		<span id="close">&times;</span>
+		<h3>Congrats!</h3>
+		<span th:text = "${groupBook.title}"></span>
+		
+		</div>
+	</div>
+	
+	
+	<script src ='./modal.js'></script>
 	<script src='./groupBook.js'></script>
 </body>
 </html>
