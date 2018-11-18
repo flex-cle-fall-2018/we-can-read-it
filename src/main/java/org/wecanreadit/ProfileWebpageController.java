@@ -10,11 +10,7 @@ public class ProfileWebpageController {
 	
 	@Resource
 	ReaderRepository readerRepo;
-	
-	@RequestMapping("/profile")
-	public String ProfilePage() {	
-		return ("profile");
-	}
+
 	@RequestMapping("/ReaderLogin")
 	public String ReaderLoginPage() {
 		return ("ReaderLogin");

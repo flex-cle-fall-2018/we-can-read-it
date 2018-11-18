@@ -11,6 +11,7 @@
 
 <body>
 
+
 	<main> <img id="icon" src="icon.svg">
 	<section class="panel">
 		<div th:each="group: ${groups}">
@@ -127,10 +128,22 @@
 			</form>
 		</div>
 	</section>
+    
+    <h2>Add a book</h2>
+    <form id="bookForm" method="POST" th:action="@{/addBook}">
+    	<input id="booktitle" type="text" placeholder="Enter book name" name="book">
+    	<input type="text" placeholder="Enter author name" name="author">
+    	<input type="hidden" th:value="${group.id}" name="id">
+    	<input id="pageCount" type="hidden" name="pageCount">
+    	<input id="button" type="button" value="Submit">
+    </form>
+    
 	<section class="panel">
 		<a href="http://localhost:8080/groups">Back to Groups</a></br> <a
 			href="http://localhost:8080/readers">Back to Readers</a>
 	</section>
 	</main>
+<script src='./group.js'></script>
+
 </body>
 </html>

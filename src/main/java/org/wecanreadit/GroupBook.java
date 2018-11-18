@@ -26,6 +26,7 @@ public class GroupBook {
 
 	private String title;
 	private String author;
+	private int points = 10;
 
 	@JsonIgnore
 	@ManyToOne
@@ -43,6 +44,14 @@ public class GroupBook {
 		this.title = title;
 		this.author = author;
 		this.readingGroup = readingGroup;
+	}
+	
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
+	public int getPoints() {
+		return points;
 	}
 
 	public long getId() {

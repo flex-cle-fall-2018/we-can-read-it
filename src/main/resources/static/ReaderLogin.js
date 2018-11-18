@@ -12,7 +12,7 @@
                console.log('success');
                 console.log(getCookie("readerId"));
                 userCookie = getCookie("readerId");
-                window.location.href = `/profile?id=${userCookie}`;
+                window.location.href = `/reader?id=${userCookie}`;
             }
             console.log(JSON.stringify(myJson));
             

@@ -23,6 +23,9 @@ public class LibrarianController {
 	GroupRepository groupRepo;
 
 	@Resource
+	GroupBookRepository groupBookRepo;
+	
+	@Resource
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
@@ -99,6 +102,20 @@ public class LibrarianController {
 
 		return "admin";
 	}
+
+	
+	@RequestMapping("/addBook")
+	public String addBook(long id, String book, String author, String pageCount) {
+		int count = 0, pages = Integer.valueOf(pageCount);
+		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
+		while (pages > 100) {
+			pages -= 100;
+			count += 5;
+		}
+		book1.setPoints(count);
+		groupBookRepo.save(book1);
+		return "redirect:/group?id=" + id;
+
 	@RequestMapping("librarian/addNewReader")
 	public String addNewReader(Reader reader) {
 		if(reader.getFirstName() !=null&& reader.getLastName()!=null && reader.getUsername()!=null && reader.getPassword()!=null) {
@@ -108,6 +125,7 @@ public class LibrarianController {
 			return "Nerp";
 		}
 	
+
 	}
 
 }
