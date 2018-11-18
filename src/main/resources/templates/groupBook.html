@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <title th:text="${groupBook.title}"></title>
 
 </head>
 <body>
+<main>
+	<img id = "icon" src="icon.svg">
+	<div class="panel">
 	<h1 th:text="${groupBook.title}"></h1>
 	<h2 th:text="${groupBook.author}"></h2>
+	</div>
 	
-	<form method="POST" id="addReaderFinishedBook">
-	<input type="hidden" name="readerId" value = 4 />
-	<input type="hidden" name="groupBookId" th:value ="${groupBook.id}" />
+	<div class="panel">
+	<form id="addReaderProgressRecordForm" onsubmit="return false">
+	<input type="hidden" name="readerId" id="readerId" value = 4 />
+	<input type="hidden" name="groupBookId" id="groupBookId" th:value ="${groupBook.id}" />
 	
-
-<label>Month:</label>
-<select name="monthFinished" id="monthFinished">
+<div class="panel">
+	<label>Month:</label>
+		<select name="monthFinished" id="monthFinished">
 	</select>
 	
 	<label>Day:</label>
@@ -27,14 +34,21 @@
 	<select name="yearFinished" id="yearFinished">
   	<option value=2018>2018</option>
 	</select>
-	<button th:formaction="@{addReaderProgressRecord}">add to my books</button>
+
+	<button id="addReaderProgressRecordButton">add to my books</button>
+
 	</form> 
-	
+	</div>
+	<div class="panel">
 	<div th:each="readerProgressRecord: ${readerProgressRecords}">
 	<p><span th:text="${readerProgressRecord.reader.username}"></span> read this book <span th:text="${readerProgressRecord.stringDateFinished}"></span></p>
 	</div>
+	<div id="newReaderProgressRecordAjax"></div>
 
 	<a th:href="@{group(id=${group.id})}">Back to Group</a>
+	</div>
+	
+	</main>
 	
 	<script src='./groupBook.js'></script>
 </body>

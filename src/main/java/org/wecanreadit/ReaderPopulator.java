@@ -1,7 +1,5 @@
 package org.wecanreadit;
 
-import java.util.Calendar;
-
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -70,7 +68,8 @@ public class ReaderPopulator implements CommandLineRunner {
 		ReaderProgressRecord viProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(book8, vi, 9, 23, 2018));
 		ReaderProgressRecord dougProgressRecord1 = readerBookRepo.save(new ReaderProgressRecord(book8, doug, 8, 14, 2018));
 	
-	
+		joe.addFriends(shane);
+		readerRepo.save(joe);
 	}
 
 }
