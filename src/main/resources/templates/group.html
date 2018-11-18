@@ -21,19 +21,24 @@
 	
 		
 	
-		<ul>
-			<li th:each="reader: ${readers}" >
+		
+			<div th:each="reader: ${readers}" >
 			<a th:href="@{reader(id=${reader.id})}"><span th:text="${reader.username}"></span></a>
-			</li>
-		</ul>
+			</div>
 		</section>
 
 		<section class="panel">
 		<h2>Books</h2>
+		<table >
+		
 		<div th:each="groupBook: ${groupBooks}">
-		<a th:href="@{groupBook(id=${groupBook.id})}"><span th:text="${groupBook.title}"></span></a>
-		<span th:text="${groupBook.author}"></span>
+		<tr>
+		<th><a th:href="@{groupBook(id=${groupBook.id})}" th:text="${groupBook.title}" id="stubborn"></a></th>
+		<th><span th:text="${groupBook.author}"></span></th>
+		</tr>
+		
 		</div>
+		</table>
 		</section>
 
 		<section class="panel">

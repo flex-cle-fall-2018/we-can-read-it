@@ -53,3 +53,11 @@ a{
 a:hover{
 	border: none;
 }
+
+#stubborn{
+	border:none;
+}
+
+th{
+	text-align:left;
+}
