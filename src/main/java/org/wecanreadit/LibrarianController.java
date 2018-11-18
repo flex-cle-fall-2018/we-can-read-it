@@ -115,6 +115,7 @@ public class LibrarianController {
 		book1.setPoints(count);
 		groupBookRepo.save(book1);
 		return "redirect:/group?id=" + id;
+	}
 
 	@RequestMapping("librarian/addNewReader")
 	public String addNewReader(Reader reader) {
