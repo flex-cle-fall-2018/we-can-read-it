@@ -1,6 +1,8 @@
 package org.wecanreadit;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ public class Reader {
 	private String lastName;
 	private String bio;
 	private String profileUrl;
+	
 
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
@@ -29,6 +32,22 @@ public class Reader {
 	@JsonIgnore
 	@OneToMany(mappedBy = "reader")
 	private Collection<ReaderProgressRecord> readerProgressRecords;
+	
+	@JsonIgnore
+	@ManyToMany
+	private Collection<Reader> pendingFriends;
+	
+	
+	@ManyToMany(mappedBy = "pendingFriends")
+	private Collection<Reader> pendingFriendOf;
+	
+	@JsonIgnore
+	@ManyToMany
+	private Collection<Reader> friends;
+	
+	
+	@ManyToMany(mappedBy = "friends")
+	private Collection<Reader> friendOf;
 
 	protected Reader() {
 	}
@@ -38,6 +57,8 @@ public class Reader {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.pendingFriends = new HashSet<>(Arrays.asList());
+		this.friends = new HashSet<>(Arrays.asList());
 	}
 
 	public Long getId() {
@@ -91,6 +112,19 @@ public class Reader {
 	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
 		return readerProgressRecords;
 	}
+	
+	public Collection<Reader> getPendingFriends() {
+		return pendingFriends;
+	}
+	
+	public Collection<Reader> getFriends() {
+		return friends;
+	}
+	
+	public void addFriends(Reader friend) {
+		friends.add(friend);
+		
+	}
 
 	@Override
 	public int hashCode() {
@@ -113,5 +147,7 @@ public class Reader {
 			return false;
 		return true;
 	}
+
+	
 
 }

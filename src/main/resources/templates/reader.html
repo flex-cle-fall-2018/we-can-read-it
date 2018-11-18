@@ -17,9 +17,10 @@
 	<p>Finished: <span th:text="${readerProgressRecord.stringDateFinished}" id="dateFinishedParagraph"></span></p>
 	<p><span th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span></p>
 	
-	
 	</div>
 	<br>
+	
+	<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">View friends.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	
 </body>

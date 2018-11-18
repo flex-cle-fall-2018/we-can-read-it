@@ -170,6 +170,7 @@ public class ReaderController {
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
+
 	@RequestMapping("/addReaderProgressRecord")
 	public String addReaderProgressRecord(long groupBookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
 			long readerId, Model model) {
@@ -189,6 +190,7 @@ public class ReaderController {
 		return "redirect:/groupBook?id=" + groupBookId;
 	}
 
+
 	@RequestMapping("/removeReaderProgressRecord")
 	public String removeReaderProgressRecord(@RequestParam long id) {
 		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(id);
@@ -196,6 +198,13 @@ public class ReaderController {
 		long readerId = readerProgressResult.getReader().getId();
 		readerProgressRecordRepo.delete(readerProgressResult);
 		return "redirect:/reader?id=" + readerId;
+	}
+	
+	@RequestMapping("/reader/{readerId}/friends")
+	public String readerFriends(@PathVariable long readerId, Model model) {
+		model.addAttribute("reader", readerRepo.findById(readerId).get());
+		model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+		return "readerFriends";
 	}
 
 }

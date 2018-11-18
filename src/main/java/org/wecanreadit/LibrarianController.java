@@ -42,7 +42,6 @@ public class LibrarianController {
 	public String findAllLibrarians(Model model) {
 		model.addAttribute("librarians", librarianRepo.findAll());
 		return "librarians";
-
 	}
 
 	@RequestMapping("/add-librarian")
