@@ -42,6 +42,7 @@ public class ReaderProgressRecordRestController {
 		readerProgressResult.setDateFinished(updatedDateFinished.monthFinished, updatedDateFinished.dayOfMonthFinished,
 				updatedDateFinished.yearFinished);
 		return readerProgressRecordRepo.save(readerProgressResult);
+
 	}
 
 	@PutMapping("/addReaderProgressRecord")
@@ -61,6 +62,7 @@ public class ReaderProgressRecordRestController {
 				newReaderProgressRecord.yearFinished);
 		readerProgressRecordRepo.save(readerProgressRecord);
 		return readerProgressRecord;
+
 	}
 
 	public static class UpdatedDateFinished {

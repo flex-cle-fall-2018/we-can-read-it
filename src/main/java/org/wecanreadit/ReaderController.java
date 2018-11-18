@@ -204,6 +204,8 @@ public class ReaderController {
 	public String readerFriends(@PathVariable long readerId, Model model) {
 		model.addAttribute("reader", readerRepo.findById(readerId).get());
 		model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+		model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
+		model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
 		return "readerFriends";
 	}
 

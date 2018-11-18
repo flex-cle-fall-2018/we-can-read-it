@@ -117,9 +117,14 @@ public class Reader {
 		return pendingFriends;
 	}
 	
+	public Collection<Reader> getPendingFriendOf() {
+		return pendingFriendOf;
+	}
+	
 	public Collection<Reader> getFriends() {
 		return friends;
 	}
+	
 	
 	public void addFriends(Reader friend) {
 		friends.add(friend);

@@ -11,12 +11,28 @@
 		<input type="text" placeholder="Friend's Username" name="friendUsername" id="friendUsername">
         <input type="hidden" th:value="${reader.id}" name="id" id="readerId">
         <button id="addFriendButton">Add Friend</button>
+        <div id="messageDiv">
+		</div>
+        
+        <div id="friends">
 		<h2>Friends</h2>
 		<div th:each="friend: ${friends}" id="friendsList">
-		<h2 th:text="${friend.username}"></h2>
+		<a th:href="@{../../reader(id=${friend.id})}" th:text="${friend.username}"></a>
 		</div>
 		
+		<div id="pendingFriends">
 		<h2>Pending Friends</h2>
+		<div th:each="pendingFriend: ${pendingFriends}" id="pendingFriendsList">
+		<a th:href="@{../../reader(id=${pendingFriend.id})}" th:text="${pendingFriend.username}"></a>
+		</div>
+		
+		
+		<div id="pendingFriendOf">
+		<h2>Friend Requests</h2>
+		<div th:each="pendingFriendOf: ${pendingFriendOf}" id="pendingFriendOfList">
+		<a th:href="@{../../reader(id=${pendingFriendOf.id})}" th:text="${pendingFriendOf.username}"></a>
+		</div>
+		
 		
      
 
