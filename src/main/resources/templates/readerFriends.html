@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+</head>
+<body>
+		<input type="text" placeholder="Friend's Username" name="friendUsername" id="friendUsername">
+        <input type="hidden" th:value="${reader.id}" name="id" id="readerId">
+        <button id="addFriendButton">Add Friend</button>
+		<h2>Friends</h2>
+		<div th:each="friend: ${friends}" id="friendsList">
+		<h2 th:text="${friend.username}"></h2>
+		</div>
+		
+		<h2>Pending Friends</h2>
+		
+     
+
+
+<script src='/addFriend.js'></script>
+
+</body>
