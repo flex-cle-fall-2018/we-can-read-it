@@ -69,3 +69,8 @@ th {
 	text-align: left;
 	width: 400px
 }
+
+.answer{
+	max-width: 600px;
+	word-wrap: break-word;
+}

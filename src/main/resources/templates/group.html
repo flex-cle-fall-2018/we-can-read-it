@@ -87,7 +87,7 @@
 
 				<div th:each="answer:${question.getAnswers()}">
 					<ul>
-						<li th:text="${answer.content}"></li>
+						<li class="answer" th:text="${answer.content}"></li>
 					</ul>
 				</div>
 
@@ -129,7 +129,9 @@
 		</div>
 	</section>
     
+    <section class="panel">
     <h2>Add a book</h2>
+    <div th:each="group: ${groups}">
     <form id="bookForm" method="POST" th:action="@{/addBook}">
     	<input id="booktitle" type="text" placeholder="Enter book name" name="book">
     	<input type="text" placeholder="Enter author name" name="author">
@@ -137,6 +139,9 @@
     	<input id="pageCount" type="hidden" name="pageCount">
     	<input id="button" type="button" value="Submit">
     </form>
+    </div>
+    	</section>
+    
     
 	<section class="panel">
 		<a href="http://localhost:8080/groups">Back to Groups</a></br> <a
