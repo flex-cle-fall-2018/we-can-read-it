@@ -24,16 +24,13 @@ public class LibrarianController {
 
 	@Resource
 	GroupBookRepository groupBookRepo;
-	
-	@Resource
-	GroupBookRepository groupBookRepo;
-	
+
+
 	@Resource
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
 	ReaderRepository readerRepo;
-
 
 	@RequestMapping("/librarian")
 	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws LibrarianNotFoundException {
@@ -64,26 +61,19 @@ public class LibrarianController {
 		return "login";
 	}
 
-
 	@RequestMapping("/librarian-login")
-	public String adminLogin(
-			HttpServletResponse response
-			) {
+	public String adminLogin(HttpServletResponse response) {
 
 		Cookie adminRoleCookie = new Cookie("role", "librarian");
 		adminRoleCookie.setHttpOnly(true);
 		adminRoleCookie.setMaxAge(300);
 		response.addCookie(adminRoleCookie);
-		
+
 		return "librarian-login";
 	}
 
 	@RequestMapping("/librarian-logout")
-	public String adminLogin(
-			HttpServletRequest request,
-			HttpServletResponse response
-			) {
-		
+	public String adminLogin(HttpServletRequest request, HttpServletResponse response) {
 
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
@@ -94,7 +84,6 @@ public class LibrarianController {
 			}
 		}
 		return "redirect:/librarian-login";
-		
 
 	}
 
@@ -114,13 +103,7 @@ public class LibrarianController {
 
 		return "admin";
 	}
-@RequestMapping("/addBook")
-public String addBook(long id , String name, String author) {
-	GroupBook book1 = new GroupBook(name, author, groupRepo.findById(id).get());
-	groupBookRepo.save(book1);
-	return "redirect:/group?id=" + id;
 
-	
 	@RequestMapping("/addBook")
 	public String addBook(long id, String book, String author, String pageCount) {
 		int count = 0, pages = Integer.valueOf(pageCount);
@@ -136,17 +119,14 @@ public String addBook(long id , String name, String author) {
 
 	@RequestMapping("librarian/addNewReader")
 	public String addNewReader(Reader reader) {
-		if(reader.getFirstName() !=null&& reader.getLastName()!=null && reader.getUsername()!=null && reader.getPassword()!=null) {
+		if (reader.getFirstName() != null && reader.getLastName() != null && reader.getUsername() != null
+				&& reader.getPassword() != null) {
 			readerRepo.save(reader);
 			return "Worked";
-		}else {
+		} else {
 			return "Nerp";
 		}
-	
 
 	}
 
 }
-}
-
-
