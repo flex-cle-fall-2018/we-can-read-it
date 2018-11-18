@@ -59,7 +59,7 @@ public class LibrarianController {
 		return "login";
 	}
 
-	@RequestMapping("/librarian/login")
+	@RequestMapping("/librarian-login")
 	public String adminLogin(
 			HttpServletResponse response
 			) {
@@ -68,10 +68,10 @@ public class LibrarianController {
 		adminRoleCookie.setMaxAge(300);
 		response.addCookie(adminRoleCookie);
 		
-		return "redirect:/admin";
+		return "librarian-login";
 	}
 
-	@RequestMapping("/admin/logout")
+	@RequestMapping("/librarian-logout")
 	public String adminLogin(
 			HttpServletRequest request,
 			HttpServletResponse response
@@ -86,7 +86,7 @@ public class LibrarianController {
 			}
 		}
 		
-		return "redirect:/admin";
+		return "redirect:/librarian-login";
 		
 	}
 
@@ -110,8 +110,8 @@ public class LibrarianController {
 		return "admin";
 	}
 @RequestMapping("/addBook")
-public String addBook(long id , String book, String author) {
-	GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
+public String addBook(long id , String name, String author) {
+	GroupBook book1 = new GroupBook(name, author, groupRepo.findById(id).get());
 	groupBookRepo.save(book1);
 	return "redirect:/group?id=" + id;
 

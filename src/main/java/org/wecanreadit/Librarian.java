@@ -53,6 +53,10 @@ public class Librarian {
 		this.topic = topic;
 		this.readingGroup = new HashSet<>(Arrays.asList(members));
 	}
+	
+	public long getId() {
+		return id;
+	}
 
 
 	public String getFirstName() {

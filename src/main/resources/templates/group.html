@@ -94,11 +94,15 @@
     <a href="http://localhost:8080/groups">Back to Groups.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	</div>
+	<div th:each="group: ${groups}">
+	 <h2>Add a book</h2>
 	<form method="POST" th:action="@{/addBook}">
-	<input type="text" placeholder="Enter Group Name" name= "name">
+	<input type="text" placeholder="Enter Book Title" name= "name">
 	<input type="text" placeholder= "Enter Author Name" name= "author">
+	<input type="hidden" th:value= "${group.id}" name="id">
 	<input type="submit">
 	
 	</form>
+	</div>
 </body>
 </html>
