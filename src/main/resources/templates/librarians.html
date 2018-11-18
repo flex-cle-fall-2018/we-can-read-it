@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-<div class="librarian" th:each= "librarian: ${librarians}">
+<!-- <div class="librarian" th:each= "librarian: ${librarians}">
 <h4>
     <span class="firstName" th:text="${librarian.firstName}"></span>
      <span class="lastName" th:text="${librarian.lastName}"></span>
@@ -18,7 +18,7 @@
         <span class="favoriteGenre" th:text="${librarian.favoriteGenre}"></span>
    </h4> 
  </div>
-
+ -->
      <form method="POST" id= "add-librarian">
         <label>First Name:</label>
         <input type="text" name="firstName" required>
@@ -63,6 +63,9 @@
             <option value="Self Help">Self Help</option>
  </select>
          <button th:formaction="@{add-librarian}">Submit</button> 
-
     </form> 
+   
+<div class="librarian" th:each= "librarian: ${librarians}">	
+<a th:href="@{/librarian(id=${librarian.id})}" th:text="${librarian.firstName}"></a>
+	</div>	
    </body>

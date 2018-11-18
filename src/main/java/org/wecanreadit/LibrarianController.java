@@ -26,10 +26,14 @@ public class LibrarianController {
 	GroupBookRepository groupBookRepo;
 	
 	@Resource
+	GroupBookRepository groupBookRepo;
+	
+	@Resource
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
 	ReaderRepository readerRepo;
+
 
 	@RequestMapping("/librarian")
 	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws LibrarianNotFoundException {
@@ -60,18 +64,26 @@ public class LibrarianController {
 		return "login";
 	}
 
-	@RequestMapping("/librarian/login")
-	public String adminLogin(HttpServletResponse response) {
+
+	@RequestMapping("/librarian-login")
+	public String adminLogin(
+			HttpServletResponse response
+			) {
+
 		Cookie adminRoleCookie = new Cookie("role", "librarian");
 		adminRoleCookie.setHttpOnly(true);
 		adminRoleCookie.setMaxAge(300);
 		response.addCookie(adminRoleCookie);
-
-		return "redirect:/admin";
+		
+		return "librarian-login";
 	}
 
-	@RequestMapping("/admin/logout")
-	public String adminLogin(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("/librarian-logout")
+	public String adminLogin(
+			HttpServletRequest request,
+			HttpServletResponse response
+			) {
+		
 
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
@@ -81,8 +93,8 @@ public class LibrarianController {
 				break;
 			}
 		}
-
-		return "redirect:/admin";
+		return "redirect:/librarian-login";
+		
 
 	}
 
@@ -102,6 +114,11 @@ public class LibrarianController {
 
 		return "admin";
 	}
+@RequestMapping("/addBook")
+public String addBook(long id , String name, String author) {
+	GroupBook book1 = new GroupBook(name, author, groupRepo.findById(id).get());
+	groupBookRepo.save(book1);
+	return "redirect:/group?id=" + id;
 
 	
 	@RequestMapping("/addBook")
@@ -130,3 +147,6 @@ public class LibrarianController {
 	}
 
 }
+}
+
+
