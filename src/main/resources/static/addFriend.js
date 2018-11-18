@@ -25,10 +25,21 @@ const addEventListeners = function() {
 		    xhr.onreadystatechange = function() {
 		      if (this.status === 200 && this.readyState === 4) {
 		    	console.log(this.responseText);
+		    	if (this.responseText) {
 		        const newFriend = JSON.parse(this.responseText);
 		        console.log(newFriend);
 		        const newFriendH2 = document.createElement('h2');
+		        	if(newFriend.pendingFriend) {
+		        		console.log(newFriend.pendingFriend);
+		        	} else if (newFriend.alreadyFriends) {
+		        		console.log(newFriend.alreadyFriends);
+		        	} else if(newFriend.alreadyAdded) {
+		        		console.log(newFriend.alreadyAdded);
+		        	}
 		        updateFriends(newFriendH2, newFriend);
+		    	} else {
+		    		//message that there was no user with this name
+		    	}
 		      }
 		    };
 		    
@@ -41,10 +52,9 @@ const addEventListeners = function() {
 	const updateFriends = function(newFriendH2, newFriend) {
 		console.log(newFriendH2);
 		newFriendH2.innerText = newFriend.friendUsername;
-		const friendsList = document.querySelector('#friendsList');
+		/*const friendsList = document.querySelector('#friendsList');
 		console.log(friendsList);
-		friendsList.appendChild(newFriendH2);
-		
+		friendsList.appendChild(newFriendH2);*/
 	}
 		
   addEventListeners();

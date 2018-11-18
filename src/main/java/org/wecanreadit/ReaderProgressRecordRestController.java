@@ -32,8 +32,6 @@ public class ReaderProgressRecordRestController {
 		ReaderProgressRecord readerProgressResult = readerProgressRecord.get();
 		readerProgressResult.setDateFinished(updatedDateFinished.monthFinished, updatedDateFinished.dayOfMonthFinished, updatedDateFinished.yearFinished);
 		return readerProgressRecordRepo.save(readerProgressResult);
-	
-		
 	}
 
 	public static class UpdatedDateFinished {

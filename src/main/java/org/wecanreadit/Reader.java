@@ -33,12 +33,14 @@ public class Reader {
 	@OneToMany(mappedBy = "reader")
 	private Collection<ReaderProgressRecord> readerProgressRecords;
 	
+	@JsonIgnore
 	@ManyToMany
 	private Collection<Reader> pendingFriends;
 	
 	@ManyToMany(mappedBy = "pendingFriends")
 	private Collection<Reader> pendingFriendOf;
 	
+	@JsonIgnore
 	@ManyToMany
 	private Collection<Reader> friends;
 	
