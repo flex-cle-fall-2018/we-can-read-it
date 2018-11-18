@@ -22,6 +22,9 @@ public class ReaderRestController {
 		Reader friend = readerRepo.findByUsername(newFriend.friendUsername);
 		if(friend == null) {
 			return null;
+		} else if (friend.getUsername().equals(reader.getUsername())) {
+			newFriend.isUser = true;
+			return newFriend;
 		}
 		Collection<Reader> readerFriends = reader.getFriends();
 		for (Reader readerFriend : readerFriends) {
@@ -61,6 +64,7 @@ public class ReaderRestController {
 		public boolean alreadyFriends = false;
 		public boolean alreadyAdded = false;
 		public boolean pendingFriend = false;
+		public boolean isUser = false;
 	}
 	
 	
