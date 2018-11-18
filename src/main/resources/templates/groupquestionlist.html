@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="theme.css">
+
 </head>
 <body>
+<main>
+
+		<img id = "icon" src="icon.svg">
+	
     
+    <div class="panel">
     
    <p>Click on your Group to See the Questions</p>
+   </div>
+   
+   <div class="panel">
    
    <div th:each="group: ${groups}">
 	<a th:href="@{/singlegroupquestions(id=${group.id})}" th:text="${group.groupName}"></a>
 	</div>
     
-    
-    
+    </div>
+    </main>
     
     
     

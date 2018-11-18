@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+        <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
 <body>
+<main>
+
+			<img id = "icon" src="icon.svg">
+	
+
+    <div class="panel">
 
     <div th:each="group: ${groups}">
             <h2 th:text="${group.groupName}"></h2>	
     		</div>
-    
+    </div>
+
+    <div class="panel">
 
 		<h2>Members of this group</h2>
 		<div th:each="group: ${groups}">
@@ -20,11 +28,16 @@
 		</div>
 		</div>
 
+	</div>
+    <div class="panel">
 
 		<h2>Here are the group's goals</h2>
         <div th:each = "goal:${goals}">
         <span th:text = "${goal.name}"></span>
         </div>
+
+	</div>
+    <div class="panel">
 
     <div th:each="group: ${groups}">
             <h2>Here are the groups discussion questions</h2>
@@ -39,9 +52,9 @@
             </div>
         </div>
         
-        
+        </div>
 
 
-
+</main>
 </body>
 </html>
