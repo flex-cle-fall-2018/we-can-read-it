@@ -1,6 +1,5 @@
 package org.wecanreadit;
 
-import java.awt.Point;
 import java.util.Optional;
 
 import javax.annotation.Resource;

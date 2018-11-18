@@ -91,9 +91,18 @@
     	<input type="submit">
     </form>
     
+    <form id="bookForm" method="POST" th:action="@{/addBook}">
+    	<input id="booktitle" type="text" placeholder="Enter book name" name="book" value="Harry Potter: A History of Magic">
+    	<input type="text" placeholder="Enter author name" name="author">
+    	<input type="hidden" th:value="${group.id}" name="id">
+    	<input id="pageCount" type="hidden" name="pageCount" value="12">
+    	<script>console.log(pageCount)</script>
+    	<input id="button" type="button" value="Submit">
+    </form>
+    
     <a href="http://localhost:8080/groups">Back to Groups.</a>
 	<a href="http://localhost:8080/readers">Back to Readers.</a>
 	</div>
-	
+	<script src='./group.js'></script>
 </body>
 </html>
