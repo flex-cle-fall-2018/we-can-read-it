@@ -18,16 +18,21 @@ public class LibrarianController {
 
 	@Resource
 	LibrarianRepository librarianRepo;
-	
+
 	@Resource
 	GroupRepository groupRepo;
+
+	@Resource
+	GroupBookRepository groupBookRepo;
 	
 	@Resource
 	GroupBookRepository groupBookRepo;
 	
 	@Resource
 	ReadingGroupRepository readingGroupRepo;
-	
+
+	@Resource
+	ReaderRepository readerRepo;
 
 
 	@RequestMapping("/librarian")
@@ -44,25 +49,27 @@ public class LibrarianController {
 	public String findAllLibrarians(Model model) {
 		model.addAttribute("librarians", librarianRepo.findAll());
 		return "librarians";
-
 	}
 
-
 	@RequestMapping("/add-librarian")
-	public String addLibrarian(String firstName, String lastName, String email, String username, String password, String library, String favoriteGenre, Model model) {
+	public String addLibrarian(String firstName, String lastName, String email, String username, String password,
+			String library, String favoriteGenre, Model model) {
 		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
 		librarianRepo.save(newLibrarian);
 		return "redirect:/show-librarians";
 	}
+
 	@RequestMapping("/login")
 	public String adminLoginPage() {
 		return "login";
 	}
 
+
 	@RequestMapping("/librarian-login")
 	public String adminLogin(
 			HttpServletResponse response
 			) {
+
 		Cookie adminRoleCookie = new Cookie("role", "librarian");
 		adminRoleCookie.setHttpOnly(true);
 		adminRoleCookie.setMaxAge(300);
@@ -77,6 +84,7 @@ public class LibrarianController {
 			HttpServletResponse response
 			) {
 		
+
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("role")) {
@@ -85,25 +93,22 @@ public class LibrarianController {
 				break;
 			}
 		}
-		
 		return "redirect:/librarian-login";
 		
+
 	}
 
 	@RequestMapping("/admin")
-	public String adminPanel(
-		@CookieValue(name = "role", defaultValue = "") String role,
-		Model model
-	) {
-		
+	public String adminPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
+
 		System.out.println("ROLE: " + role);
-		
+
 		if (role == null || !role.equals("admin")) {
 			return "redirect:/login";
 		}
-		
+
 		System.out.println("SUCCESS");
-		
+
 		Iterable<Librarian> categories = librarianRepo.findAll();
 		model.addAttribute("categories", categories);
 
@@ -114,6 +119,32 @@ public String addBook(long id , String name, String author) {
 	GroupBook book1 = new GroupBook(name, author, groupRepo.findById(id).get());
 	groupBookRepo.save(book1);
 	return "redirect:/group?id=" + id;
+
+	
+	@RequestMapping("/addBook")
+	public String addBook(long id, String book, String author, String pageCount) {
+		int count = 0, pages = Integer.valueOf(pageCount);
+		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
+		while (pages > 100) {
+			pages -= 100;
+			count += 5;
+		}
+		book1.setPoints(count);
+		groupBookRepo.save(book1);
+		return "redirect:/group?id=" + id;
+	}
+
+	@RequestMapping("librarian/addNewReader")
+	public String addNewReader(Reader reader) {
+		if(reader.getFirstName() !=null&& reader.getLastName()!=null && reader.getUsername()!=null && reader.getPassword()!=null) {
+			readerRepo.save(reader);
+			return "Worked";
+		}else {
+			return "Nerp";
+		}
+	
+
+	}
 
 }
 }
