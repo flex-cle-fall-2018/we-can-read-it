@@ -40,6 +40,7 @@ public class Reader {
 	@ManyToMany(mappedBy = "pendingFriends")
 	private Collection<Reader> pendingFriendOf;
 	
+	
 	@JsonIgnore
 	@ManyToMany
 	private Collection<Reader> friends;
@@ -115,9 +116,14 @@ public class Reader {
 		return pendingFriends;
 	}
 	
+	public Collection<Reader> getPendingFriendOf() {
+		return pendingFriendOf;
+	}
+	
 	public Collection<Reader> getFriends() {
 		return friends;
 	}
+	
 	
 	public void addFriends(Reader friend) {
 		friends.add(friend);

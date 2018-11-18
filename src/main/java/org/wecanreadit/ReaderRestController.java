@@ -33,7 +33,7 @@ public class ReaderRestController {
 		Collection<Reader> readerPendingFriends = reader.getPendingFriends();
 		for (Reader readerPendingFriend : readerPendingFriends) {
 			if (readerPendingFriend.getUsername() == friend.getUsername()) {
-				newFriend.pendingFriend = true;
+				newFriend.alreadyAdded = true;
 				return newFriend;
 			}
 		}
@@ -42,6 +42,8 @@ public class ReaderRestController {
 			if (friendPendingFriend.getUsername() == reader.getUsername()) {
 				reader.getFriends().add(friend);
 				friend.getFriends().add(reader);
+				friend.getPendingFriends().remove(reader);
+				reader.getPendingFriends().remove(friend);
 				readerRepo.save(reader);
 				readerRepo.save(friend);
 				return newFriend;
