@@ -23,10 +23,10 @@ public class LibrarianController {
 	GroupRepository groupRepo;
 	
 	@Resource
-	ReadingGroupRepository readingGroupRepo;
+	GroupBookRepository groupBookRepo;
 	
 	@Resource
-	ReaderRepository readerRepo;
+	ReadingGroupRepository readingGroupRepo;
 	
 
 
@@ -109,5 +109,13 @@ public class LibrarianController {
 
 		return "admin";
 	}
+@RequestMapping("/addBook")
+public String addBook(long id , String book, String author) {
+	GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
+	groupBookRepo.save(book1);
+	return "redirect:/group?id=" + id;
 
 }
+}
+
+

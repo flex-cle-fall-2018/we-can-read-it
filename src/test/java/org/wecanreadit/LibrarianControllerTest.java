@@ -32,6 +32,18 @@ public class LibrarianControllerTest {
 	@Mock
 	private Model model;
 	
+	@Mock
+	GroupBookRepository groupBookRepo;
+	
+	@Mock
+	ReadingGroup readingGroup;
+	
+	@Mock
+	ReadingGroupRepository readingGroupRepo;
+	
+	@Mock
+	ReaderRepository readerRepo;
+	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -51,5 +63,9 @@ public class LibrarianControllerTest {
 		underTest.findAllLibrarians(model);
 		verify(model).addAttribute("librarians", allLibrarians);
 	}
+	
+	
+	
+
 	
 }

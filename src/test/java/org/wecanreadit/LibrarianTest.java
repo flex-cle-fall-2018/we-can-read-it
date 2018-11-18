@@ -3,17 +3,23 @@ package org.wecanreadit;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Collection;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class LibrarianTest {
 
 	Librarian librarian;
+	ReadingGroup readingGroup;
+	GroupBook book;
 
 	@Before
 	public void setup() {
 		librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password", "favoriteGenre");
+		
 	}
+	
 
 	@Test
 	public void shouldBeAbleToCreateLibrarian() {
@@ -62,5 +68,13 @@ public class LibrarianTest {
 	public void shouldBeAbleToGetFavoriteGenre() {
 		String favoriteGenre = librarian.getFavoriteGenre();
 		assertThat(favoriteGenre, is("favoriteGenre"));
+	}
+			
+	@Test 
+	public void shouldBeAbleToAddBooksToGroup() {
+		Librarian readingGroup = new Librarian();
+		GroupBook book = new GroupBook();
+		readingGroup.addBook(book);
+	
 	}
 }
