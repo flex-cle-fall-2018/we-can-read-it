@@ -13,11 +13,6 @@
 	console.log(bookTitle)
 	
 	function onClickEvent(){
-//		getData(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}&maxResults=1`, {answer: 42})
-//			.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-//			.catch(error => console.log(error));
-		//dataHolder = data;
-	
 		var bookTitle = document.getElementById("booktitle").value;
 		var bookForm = document.getElementById("bookForm");
 		
@@ -36,14 +31,6 @@
 		  });
 	}
 	
-//	function sentPostRequest(title){
-//		postData(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}`, {answer: 42})
-//			.then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-//			.catch(error => console.log(error));
-//		var pageCount = data.volumeInfo.pageCount;
-//		alert(pageCount);
-//	}
-
 	function getData(url = ``, data = {}) {
 	  // Default options are marked with *
 	    return fetch(url, {

@@ -91,12 +91,12 @@
     	<input type="submit">
     </form>
     
+    <h2>Add a book</h2>
     <form id="bookForm" method="POST" th:action="@{/addBook}">
-    	<input id="booktitle" type="text" placeholder="Enter book name" name="book" value="Harry Potter: A History of Magic">
+    	<input id="booktitle" type="text" placeholder="Enter book name" name="book">
     	<input type="text" placeholder="Enter author name" name="author">
     	<input type="hidden" th:value="${group.id}" name="id">
-    	<input id="pageCount" type="hidden" name="pageCount" value="12">
-    	<script>console.log(pageCount)</script>
+    	<input id="pageCount" type="hidden" name="pageCount">
     	<input id="button" type="button" value="Submit">
     </form>
     
