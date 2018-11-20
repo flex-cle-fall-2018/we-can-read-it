@@ -22,7 +22,7 @@ public class ReadingGroup {
 
 	@ManyToMany
 	private Collection<Reader> readingGroup;
-	
+
 	@OneToMany(mappedBy = "readingGroup")
 	private Collection<GroupBook> groupBooks;
 
@@ -31,6 +31,9 @@ public class ReadingGroup {
 
 	@ManyToMany
 	private Collection<DiscussionQuestion> questions;
+
+	@ManyToMany
+	private Collection<MessageBoardPost> posts;
 
 	ReadingGroup() {
 	}
@@ -60,7 +63,7 @@ public class ReadingGroup {
 	public void removeMember(Reader reader) {
 		readingGroup.remove(reader);
 	}
-	
+
 	public Collection<GroupBook> getAllGroupBooks() {
 		return groupBooks;
 	}
@@ -114,6 +117,15 @@ public class ReadingGroup {
 
 	public void removeQuestion(DiscussionQuestion quest) {
 		questions.remove(quest);
+	}
+
+	public Collection<MessageBoardPost> getPosts() {
+		return posts;
+	}
+
+	public void addPost(MessageBoardPost newPost) {
+		posts.add(newPost);
+		
 	}
 
 }

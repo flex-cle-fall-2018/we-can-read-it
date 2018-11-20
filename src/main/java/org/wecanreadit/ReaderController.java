@@ -36,6 +36,9 @@ public class ReaderController {
 
 	@Resource
 	ReaderProgressRecordRepository readerProgressRecordRepo;
+	
+	@Resource
+	MessageBoardPostRepository postRepo;
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(Model model) {
@@ -49,7 +52,16 @@ public class ReaderController {
 		model.addAttribute("groups", group);
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("goals", group.getGoals());
+		model.addAttribute("posts", group.getPosts());
 		return "singlegroupquestions";
+	}
+	
+	@PostMapping("/savePost")
+	public String saveNewPost(@RequestParam(required = true) String newPost, long groupid) {
+		ReadingGroup group = groupRepo.findById(groupid).get();
+		group.addPost(postRepo.save(new MessageBoardPost(newPost)));
+		groupRepo.save(group);
+		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
 	@RequestMapping("/readers")
@@ -170,7 +182,6 @@ public class ReaderController {
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
-
 	@RequestMapping("/addReaderProgressRecord")
 	public String addReaderProgressRecord(long groupBookId, int monthFinished, int dayOfMonthFinished, int yearFinished,
 			long readerId, Model model) {
@@ -190,7 +201,6 @@ public class ReaderController {
 		return "redirect:/groupBook?id=" + groupBookId;
 	}
 
-
 	@RequestMapping("/removeReaderProgressRecord")
 	public String removeReaderProgressRecord(@RequestParam long id) {
 		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(id);
@@ -199,7 +209,7 @@ public class ReaderController {
 		readerProgressRecordRepo.delete(readerProgressResult);
 		return "redirect:/reader?id=" + readerId;
 	}
-	
+
 	@RequestMapping("/reader/{readerId}/friends")
 	public String readerFriends(@PathVariable long readerId, Model model) {
 		model.addAttribute("reader", readerRepo.findById(readerId).get());
