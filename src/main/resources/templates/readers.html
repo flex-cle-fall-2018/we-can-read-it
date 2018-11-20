@@ -12,7 +12,7 @@
 	<main> <img id="icon" src="icon.svg">
 
 	<div class="panel">
-		<h2>These are our readers</h2>
+		<h2>All Readers</h2>
 		<div th:each="reader: ${readers}">
 			<a th:href="@{reader(id=${reader.id})}"><span
 				th:text="${reader.username}"></span></a>
@@ -21,7 +21,7 @@
 
 
 	<div class="panel">
-		<h2>These are the available groups</h2>
+		<h2>All Groups</h2>
 		<div th:each="group: ${groups}">
 			<a th:href="@{group(id=${group.id})}" th:text="${group.groupName}"></a>
 		</div>
