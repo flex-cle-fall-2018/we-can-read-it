@@ -20,7 +20,7 @@
 
 	<div class="panel">
 
-		<h2>Members of this group</h2>
+		<h2>Group Members</h2>
 		<div th:each="group: ${groups}">
 			<div th:each="reader: ${group.getAllMembers()}">
 				<a th:href="@{reader(id=${reader.id})}"><span
@@ -31,20 +31,25 @@
 	</div>
 	<div class="panel">
 
-		<h2>Here are the group's goals</h2>
+		<h2>Group Goals</h2>
 		<div th:each="goal:${goals}">
 			<span th:text="${goal.name}"></span>
 		</div>
 
 	</div>
+
+
+
+
 	<div class="panel">
 
 		<div th:each="group: ${groups}">
-			<h2>Here are the groups discussion questions</h2>
+			<h2>Group Questions</h2>
 			<div th:each="question: ${questions}">
 				<span th:text="${question.content}"></span>
 				<form method="POST" th:action="@{/saveanswer}">
-					<textarea rows="4" cols="75" name="answer" placeholder="Answer here" required></textarea>
+					<textarea rows="4" cols="75" name="answer"
+						placeholder="Answer here" required></textarea>
 					<input type="hidden" th:value="${question.id}" name="id"> <input
 						type="hidden" th:value="${group.id}" name="groupid"> <input
 						type="submit">
@@ -53,8 +58,24 @@
 		</div>
 
 	</div>
+	<div class="panel">
 
+		<div th:each="group: ${groups}">
+			<h2>Group Message Board</h2>
 
+			<div class="panel" th:each="post: ${posts}">
+				<span th:text="${post.content}"></span>
+			</div>
+
+			<form method="POST" th:action="@{/savePost}">
+				<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
+					required></textarea>
+				<input type="hidden" th:value="${group.id}" name="groupid">
+				<input type="submit">
+
+			</form>
+		</div>
+	</div>
 	</main>
 </body>
 </html>
