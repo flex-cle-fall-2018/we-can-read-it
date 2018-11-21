@@ -17,9 +17,6 @@
 
 		<h1 th:text="${reader.firstName}"></h1>
 
-
-		<section class="panel">
-
 			<div th:each="readerProgressRecord: ${readerProgressRecords}">
 				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}"><span
 					th:text="${readerProgressRecord.groupBook.title}"></span></a>
@@ -35,6 +32,10 @@
 				</p>
 
 			</div>
+		</section>
+
+		<section class="panel">
+		Points: <span th:text="${reader.points}"></span>
 		</section>
 
 		<section class="panel">

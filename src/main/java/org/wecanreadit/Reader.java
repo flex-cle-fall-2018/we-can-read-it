@@ -24,6 +24,7 @@ public class Reader {
 	private String lastName;
 	private String bio;
 	private String profileUrl;
+	private int points = 0;
 	
 
 	@ManyToMany(mappedBy = "readingGroup")
@@ -108,6 +109,18 @@ public class Reader {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
+	
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
+	public void addPoints(int points) {
+		this.points += points;
+	}
 
 	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
 		return readerProgressRecords;
@@ -152,7 +165,5 @@ public class Reader {
 			return false;
 		return true;
 	}
-
-	
 
 }
