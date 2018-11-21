@@ -67,14 +67,12 @@
 
 	<section class="panel">
 		<div th:each="group: ${groups}">
-			<h2>
-				Create a new question
-				</p>
-				<form method="POST" th:action="@{/addQuestion}">
-					<input type="text" placeholder="Question" name="content"> <input
-						type="hidden" th:value="${group.id}" name="id"> <input
-						type="submit">
-				</form>
+			<h2>Create a new question</h2>
+			<form method="POST" th:action="@{/addQuestion}">
+				<input type="text" placeholder="Question" name="content"> <input
+					type="hidden" th:value="${group.id}" name="id"> <input
+					type="submit">
+			</form>
 		</div>
 	</section>
 
