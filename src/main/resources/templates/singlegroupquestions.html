@@ -29,8 +29,20 @@
 		</div>
 
 	</div>
-	
-	
+
+	<div class="panel">
+		<h2>Group Books</h2>
+		<div th:each="book:${books}">
+			<a th:href="@{groupBook(id=${book.id})}"
+						th:text="${book.title}" id="stubborn"></a>
+		</div>
+
+	</div>
+
+
+
+
+
 	<div class="panel">
 
 		<h2>Group Goals</h2>
@@ -60,17 +72,17 @@
 		</div>
 
 	</div>
-	
-	
+
+
 	<div class="panel">
 
 		<div th:each="group: ${groups}">
 			<h2>Group Message Board</h2>
 
 			<div class="panel" th:each="post: ${posts}">
-			<ul>
-				<li th:text="${post.getReader().username}"></li>
-				<li th:text="${post.content}"></li>
+				<ul>
+					<li th:text="${post.getReader().username}"></li>
+					<li th:text="${post.content}"></li>
 				</ul>
 			</div>
 
