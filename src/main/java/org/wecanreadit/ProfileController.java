@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +32,8 @@ public class ProfileController {
 	}
 
 	// Add custom Exceptions
-	@RequestMapping("/verifyLogin")
-	public Reader verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
+	@PostMapping("/verifyLogin")
+	public LoginRequest verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
 		Reader reader = readerRepo.findByUsername(login.name);
 
 		if (!reader.getPassword().equals(login.password)) {
@@ -41,7 +42,7 @@ public class ProfileController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie readerIdCookie = new Cookie("readerId", reader.getId().toString());
 		response.addCookie(readerIdCookie);
-		return reader;
+		return login;
 
 	}
 
