@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -175,10 +176,16 @@ public class ReaderController {
 	}
 
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@RequestParam(required = true) String answer, long id, long groupid) {
+	public String saveAnswer(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String answer, long id, long groupid) {
 		DiscussionQuestion quest = questRepo.findById(id).get();
-		quest.addAnswer(ansRepo.save(new DiscussionAnswer(answer)));
+		Reader reader = readerRepo.findById(readerId).get();
+		DiscussionAnswer newAnswer = ansRepo.save(new DiscussionAnswer(answer));
+		quest.addAnswer(newAnswer);
+		reader.saveAnswer(newAnswer);
+		newAnswer.setReader(reader);
+		ansRepo.save(newAnswer);
 		questRepo.save(quest);
+		readerRepo.save(reader);
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 

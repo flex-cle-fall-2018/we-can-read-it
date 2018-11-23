@@ -82,9 +82,10 @@
 			<div class="panel" th:each="question: ${questions}">
 				<span th:text="${question.content}"></span> <a
 					th:href="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
-
+			
 				<div th:each="answer:${question.getAnswers()}">
 					<ul>
+						<li th:text="${answer.getReader().username}"></li>
 						<li class="answer" th:text="${answer.content}"></li>
 					</ul>
 				</div>

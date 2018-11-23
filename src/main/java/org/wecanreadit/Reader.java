@@ -25,6 +25,8 @@ public class Reader {
 	private String bio;
 	private String profileUrl;
 	
+	@OneToMany(mappedBy="reader")
+	private Collection<DiscussionAnswer> answers;
 
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
@@ -153,6 +155,8 @@ public class Reader {
 		return true;
 	}
 
-	
+	public void saveAnswer(DiscussionAnswer answer) {
+		answers.add(answer);
+	}
 
 }
