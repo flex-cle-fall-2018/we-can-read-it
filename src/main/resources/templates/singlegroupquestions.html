@@ -68,7 +68,10 @@
 			<h2>Group Message Board</h2>
 
 			<div class="panel" th:each="post: ${posts}">
-				<span th:text="${post.content}"></span>
+			<ul>
+				<li th:text="${post.getReader().username}"></li>
+				<li th:text="${post.content}"></li>
+				</ul>
 			</div>
 
 			<form method="POST" th:action="@{/savePost}">

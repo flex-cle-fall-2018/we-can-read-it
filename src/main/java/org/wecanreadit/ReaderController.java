@@ -58,10 +58,16 @@ public class ReaderController {
 	}
 	
 	@PostMapping("/savePost")
-	public String saveNewPost(@RequestParam(required = true) String newPost, long groupid) {
+	public String saveNewPost(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String newPost, long groupid) {
 		ReadingGroup group = groupRepo.findById(groupid).get();
-		group.addPost(postRepo.save(new MessageBoardPost(newPost)));
+		Reader reader = readerRepo.findById(readerId).get();
+		MessageBoardPost post = postRepo.save(new MessageBoardPost(newPost));
+		group.addPost(post);
+		post.setReader(reader);
+		reader.savePost(post);
 		groupRepo.save(group);
+		postRepo.save(post);
+		readerRepo.save(reader);
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 

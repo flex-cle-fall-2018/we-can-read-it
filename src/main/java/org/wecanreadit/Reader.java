@@ -26,6 +26,9 @@ public class Reader {
 	private String profileUrl;
 	
 	@OneToMany(mappedBy="reader")
+	private Collection<MessageBoardPost> posts;
+	
+	@OneToMany(mappedBy="reader")
 	private Collection<DiscussionAnswer> answers;
 
 	@ManyToMany(mappedBy = "readingGroup")
@@ -157,6 +160,10 @@ public class Reader {
 
 	public void saveAnswer(DiscussionAnswer answer) {
 		answers.add(answer);
+	}
+	
+	public void savePost(MessageBoardPost post) {
+		posts.add(post);
 	}
 
 }
