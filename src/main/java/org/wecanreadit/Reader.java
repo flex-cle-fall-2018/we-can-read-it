@@ -24,11 +24,11 @@ public class Reader {
 	private String lastName;
 	private String bio;
 	private String profileUrl;
-	
-	@OneToMany(mappedBy="reader")
+
+	@OneToMany(mappedBy = "reader")
 	private Collection<MessageBoardPost> posts;
-	
-	@OneToMany(mappedBy="reader")
+
+	@OneToMany(mappedBy = "reader")
 	private Collection<DiscussionAnswer> answers;
 
 	@ManyToMany(mappedBy = "readingGroup")
@@ -37,20 +37,18 @@ public class Reader {
 	@JsonIgnore
 	@OneToMany(mappedBy = "reader")
 	private Collection<ReaderProgressRecord> readerProgressRecords;
-	
+
 	@JsonIgnore
 	@ManyToMany
 	private Collection<Reader> pendingFriends;
-	
-	
+
 	@ManyToMany(mappedBy = "pendingFriends")
 	private Collection<Reader> pendingFriendOf;
-	
+
 	@JsonIgnore
 	@ManyToMany
 	private Collection<Reader> friends;
-	
-	
+
 	@ManyToMany(mappedBy = "friends")
 	private Collection<Reader> friendOf;
 
@@ -117,23 +115,22 @@ public class Reader {
 	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
 		return readerProgressRecords;
 	}
-	
+
 	public Collection<Reader> getPendingFriends() {
 		return pendingFriends;
 	}
-	
+
 	public Collection<Reader> getPendingFriendOf() {
 		return pendingFriendOf;
 	}
-	
+
 	public Collection<Reader> getFriends() {
 		return friends;
 	}
-	
-	
+
 	public void addFriends(Reader friend) {
 		friends.add(friend);
-		
+
 	}
 
 	@Override
@@ -161,9 +158,13 @@ public class Reader {
 	public void saveAnswer(DiscussionAnswer answer) {
 		answers.add(answer);
 	}
-	
+
 	public void savePost(MessageBoardPost post) {
 		posts.add(post);
+	}
+
+	public Collection<ReadingGroup> getGroups() {
+		return groups;
 	}
 
 }

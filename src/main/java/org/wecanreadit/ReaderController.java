@@ -42,8 +42,9 @@ public class ReaderController {
 	MessageBoardPostRepository postRepo;
 
 	@RequestMapping("/questionlist")
-	public String findQuestions(Model model) {
-		model.addAttribute("groups", groupRepo.findAll());
+	public String findQuestions(@CookieValue(value="readerId") long readerId, Model model) {
+		
+		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
 		return "groupquestionlist";
 	}
 
