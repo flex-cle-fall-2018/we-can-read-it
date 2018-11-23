@@ -34,7 +34,7 @@
 		<h2>Group Books</h2>
 		<div th:each="book:${books}">
 			<a th:href="@{groupBook(id=${book.id})}"
-						th:text="${book.title}" id="stubborn"></a>
+						th:text="${book.title}"></a>
 		</div>
 
 	</div>
