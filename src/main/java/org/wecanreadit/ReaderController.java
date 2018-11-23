@@ -37,13 +37,13 @@ public class ReaderController {
 
 	@Resource
 	ReaderProgressRecordRepository readerProgressRecordRepo;
-	
+
 	@Resource
 	MessageBoardPostRepository postRepo;
 
 	@RequestMapping("/questionlist")
-	public String findQuestions(@CookieValue(value="readerId") long readerId, Model model) {
-		
+	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
+
 		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
 		return "groupquestionlist";
 	}
@@ -58,9 +58,10 @@ public class ReaderController {
 		model.addAttribute("posts", group.getPosts());
 		return "singlegroupquestions";
 	}
-	
+
 	@PostMapping("/savePost")
-	public String saveNewPost(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String newPost, long groupid) {
+	public String saveNewPost(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String newPost, long groupid) {
 		ReadingGroup group = groupRepo.findById(groupid).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		MessageBoardPost post = postRepo.save(new MessageBoardPost(newPost));
@@ -184,7 +185,8 @@ public class ReaderController {
 	}
 
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String answer, long id, long groupid) {
+	public String saveAnswer(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String answer, long id, long groupid) {
 		DiscussionQuestion quest = questRepo.findById(id).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		DiscussionAnswer newAnswer = ansRepo.save(new DiscussionAnswer(answer));
