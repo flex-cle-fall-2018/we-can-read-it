@@ -1,0 +1,16 @@
+.fa-user {
+	margin-right: 4px;
+}
+
+
+#friends {
+	font-weight: 700;
+	
+}
+
+#friendsGridContainer {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	font-size: 1.15rem;
+}
+

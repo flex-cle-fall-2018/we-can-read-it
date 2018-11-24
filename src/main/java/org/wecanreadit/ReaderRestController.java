@@ -67,6 +67,21 @@ public class ReaderRestController {
 		public boolean isUser = false;
 	}
 	
+	@PutMapping("/declineFriend")
+	public DeclineFriend declineFriend(@RequestBody DeclineFriend declineFriend) {
+		Reader reader = readerRepo.findById(declineFriend.readerId).get();
+		Reader friend = readerRepo.findByUsername(declineFriend.friendUsername);
+		Collection<Reader> friendPendingFriends = friend.getPendingFriends();
+		friend.getPendingFriends().remove(reader);
+		readerRepo.save(friend);
+		return declineFriend;
+	}
+	
+	public static class DeclineFriend {
+		public String friendUsername;
+		public long readerId;
+	}
+	
 	
 	
 }

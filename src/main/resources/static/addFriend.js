@@ -10,7 +10,17 @@
 				location.reload();
 			})
 		});
-	};
+		const acceptFriendRequestButton = document.querySelector('.acceptFriendRequestButton');
+		if (acceptFriendRequestButton != null) {
+		acceptFriendRequestButton.addEventListener('click', acceptFriend);
+	}; 
+		const declineFriendRequestButton = document.querySelector('.declineFriendRequestButton');
+		if (declineFriendRequestButton != null) {
+		declineFriendRequestButton.addEventListener('click', declineFriend);
+		};
+	}
+	
+	
 	const sleep = (milliseconds)=>{
 		return new Promise(res=> setTimeout(res, milliseconds))
 	}
@@ -26,6 +36,32 @@
 	    sendFriendRequest(friend);
 	    
 	 };
+	 
+		const acceptFriend = function() {
+		    const friendUsername = document.querySelector('.requestorUsername').textContent;
+		    const readerId = document.querySelector('#readerId').value;
+		    const friend = {
+		    		friendUsername,
+		    		readerId,
+		    		
+		    };
+		    console.log(friend);
+		    sendFriendRequest(friend);
+		    
+		 };
+		 
+		 const declineFriend = function() {
+			    const friendUsername = document.querySelector('.requestorUsername').textContent;
+			    const readerId = document.querySelector('#readerId').value;
+			    const declineFriend = {
+			    		friendUsername,
+			    		readerId,
+			    		
+			    };
+			    console.log(declineFriend);
+			    declineFriendRequest(declineFriend);
+			    
+			 };
 	  
 //	 sendFriendRequest = function(newFriend) {
 //		    const xhr = new XMLHttpRequest();
@@ -120,6 +156,43 @@
 			const body = JSON.stringify(newFriend);
 			xhr.send(body);
 		};
+		
+		declineFriendRequest = function (declineFriend) {
+			const xhr = new XMLHttpRequest();
+
+			xhr.onreadystatechange = function () {
+				if (this.status === 200 && this.readyState === 4) {
+					console.log(this.responseText);
+		
+					const declineFriend = JSON.parse(this.responseText);
+						console.log(declineFriend);
+						// Create a <p> element
+//						const newFriendPara = document.createElement('P');
+
+
+						var message = "";
+						message = "You have declined the friend request from " + declineFriend.friendUsername;
+						
+//						updateFriends(newFriendPara, newFriend);
+					
+
+					console.log(message);
+					addMessage(message);
+
+					// window.location.reload();
+					// window.onload = addMessage(message);
+					
+				};
+			};
+
+				// var t = document.createTextNode("This is a paragraph");       // Create a text node
+				// para.appendChild(t);                                          // Append the text to <p>
+				// document.body.appendChild(para);
+				xhr.open('PUT', '/declineFriend');
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				const body = JSON.stringify(declineFriend);
+				xhr.send(body);
+			};
 
 //		const updateFriends = function (newFriendPara, newFriend) {
 //			console.log(newFriendPara);
