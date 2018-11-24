@@ -40,7 +40,7 @@
 	</form> 
 	</div>
 	<div class="panel">
-	<div th:each="readerProgressRecord: ${readerProgressRecords}">
+	<div th:each="readerProgressRecord: ${readerProgressRecords}" class="readerProgressRecordsContainer">
 	<p><span th:text="${readerProgressRecord.reader.username}"></span> read this book <span th:text="${readerProgressRecord.stringDateFinished}"></span></p>
 	</div>
 

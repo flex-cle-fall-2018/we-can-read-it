@@ -47,8 +47,8 @@
 				if (this.responseText) {
 					console.log(this.responseText);
 					const newReaderProgressRecord = JSON.parse(this.responseText);
-					const readerProgressRecordsDiv = document.querySelector('#newReaderProgressRecordAjax');
-					updateReaderProgressRecords(readerProgressRecordsDiv, newReaderProgressRecord);
+					const readerProgressRecordsContainer = document.querySelector('.readerProgressRecordsContainer');
+					updateReaderProgressRecords(readerProgressRecordsContainer, newReaderProgressRecord);
 				}
 			}
 		};
@@ -59,10 +59,10 @@
 		xhr.send(body);
 	};
 
-	const updateReaderProgressRecords = function (readerProgressRecordsDiv, newReaderProgressRecord) {
+	const updateReaderProgressRecords = function (readerProgressRecordsContainer, newReaderProgressRecord) {
 		var readerProgressRecordsPara = document.createElement('p');
 		readerProgressRecordsPara.innerText = newReaderProgressRecord.reader.username + " read this book " + newReaderProgressRecord.stringDateFinished;
-		readerProgressRecordsDiv.appendChild(readerProgressRecordsPara);
+		readerProgressRecordsContainer.appendChild(readerProgressRecordsPara);
 	}
 
 	addEventListeners();
