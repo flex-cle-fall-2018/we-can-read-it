@@ -1,0 +1,25 @@
+#progressGridContainer {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    justify-items: center;
+}
+
+a {
+    color: black;
+}
+
+.bookLink {
+    text-align: center;
+}
+
+.bookIcon {
+    display: block;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+}
+
+
