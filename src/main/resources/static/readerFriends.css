@@ -59,6 +59,59 @@ i {
 	padding: 5px;
 }
 
+body.modal-open {
+	/* hide scrolling when modal open */
+	overflow: hidden;
+  }
+  
+  #backdrop {
+	position: fixed;
+	top: 5vh;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.7);
+  
+	display: none;
+	align-items: flex-end;
+	justify-content: center;
+}
+  
+.modal-open #backdrop {
+	display: flex;
+}
+  
+#modal {
+	width: 80vw;
+	height: 70vh;
+	background: #fff;
+	padding: 1em;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 5px #333;
+	margin-bottom: 10vh;
+}
+  
+#modal h4 {
+	float: left;
+}
+  
+#modal button {
+	float: right;
+  
+	background: #eee;
+	padding: 5px 10px;
+	border: 0;
+	border-radius: 3px;
+  
+	cursor: pointer;
+}
+ 
+  
+#modal #modal-content {
+	clear: both;
+	padding-top: 1em;
+}
+
 
 
 

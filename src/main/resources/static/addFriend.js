@@ -10,20 +10,33 @@
 				location.reload();
 			})
 		});
-		const acceptFriendRequestButton = document.querySelector('.acceptFriendRequestButton');
-		if (acceptFriendRequestButton != null) {
-		acceptFriendRequestButton.addEventListener('click', acceptFriend);
+		const acceptFriendRequestButtons = document.querySelectorAll('.acceptFriendRequestButton');
+		if (acceptFriendRequestButtons != null) {
+			for(var i = 0; i < acceptFriendRequestButtons.length; i++ ) {
+				acceptFriendRequestButtons[i].addEventListener('click', acceptFriend);
+				}
+		
 	}; 
-		const declineFriendRequestButton = document.querySelector('.declineFriendRequestButton');
-		if (declineFriendRequestButton != null) {
-		declineFriendRequestButton.addEventListener('click', declineFriend);
+		const declineFriendRequestButtons = document.querySelectorAll('.declineFriendRequestButton');
+		if (declineFriendRequestButtons != null) {
+		for(var i = 0; i < declineFriendRequestButtons.length; i++ ) {
+		declineFriendRequestButtons[i].addEventListener('click', declineFriend);
+		}
 		};
+		
+		const modalCloseButton = document.querySelector('#modal button');
+		modalCloseButton.addEventListener('click', modalCloseButtonClickHandler);
 	}
 	
 	
 	const sleep = (milliseconds)=>{
 		return new Promise(res=> setTimeout(res, milliseconds))
 	}
+	
+	const modalCloseButtonClickHandler = function() {
+	      document.body.classList.remove('modal-open');
+	      location.reload();
+	    };
   	const addFriend = function() {
 	    const friendUsername = document.querySelector('#friendUsername').value;
 	    const readerId = document.querySelector('#readerId').value;
@@ -142,6 +155,7 @@
 
 				console.log(message);
 				addMessage(message);
+				
 
 				// window.location.reload();
 				// window.onload = addMessage(message);
@@ -211,7 +225,11 @@
 			messagePara.innerText = message;
 			console.log(messagePara);
 			const messageDiv = document.querySelector('#messageDiv');
+			console.log("open modal 1");
 			messageDiv.appendChild(messagePara);
+			console.log("open modal 2");
+			document.body.classList.add('modal-open');
+			console.log("open modal 3");
 		}
 
 		addEventListeners();

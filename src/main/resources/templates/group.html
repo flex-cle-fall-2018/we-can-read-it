@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="theme.css">
 <link rel="stylesheet" type="text/css" href="group.css">
 
@@ -23,7 +24,7 @@
 
 
 		<div th:each="reader: ${readers}">
-			<a th:href="@{reader(id=${reader.id})}"><span
+			<a th:href="@{reader(id=${reader.id})}"><i class="fas fa-user"></i><span
 				th:text="${reader.username}"></span></a>
 		</div>
 	</section>
@@ -55,7 +56,7 @@
 
 			<div th:each="groupBook: ${groupBooks}">
 				<tr>
-					<th><a th:href="@{groupBook(id=${groupBook.id})}"
+					<th><i class="fas fa-book-reader"></i><a th:href="@{groupBook(id=${groupBook.id})}"
 						th:text="${groupBook.title}" id="stubborn"></a></th>
 					<th><span th:text="${groupBook.author}"></span></th>
 				</tr>
@@ -124,7 +125,7 @@
 		<div th:each="group: ${groups}">
 			<h2>Group goals</h2>
 			<div th:each="goal: ${goals}">
-				<span th:text="${goal.name}"></span> <a
+				<i class="fas fa-star"></i><span th:text="${goal.name}"></span> <a
 					th:href="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
 			</div>
 		</div>
