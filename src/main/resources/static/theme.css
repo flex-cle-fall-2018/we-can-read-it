@@ -75,3 +75,20 @@ th {
 	max-width: 600px;
 	word-wrap: break-word;
 }
+
+input[type="submit"], button {
+	font-size: 1rem;
+	background-color: #0ca8e5;
+	color: white;
+	border-radius: 5px;
+	width: 125px;
+	text-align: center;
+	font-weight: 700;
+	padding: 5px;
+	border: none;
+	cursor:pointer;
+}
+
+ul, ol {
+	list-style-type: none;
+}

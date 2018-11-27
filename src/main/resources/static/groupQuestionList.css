@@ -1,0 +1,22 @@
+#groupsGridContainer {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); 
+	justify-items: center;
+	text-align: center;
+	font-weight: 700;
+}
+
+.fa-users {
+	display: inline-block;
+	font-size: 2rem;
+}
+
+.groupLink {
+	border: none;
+	color: black;
+	display: inline-block;
+}
+
+.groupLink:hover {
+	transform: translateY(-3px);
+}

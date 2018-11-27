@@ -40,5 +40,25 @@ a {
     }
 }
 
+#readerNav {
+	display: flex;
+	justify-content: space-around;
+}
+
+#readerNav a {
+	background-color: #0ca8e5;
+	color: white;
+	border-radius: 5px;
+	width: 125px;
+	text-align: center;
+	font-weight: 700;
+	padding: 10px;
+	
+}
+
+.fa-users, .fa-user-friends {
+	margin-right: 5px;
+}
+
 
 

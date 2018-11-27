@@ -61,6 +61,12 @@
 			<h2>Group Questions</h2>
 			<div th:each="question: ${questions}">
 				<span th:text="${question.content}"></span>
+				<div th:each="answer:${question.getAnswers()}">
+					 <ul th:if="${answer.reader.id == reader.id}">
+						<li>Your Answer:</li>
+						<li class="answer" th:text="${answer.content}"></li>
+					</ul>
+				</div>
 				<form method="POST" th:action="@{/saveanswer}">
 					<textarea rows="4" cols="75" name="answer"
 						placeholder="Answer here" required></textarea>

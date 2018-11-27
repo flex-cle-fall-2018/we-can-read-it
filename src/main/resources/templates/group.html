@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" type="text/css" href="theme.css">
-
+<link rel="stylesheet" type="text/css" href="group.css">
 
 </head>
 
@@ -27,22 +27,6 @@
 				th:text="${reader.username}"></span></a>
 		</div>
 	</section>
-
-	<section class="panel">
-		<h2>Books</h2>
-		<table>
-
-			<div th:each="groupBook: ${groupBooks}">
-				<tr>
-					<th><a th:href="@{groupBook(id=${groupBook.id})}"
-						th:text="${groupBook.title}" id="stubborn"></a></th>
-					<th><span th:text="${groupBook.author}"></span></th>
-				</tr>
-
-			</div>
-		</table>
-	</section>
-
 	<section class="panel">
 		<div th:each="group: ${groups}">
 			<h2>Add a reader</h2>
@@ -61,6 +45,36 @@
 				<input type="text" placeholder="Reader's Username" name="username">
 				<input type="hidden" th:value="${group.id}" name="id"> <input
 					type="submit">
+			</form>
+		</div>
+	</section>
+
+	<section class="panel">
+		<h2>Books</h2>
+		<table>
+
+			<div th:each="groupBook: ${groupBooks}">
+				<tr>
+					<th><a th:href="@{groupBook(id=${groupBook.id})}"
+						th:text="${groupBook.title}" id="stubborn"></a></th>
+					<th><span th:text="${groupBook.author}"></span></th>
+				</tr>
+
+			</div>
+		</table>
+	</section>
+
+	
+	<section class="panel">
+		<h2>Add a book</h2>
+		<div th:each="group: ${groups}">
+			<form id="bookForm" method="POST" th:action="@{/addBook}">
+				<input id="booktitle" type="text" placeholder="Enter book name"
+					name="book"> <input type="text"
+					placeholder="Enter author name" name="author"> <input
+					type="hidden" th:value="${group.id}" name="id"> <input
+					id="pageCount" type="hidden" name="pageCount"> <input
+					id="button" type="button" value="Submit">
 			</form>
 		</div>
 	</section>
@@ -85,7 +99,8 @@
 			
 				<div class="panel" th:each="answer:${question.getAnswers()}">
 					<ul>
-						<li th:text="${answer.getReader().username}"></li>
+					
+						<li th:text="${answer.getReader().username} + ':'" class="discussionAnswerUsername"></li>
 						<li class="answer" th:text="${answer.content}"></li>
 					</ul>
 				</div>
@@ -126,20 +141,27 @@
 		</div>
 	</section>
 
-	<section class="panel">
-		<h2>Add a book</h2>
+	<div class="panel">
+
 		<div th:each="group: ${groups}">
-			<form id="bookForm" method="POST" th:action="@{/addBook}">
-				<input id="booktitle" type="text" placeholder="Enter book name"
-					name="book"> <input type="text"
-					placeholder="Enter author name" name="author"> <input
-					type="hidden" th:value="${group.id}" name="id"> <input
-					id="pageCount" type="hidden" name="pageCount"> <input
-					id="button" type="button" value="Submit">
+			<h2>Group Message Board</h2>
+
+			<div class="panel" th:each="post: ${posts}">
+				<ul>
+					<li th:text="${post.getReader().username}"></li>
+					<li th:text="${post.content}"></li>
+				</ul>
+			</div>
+
+			<form method="POST" th:action="@{/savePost}">
+				<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
+					required></textarea>
+				<input type="hidden" th:value="${group.id}" name="groupid">
+				<input type="submit">
+
 			</form>
 		</div>
-	</section>
-
+	</div>
 
 
 	<section class="panel">

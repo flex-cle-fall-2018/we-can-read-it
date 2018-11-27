@@ -49,13 +49,15 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/singlegroupquestions")
-	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, Model model) {
+	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId, @RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
+		Reader reader = readerRepo.findById(readerId).get();
 		model.addAttribute("groups", group);
 		model.addAttribute("books", group.getBooks());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("posts", group.getPosts());
+		model.addAttribute("reader", reader);
 		return "singlegroupquestions";
 	}
 

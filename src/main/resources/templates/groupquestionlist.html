@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Groups</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="theme.css">
+<link rel="stylesheet" type="text/css" href="groupQuestionList.css">
 
 </head>
 <body>
@@ -13,15 +16,14 @@
 
 	<div class="panel">
 
-		<p>Click on your Group</p>
+		<p>Your Groups</p>
 	</div>
 
-	<div class="panel">
-
+	<div class="panel" id="groupsGridContainer">
 		<div th:each="group: ${groups}">
-			<title th:text="${group.groupName}"></title> <a
-				th:href="@{/singlegroupquestions(id=${group.id})}"
-				th:text="${group.groupName}"></a>
+		 <a th:href="@{/singlegroupquestions(id=${group.id})}" class="groupLink">
+			<i class="fas fa-users"></i>
+				<p th:text="${group.groupName}"></p></a>
 		</div>
 
 	</div>

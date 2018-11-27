@@ -24,7 +24,7 @@
 		<div th:each="friend: ${friends}" class="friendItem">
 			
 			<a th:href="@{../../reader(id=${friend.id})}">
-			<i class="fas fa-user"></i>
+			<i class="fas fa-user-circle"></i>
 				<span th:text="${friend.username}"></span></a>
 				
 		</div>
@@ -33,16 +33,16 @@
 	<div class="panel" id="pendingFriendOf">
 		<h2>Friend Requests</h2>
 		<div th:each="pendingFriendOf: ${pendingFriendOf}"
-			id="pendingFriendOfList">
+			class="pendingFriendOf">
 			<a th:href="@{../../reader(id=${pendingFriendOf.id})}"
 				th:text="${pendingFriendOf.username}" class="requestorUsername"></a>
-				<button class="acceptFriendRequestButton">Accept</button>
-				<button class="declineFriendRequestButton">Decline</button>
+				<button class="acceptFriendRequestButton"><i class="fas fa-user-check"></i>Accept</button>
+				<button class="declineFriendRequestButton"><i class="fas fa-user-times"></i>Decline</button>
 		</div>
 	</div>
 	<div class="panel" id="pendingFriends">
 		<h2>Friend Requests Sent</h2>
-		<p>These readers will need to accept the request to confirm the connection</p>
+		<p>These readers must accept your request to confirm the connection</p>
 		<div th:each="pendingFriend: ${pendingFriends}"
 			id="pendingFriendsList">
 			<a th:href="@{../../reader(id=${pendingFriend.id})}"
@@ -51,7 +51,7 @@
 		<input type="text" placeholder="Friend's Username"
 			name="friendUsername" id="friendUsername"> <input
 			type="hidden" th:value="${reader.id}" name="id" id="readerId">
-		<button id="addFriendButton">Send Friend Request</button>
+		<button id="addFriendButton">Send Request</button>
 	</div>
 
 

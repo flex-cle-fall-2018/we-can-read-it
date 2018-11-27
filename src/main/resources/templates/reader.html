@@ -42,12 +42,12 @@
 			</div>
 		</section>
 
-		<section class="panel">
-
-			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">View
-				Friends</a>
-				</br>
-				<a th:href="@{'/questionlist'}">View Your Groups</a>
+		<section class="panel" id="readerNav">
+			<a th:href="@{'/questionlist'}"><i class="fas fa-users"></i>Groups</a>
+			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">
+				<i class="fas fa-user-friends"></i>Friends</a>
+				
+				
 		</section>
 	</main>
   <script src='./ProfilePutRequest.js'></script>

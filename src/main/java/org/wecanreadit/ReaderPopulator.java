@@ -45,7 +45,7 @@ public class ReaderPopulator implements CommandLineRunner {
 		doug = readerRepo.save(doug);
 
 		ReadingGroup test1 = new ReadingGroup("Group 1", "Everything", shane, zack, joe);
-		ReadingGroup test2 = new ReadingGroup("Group 2", "Everything", vi, doug, joe);
+		ReadingGroup test2 = new ReadingGroup("Group 2", "Everything", vi, doug, joe, shane);
 		ReadingGroup test3 = new ReadingGroup("Group 3", "Everything", zack, bob, vi, doug);
 
 		test1 = groupRepo.save(test1);
