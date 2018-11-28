@@ -87,7 +87,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(reader));
+		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReaderSortByGroup(reader));
 		return "reader";
 	}
 
