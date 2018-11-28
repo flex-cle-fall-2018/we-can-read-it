@@ -92,3 +92,10 @@ input[type="submit"], button {
 ul, ol {
 	list-style-type: none;
 }
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	font-size: 1.15rem;
+	text-align: center;
+}
