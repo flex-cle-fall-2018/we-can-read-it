@@ -12,6 +12,39 @@
 	<main> <img id="icon" src="icon.svg">
 
 	<div class="panel">
+		<h2>Create a new reader</h2>
+		<form method="POST" th:action="@{/createnewreader}">
+			<input type="text" placeholder="Username" name="username" required>
+			<input type="text" placeholder="Password" name="password" required>
+			<input type="text" placeholder="First Name" name="firstName" required>
+			<input type="text" placeholder="Last Name" name="lastName" required>
+			<input type="submit">
+		</form>
+
+
+	</div>
+
+	<div class="panel">
+		<h2>Create a new group</h2>
+		<form method="POST" th:action="@{/addGroup}">
+			<input type="text" placeholder="Group Name" name="groupName" required>
+			<input type="text" placeholder="Group Topic" name="topic" required>
+			<input type="submit">
+		</form>
+	</div>
+
+
+	<div class="panel">
+		<h2>Delete a group</h2>
+		<form method="GET" th:action="@{/deleteGroup}">
+			<input type="text" placeholder="Group Name" name="groupName">
+			<input type="submit">
+		</form>
+	</div>
+
+
+
+	<div class="panel">
 		<h2>All Readers</h2>
 		<div th:each="reader: ${readers}">
 			<a th:href="@{reader(id=${reader.id})}"><span
@@ -24,6 +57,14 @@
 		<h2>All Groups</h2>
 		<div th:each="group: ${groups}">
 			<a th:href="@{group(id=${group.id})}" th:text="${group.groupName}"></a>
+		</div>
+	</div>
+
+	<div class="panel">
+		<h2>All Books</h2>
+		<div th:each="book:${books}">
+			<a th:href="@{groupBook(id=${book.id})}"
+				th:text="${book.title}"></a>
 		</div>
 	</div>
 

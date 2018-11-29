@@ -60,6 +60,13 @@ public class ReaderController {
 		model.addAttribute("posts", group.getPosts());
 		return "singlegroupquestions";
 	}
+	
+	@PostMapping("/createnewreader")
+	public String createNewReader(String username, String password, String firstName, String lastName) {
+		Reader newReader = new Reader(username, password, firstName, lastName);
+		readerRepo.save(newReader);		
+		return "redirect:/readers";
+	}
 
 	@PostMapping("/savePost")
 	public String saveNewPost(@CookieValue(value = "readerId") long readerId,
@@ -80,6 +87,7 @@ public class ReaderController {
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
 		model.addAttribute("groups", groupRepo.findAll());
+		model.addAttribute("books", bookRepo.findAll());
 		return "readers";
 	}
 
