@@ -1,6 +1,4 @@
-.fa-user-circle {
-	margin-right: 4px;
-}
+
 
 
 #friends {
@@ -19,14 +17,6 @@
 
 button {
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: #0ca8e5;
-	color: white;
-	border-radius: 5px;
-	text-align: center;
-	font-weight: 700;
-	padding: 10px;
-	border: none;
-	cursor:pointer;
 	font-size: 14px;
 }
 
@@ -36,6 +26,8 @@ i {
 
 #addFriendButton {
 	font-size: 1rem;
+	width: 150px;
+	padding: 10px 20px;
 }
 
 .requestorUsername {
@@ -55,9 +47,7 @@ i {
 	margin: 5px 0;
 }
 
-.acceptFriendRequestButton, .declineFriendRequestButton {
-	padding: 5px;
-}
+
 
 body.modal-open {
 	/* hide scrolling when modal open */
@@ -66,12 +56,11 @@ body.modal-open {
   
   #backdrop {
 	position: fixed;
-	top: 5vh;
+	top: 0;
 	left: 0;
 	width: 100vw;
 	height: 100vh;
 	background: rgba(0,0,0,0.7);
-  
 	display: none;
 	align-items: flex-end;
 	justify-content: center;
@@ -82,34 +71,32 @@ body.modal-open {
 }
   
 #modal {
-	width: 80vw;
-	height: 70vh;
+	width: 60vw;
+	height: 30vh;
 	background: #fff;
 	padding: 1em;
 	border-radius: 5px;
 	box-shadow: 0 0 5px 5px #333;
-	margin-bottom: 10vh;
+	margin-bottom: 60vh;
 }
   
 #modal h4 {
 	float: left;
 }
-  
-#modal button {
-	float: right;
-  
-	background: #eee;
-	padding: 5px 10px;
-	border: 0;
-	border-radius: 3px;
-  
-	cursor: pointer;
-}
  
+.modal-button {
+	display: block;
+	margin: 25px auto 0 auto;
+}
   
 #modal #modal-content {
 	clear: both;
 	padding-top: 1em;
+}
+
+#messageDiv {
+	text-align: center;
+	font-weight: 700;
 }
 
 

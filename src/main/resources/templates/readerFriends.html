@@ -34,10 +34,12 @@
 		<h2>Friend Requests</h2>
 		<div th:each="pendingFriendOf: ${pendingFriendOf}"
 			class="pendingFriendOf">
-			<a th:href="@{../../reader(id=${pendingFriendOf.id})}"
-				th:text="${pendingFriendOf.username}" class="requestorUsername"></a>
+			<div  th:data-requestor="${pendingFriendOf.username}">
+				<a th:href="@{../../reader(id=${pendingFriendOf.id})}" th:text="${pendingFriendOf.username}"></a>
 				<button class="acceptFriendRequestButton"><i class="fas fa-user-check"></i>Accept</button>
 				<button class="declineFriendRequestButton"><i class="fas fa-user-times"></i>Decline</button>
+				
+			</div>
 		</div>
 	</div>
 	<div class="panel" id="pendingFriends">
@@ -62,12 +64,13 @@
 	</main>
 	<div id="backdrop">
 		<div id="modal">
-			<button class="text-button">Close</button>
+			
 			<div id="modal-content">
 				<section>
 					<div id="messageDiv"></div>
 				</section>
 			</div>
+			<button class="modal-button">Close</button>
 		</div>
 	</div>
 

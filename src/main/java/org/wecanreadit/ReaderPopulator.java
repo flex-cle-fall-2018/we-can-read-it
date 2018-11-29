@@ -71,9 +71,14 @@ public class ReaderPopulator implements CommandLineRunner {
 		joe.getPendingFriends().add(shane);
 		zack.getPendingFriends().add(joe);
 		vi.getPendingFriends().add(joe);
+		vi.getPendingFriends().add(shane);
+		shane.getFriends().add(doug);
+		doug.getFriends().add(shane);
 		readerRepo.save(joe);
 		readerRepo.save(vi);
 		readerRepo.save(zack);
+		readerRepo.save(shane);
+		readerRepo.save(doug);
 	}
 
 }

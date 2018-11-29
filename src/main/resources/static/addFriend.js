@@ -3,13 +3,7 @@
 
 	const addEventListeners = function () {
 		const addFriendButton = document.querySelector('#addFriendButton');
-		addFriendButton.addEventListener('click', function(event){
-			addFriend();
-			event.preventDefault();
-			sleep(5000).then(()=>{
-				location.reload();
-			})
-		});
+		addFriendButton.addEventListener('click', addFriend);
 		const acceptFriendRequestButtons = document.querySelectorAll('.acceptFriendRequestButton');
 		if (acceptFriendRequestButtons != null) {
 			for(var i = 0; i < acceptFriendRequestButtons.length; i++ ) {
@@ -29,9 +23,7 @@
 	}
 	
 	
-	const sleep = (milliseconds)=>{
-		return new Promise(res=> setTimeout(res, milliseconds))
-	}
+
 	
 	const modalCloseButtonClickHandler = function() {
 	      document.body.classList.remove('modal-open');
@@ -51,7 +43,7 @@
 	 };
 	 
 		const acceptFriend = function() {
-		    const friendUsername = document.querySelector('.requestorUsername').textContent;
+		    const friendUsername = this.parentNode.getAttribute("data-requestor"); 
 		    const readerId = document.querySelector('#readerId').value;
 		    const friend = {
 		    		friendUsername,
@@ -64,7 +56,7 @@
 		 };
 		 
 		 const declineFriend = function() {
-			    const friendUsername = document.querySelector('.requestorUsername').textContent;
+			 const friendUsername = this.parentNode.getAttribute("data-requestor"); 
 			    const readerId = document.querySelector('#readerId').value;
 			    const declineFriend = {
 			    		friendUsername,
@@ -135,7 +127,7 @@
 					if (newFriend.pendingFriend) {
 						console.log(newFriend.pendingFriend);
 //						updatePendingFriends(newFriendPara, newFriend);
-						message = "This friend is pending, friend must add your username to confirm connection";
+						message = "This friend is pending, friend must add your username to confirm the connection";
 					} else if (newFriend.alreadyFriends) {
 						console.log(newFriend.alreadyFriends);
 						message = "You are already friends with this reader";
@@ -150,7 +142,7 @@
 					}
 //					updateFriends(newFriendPara, newFriend);
 				} else {
-					message = "There was no reader with this username";
+					message = "There was no reader with that username";
 				}
 
 				console.log(message);
@@ -225,11 +217,9 @@
 			messagePara.innerText = message;
 			console.log(messagePara);
 			const messageDiv = document.querySelector('#messageDiv');
-			console.log("open modal 1");
 			messageDiv.appendChild(messagePara);
-			console.log("open modal 2");
 			document.body.classList.add('modal-open');
-			console.log("open modal 3");
+		
 		}
 
 		addEventListeners();
