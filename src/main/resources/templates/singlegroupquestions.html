@@ -100,14 +100,16 @@
 	<div class="panel">
 
 
+
 		<h2>Group Message Board</h2>
 
-		<div class="panel" th:each="post: ${posts}">
-			<ul>
-				<li th:text="${post.getReader().username}"></li>
-				<li th:text="${post.content}"></li>
-			</ul>
-		</div>
+			<div class="panel" th:each="post: ${posts}">
+					<strong th:text="${post.getReader().username}"></strong>
+					<p th:text="${post.content}"></p>
+			</div>
+
+
+		
 
 		<form method="POST" th:action="@{/savePost}">
 			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"

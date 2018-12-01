@@ -20,12 +20,14 @@
 		<h1 th:text="${reader.firstName}"></h1>
 
 
+
 		<section class="panel">
 			<div id="progressGridContainer">
 			<div th:each="readerProgressRecord: ${readerProgressRecords}" id="progressGridItem">
 				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}" class="bookLink">
 				<span class="bookIcon"><i class="fa fa-book-open" aria-hidden="true"></i></span>
 				 <p th:text="${readerProgressRecord.groupBook.title}"></p>
+
 				<p th:text="${readerProgressRecord.groupBook.author}"></p>
 				<p>
 					Finished: <span
@@ -42,13 +44,21 @@
 			</div>
 		</section>
 
+
 		<section class="panel" id="readerNav">
 			<a th:href="@{'/questionlist'}"  class='navLink'><i class="fas fa-users"></i>Groups</a>
 			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
 				<i class="fas fa-user-friends"></i>Friends</a>
+				</section>
 				
-				
+
+		<section class="panel">
+		Points: <span th:text="${reader.points}"></span>
 		</section>
+
+		
+
+		
 	</main>
   <script src='./ProfilePutRequest.js'></script>
 

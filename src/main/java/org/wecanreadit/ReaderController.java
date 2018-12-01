@@ -1,6 +1,8 @@
 package org.wecanreadit;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -60,6 +62,13 @@ public class ReaderController {
 		model.addAttribute("reader", reader);
 		return "singlegroupquestions";
 	}
+	
+	@PostMapping("/createnewreader")
+	public String createNewReader(String username, String password, String firstName, String lastName) {
+		Reader newReader = new Reader(username, password, firstName, lastName);
+		readerRepo.save(newReader);		
+		return "redirect:/readers";
+	}
 
 	@PostMapping("/savePost")
 	public String saveNewPost(@CookieValue(value = "readerId") long readerId,
@@ -80,6 +89,7 @@ public class ReaderController {
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
 		model.addAttribute("groups", groupRepo.findAll());
+		model.addAttribute("books", bookRepo.findAll());
 		return "readers";
 	}
 
@@ -164,7 +174,15 @@ public class ReaderController {
 
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
-		groupRepo.deleteById(groupRepo.findByGroupName(groupName).getId());
+		ReadingGroup group = groupRepo.findByGroupName(groupName);
+		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
+		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
+		for (GroupBook book: books) {
+			readingRecords.addAll(book.getReaderProgressRecords());
+		}
+		readerProgressRecordRepo.deleteAll(readingRecords);
+		bookRepo.deleteAll(books);
+		groupRepo.delete(group);
 		return "redirect:/groups";
 	}
 
@@ -184,6 +202,15 @@ public class ReaderController {
 		group.addMember(reader);
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
+	}
+	
+	@PostMapping("/addbooktogroup")
+	public String addBookToGroup(String title, long groupId) {
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		GroupBook book = bookRepo.findByTitle(title);
+		group.addBook(book);
+		groupRepo.save(group);
+		return "redirect:/group?id=" + groupId;
 	}
 
 	@PostMapping("/saveanswer")
