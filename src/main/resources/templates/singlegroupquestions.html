@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="theme.css">
+<link rel="stylesheet" type="text/css" href="group.css">
+<link rel="stylesheet" type="text/css" href="singlegroupquestions.css">
 </head>
 <body>
 	<main> <img id="icon" src="icon.svg">
@@ -12,88 +18,107 @@
 
 	<div class="panel">
 
-		<div th:each="group: ${groups}">
-			<h2 th:text="${group.groupName}"></h2>
-			<title th:text="${group.groupName}"></title>
-		</div>
+
+		<h2 th:text="${group.groupName}"></h2>
+		<title th:text="${group.groupName}"></title>
+
 	</div>
 
 	<div class="panel">
 
-		<h2>Group Members</h2>
-		<div th:each="group: ${groups}">
+		<h2>Members</h2>
+
+
+		<div class="gridContainer">
 			<div th:each="reader: ${group.getAllMembers()}">
-				<a th:href="@{reader(id=${reader.id})}"><span
+				<a th:href="@{reader(id=${reader.id})}"><i class="fas fa-user"></i><span
 					th:text="${reader.username}"></span></a>
 			</div>
 		</div>
 
-	</div>
-
-	<div class="panel">
-		<h2>Group Books</h2>
-		<div th:each="book:${books}">
-			<a th:href="@{groupBook(id=${book.id})}"
-						th:text="${book.title}"></a>
-		</div>
 
 	</div>
 
-
-
-
-
 	<div class="panel">
+		<h2>Books</h2>
+		<table>
 
-		<h2>Group Goals</h2>
-		<div th:each="goal:${goals}">
-			<span th:text="${goal.name}"></span>
-		</div>
+			<div th:each="book: ${books}">
+				<tr>
+					<th><i class="fas fa-book-reader"></i><a
+						th:href="@{readerViewGroupBook(id=${book.id})}" th:text="${book.title}"
+						id="stubborn"></a></th>
+					<th><span th:text="${book.author}"></span></th>
+				</tr>
 
-	</div>
-
-
-
-
-	<div class="panel">
-
-		<div th:each="group: ${groups}">
-			<h2>Group Questions</h2>
-			<div th:each="question: ${questions}">
-				<span th:text="${question.content}"></span>
-				<form method="POST" th:action="@{/saveanswer}">
-					<textarea rows="4" cols="75" name="answer"
-						placeholder="Answer here" required></textarea>
-					<input type="hidden" th:value="${question.id}" name="id"> <input
-						type="hidden" th:value="${group.id}" name="groupid"> <input
-						type="submit">
-				</form>
 			</div>
+		</table>
+
+	</div>
+
+
+
+
+
+	<div class="panel">
+
+		<h2>Goals</h2>
+		<div th:each="goal:${goals}">
+			<i class="fas fa-star"></i><span th:text="${goal.name}"></span>
 		</div>
 
 	</div>
 
 
+
+
 	<div class="panel">
 
-		<div th:each="group: ${groups}">
-			<h2>Group Message Board</h2>
 
-			<div class="panel" th:each="post: ${posts}">
-				<ul>
-					<li th:text="${post.getReader().username}"></li>
-					<li th:text="${post.content}"></li>
+		<h2>Questions</h2>
+		<div th:each="question: ${questions}" class="panel">
+			<span th:text="${question.content}"></span>
+			<div th:each="answer:${question.getAnswers()}">
+				<ul th:if="${answer.reader.id == reader.id}" class="readerAnswer">
+					<li>Your Answer:</li>
+					<li class="answer" th:text="${answer.content}"></li>
 				</ul>
 			</div>
-
-			<form method="POST" th:action="@{/savePost}">
-				<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
+			<form method="POST" th:action="@{/saveanswer}" id="answerForm">
+				<textarea rows="4" cols="75" name="answer" placeholder="Answer here"
 					required></textarea>
-				<input type="hidden" th:value="${group.id}" name="groupid">
-				<input type="submit">
-
+				<input type="hidden" th:value="${question.id}" name="id"> <input
+					type="hidden" th:value="${group.id}" name="groupid"> <input
+					type="submit">
 			</form>
+
 		</div>
+
+	</div>
+
+
+	<div class="panel">
+
+
+
+		<h2>Group Message Board</h2>
+
+			<div class="panel" th:each="post: ${posts}">
+					<strong th:text="${post.getReader().username}"></strong>
+					<p th:text="${post.content}"></p>
+			</div>
+
+
+		
+
+		<form method="POST" th:action="@{/savePost}">
+			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
+				required></textarea>
+			<input type="hidden" th:value="${group.id}" name="groupid"> <input
+				type="submit" id="messageBoardSubmit">
+
+		</form>
+
 	</div>
 	</main>
 </body>

@@ -16,32 +16,14 @@
 	<h2 th:text="${groupBook.author}"></h2>
 	</div>
 	
-	<div class="panel">
-	<form id="addReaderProgressRecordForm" onsubmit="return false">
-	<input type="hidden" name="readerId" id="readerId" value = 4 />
-	<input type="hidden" name="groupBookId" id="groupBookId" th:value ="${groupBook.id}" />
-	
-<div class="panel">
-	<label>Month:</label>
-		<select name="monthFinished" id="monthFinished">
-	</select>
-	
-	<label>Day:</label>
-	<select name="dayOfMonthFinished" id="dayOfMonthFinished">
-	</select>
-	
-	<label>Year:</label>
-	<select name="yearFinished" id="yearFinished">
-  	<option value=2018>2018</option>
-	</select>
-
-	<button id="addReaderProgressRecordButton">add to my books</button>
-
-	</form> 
+	 
 	</div>
 	<div class="panel">
-	<div th:each="readerProgressRecord: ${readerProgressRecords}">
-	<p><span th:text="${readerProgressRecord.reader.username}"></span> read this book <span th:text="${readerProgressRecord.stringDateFinished}"></span></p>
+	<h2>Members who have finished this book:</h2>
+	<div class="gridContainer" id="readerProgressGrid">
+	<div th:each="readerProgressRecord: ${readerProgressRecords}" class="readerProgressRecordsContainer">
+	<p th:text="${readerProgressRecord.reader.username}"></p><p th:text="${readerProgressRecord.stringDateFinished}"></p>
+	</div>
 	</div>
 
 	

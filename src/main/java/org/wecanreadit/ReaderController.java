@@ -1,6 +1,8 @@
 package org.wecanreadit;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -37,30 +39,40 @@ public class ReaderController {
 
 	@Resource
 	ReaderProgressRecordRepository readerProgressRecordRepo;
-	
+
 	@Resource
 	MessageBoardPostRepository postRepo;
 
 	@RequestMapping("/questionlist")
-	public String findQuestions(@CookieValue(value="readerId") long readerId, Model model) {
-		
+	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
+
 		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
 		return "groupquestionlist";
 	}
 
 	@RequestMapping("/singlegroupquestions")
-	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, Model model) {
+	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId, @RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		model.addAttribute("groups", group);
+		Reader reader = readerRepo.findById(readerId).get();
+		model.addAttribute("group", group);
 		model.addAttribute("books", group.getBooks());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("posts", group.getPosts());
+		model.addAttribute("reader", reader);
 		return "singlegroupquestions";
 	}
 	
+	@PostMapping("/createnewreader")
+	public String createNewReader(String username, String password, String firstName, String lastName) {
+		Reader newReader = new Reader(username, password, firstName, lastName);
+		readerRepo.save(newReader);		
+		return "redirect:/readers";
+	}
+
 	@PostMapping("/savePost")
-	public String saveNewPost(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String newPost, long groupid) {
+	public String saveNewPost(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String newPost, long groupid) {
 		ReadingGroup group = groupRepo.findById(groupid).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		MessageBoardPost post = postRepo.save(new MessageBoardPost(newPost));
@@ -77,6 +89,7 @@ public class ReaderController {
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
 		model.addAttribute("groups", groupRepo.findAll());
+		model.addAttribute("books", bookRepo.findAll());
 		return "readers";
 	}
 
@@ -84,7 +97,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(reader));
+		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReaderSortByGroup(reader));
 		return "reader";
 	}
 
@@ -97,7 +110,7 @@ public class ReaderController {
 	@RequestMapping("/group")
 	public String findAGroup(@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		model.addAttribute("groups", group);
+		model.addAttribute("group", group);
 		model.addAttribute("readers", group.getAllMembers());
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("questions", group.getQuestions());
@@ -161,7 +174,15 @@ public class ReaderController {
 
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
-		groupRepo.deleteById(groupRepo.findByGroupName(groupName).getId());
+		ReadingGroup group = groupRepo.findByGroupName(groupName);
+		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
+		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
+		for (GroupBook book: books) {
+			readingRecords.addAll(book.getReaderProgressRecords());
+		}
+		readerProgressRecordRepo.deleteAll(readingRecords);
+		bookRepo.deleteAll(books);
+		groupRepo.delete(group);
 		return "redirect:/groups";
 	}
 
@@ -182,9 +203,19 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
+	
+	@PostMapping("/addbooktogroup")
+	public String addBookToGroup(String title, long groupId) {
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		GroupBook book = bookRepo.findByTitle(title);
+		group.addBook(book);
+		groupRepo.save(group);
+		return "redirect:/group?id=" + groupId;
+	}
 
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@CookieValue(value="readerId") long readerId, @RequestParam(required = true) String answer, long id, long groupid) {
+	public String saveAnswer(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String answer, long id, long groupid) {
 		DiscussionQuestion quest = questRepo.findById(id).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		DiscussionAnswer newAnswer = ansRepo.save(new DiscussionAnswer(answer));

@@ -1,0 +1,130 @@
+
+
+
+#friends {
+	font-weight: 700;	
+}
+
+#friends a {
+	color: black;
+}
+
+#friendsGridContainer {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	font-size: 1.15rem;
+}
+
+button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+i {
+	margin-right: 5px;
+}
+
+#addFriendButton {
+	font-size: 1rem;
+	width: 150px;
+	padding: 10px 20px;
+}
+
+.requestorUsername {
+	display: inline;
+}
+
+#friendUsername {
+	height: 34px;
+	font-size: 14px;
+}
+
+.pendingFriendsList, .pendingFriendOf {
+	font-weight: 700;
+}
+
+.pendingFriendOf {
+	margin: 5px 0;
+}
+
+
+
+body.modal-open {
+	/* hide scrolling when modal open */
+	overflow: hidden;
+  }
+  
+  #backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,0.7);
+	display: none;
+	align-items: flex-end;
+	justify-content: center;
+}
+  
+.modal-open #backdrop {
+	display: flex;
+}
+  
+#modal {
+	width: 60vw;
+	height: 30vh;
+	background: #fff;
+	padding: 1em;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 5px #333;
+	margin-bottom: 60vh;
+}
+  
+#modal h4 {
+	float: left;
+}
+ 
+.modal-button {
+	display: block;
+	margin: 25px auto 0 auto;
+}
+  
+#modal #modal-content {
+	clear: both;
+	padding-top: 1em;
+}
+
+#messageDiv {
+	text-align: center;
+	font-weight: 700;
+}
+
+@media only screen and (max-width: 900px) {
+    #friendsGridContainer {
+         grid-template-columns: repeat(3, 1fr);
+         
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #friendsGridContainer {
+         grid-template-columns: repeat(2, 1fr);
+         
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #friendsGridContainer {
+         grid-template-columns: repeat(1, 1fr);
+         
+    }
+    
+    #addFriendButton {
+    	margin-top: 10px;
+    }
+}
+
+
+
+
+

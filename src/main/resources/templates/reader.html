@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" type="text/css" href="theme.css">
+<link rel="stylesheet" type="text/css" href="reader.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <title th:text="${reader.firstName}"></title>
 
 
@@ -18,11 +20,14 @@
 		<h1 th:text="${reader.firstName}"></h1>
 
 
-		<section class="panel">
 
-			<div th:each="readerProgressRecord: ${readerProgressRecords}">
-				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}"><span
-					th:text="${readerProgressRecord.groupBook.title}"></span></a>
+		<section class="panel">
+			<div id="progressGridContainer">
+			<div th:each="readerProgressRecord: ${readerProgressRecords}" id="progressGridItem">
+				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}" class="bookLink">
+				<span class="bookIcon"><i class="fa fa-book-open" aria-hidden="true"></i></span>
+				 <p th:text="${readerProgressRecord.groupBook.title}"></p>
+
 				<p th:text="${readerProgressRecord.groupBook.author}"></p>
 				<p>
 					Finished: <span
@@ -33,15 +38,27 @@
 					<span
 						th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span>
 				</p>
-
+				</a>
+				
+			</div>
 			</div>
 		</section>
 
-		<section class="panel">
 
-			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}">View
-				Friends</a></br> <a href="http://localhost:8080/readers">Back to Readers</a>
+		<section class="panel" id="readerNav">
+			<a th:href="@{'/questionlist'}"  class='navLink'><i class="fas fa-users"></i>Groups</a>
+			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
+				<i class="fas fa-user-friends"></i>Friends</a>
+				</section>
+				
+
+		<section class="panel">
+		Points: <span th:text="${reader.points}"></span>
 		</section>
+
+		
+
+		
 	</main>
   <script src='./ProfilePutRequest.js'></script>
 
