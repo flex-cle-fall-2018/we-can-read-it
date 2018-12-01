@@ -110,7 +110,7 @@ public class LibrarianController {
 	}
 
 	@RequestMapping("/addBook")
-	public String addBook(@CookieValue(value = "librarianId") long librarianId, long id, String book, String author, String pageCount) {
+	public String addBook(@CookieValue(value = "LibrarianId") long librarianId, long id, String book, String author, String pageCount) {
 		int count = 0, pages = Integer.valueOf(pageCount);
 		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
 		Librarian lib = libRepo.findById(librarianId).get();
