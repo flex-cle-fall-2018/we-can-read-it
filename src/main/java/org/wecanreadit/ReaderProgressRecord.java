@@ -33,6 +33,7 @@ public class ReaderProgressRecord {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 		this.reader = reader;
 		this.groupBook = groupBook;
+		reader.addPoints(groupBook.getPoints());
 	}
 	
 	public long getId() {

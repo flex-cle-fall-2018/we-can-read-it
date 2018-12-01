@@ -33,10 +33,10 @@ public class ReaderPopulator implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
 		Reader zack = new Reader("Zack", "Mike", "Zack", "Am");
-		Reader bob = new Reader("Bob", "Em", "Shane", "Em");
+		Reader bob = new Reader("Bob", "Em", "Bob", "Em");
 		Reader joe = new Reader("Joe", "Mike", "Joe", "Am");
 		Reader vi = new Reader("Vi", "Em", "Shane", "Em");
-		Reader doug = new Reader("Doug", "Mike", "Zeke", "Am");
+		Reader doug = new Reader("Doug", "Mike", "Doug", "Am");
 		shane = readerRepo.save(shane);
 		zack = readerRepo.save(zack);
 		bob = readerRepo.save(bob);
