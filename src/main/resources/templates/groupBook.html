@@ -20,7 +20,7 @@
 	</div>
 	<div class="panel">
 	<h2>Members who have finished this book:</h2>
-	<div class="gridContainer">
+	<div class="gridContainer" id="readerProgressGrid">
 	<div th:each="readerProgressRecord: ${readerProgressRecords}" class="readerProgressRecordsContainer">
 	<p th:text="${readerProgressRecord.reader.username}"></p><p th:text="${readerProgressRecord.stringDateFinished}"></p>
 	</div>

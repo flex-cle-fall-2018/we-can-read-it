@@ -52,7 +52,7 @@ public class ReaderController {
 	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId, @RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		Reader reader = readerRepo.findById(readerId).get();
-		model.addAttribute("groups", group);
+		model.addAttribute("group", group);
 		model.addAttribute("books", group.getBooks());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("goals", group.getGoals());
@@ -100,7 +100,7 @@ public class ReaderController {
 	@RequestMapping("/group")
 	public String findAGroup(@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		model.addAttribute("groups", group);
+		model.addAttribute("group", group);
 		model.addAttribute("readers", group.getAllMembers());
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("questions", group.getQuestions());

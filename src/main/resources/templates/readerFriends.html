@@ -38,7 +38,6 @@
 				<a th:href="@{../../reader(id=${pendingFriendOf.id})}" th:text="${pendingFriendOf.username}"></a>
 				<button class="acceptFriendRequestButton"><i class="fas fa-user-check"></i>Accept</button>
 				<button class="declineFriendRequestButton"><i class="fas fa-user-times"></i>Decline</button>
-				
 			</div>
 		</div>
 	</div>
@@ -55,12 +54,6 @@
 			type="hidden" th:value="${reader.id}" name="id" id="readerId">
 		<button id="addFriendButton">Send Request</button>
 	</div>
-
-
-	
-
-
-
 	</main>
 	<div id="backdrop">
 		<div id="modal">

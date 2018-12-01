@@ -1,6 +1,6 @@
 #groupsGridContainer {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr); 
+	grid-template-columns: repeat(3, 1fr); 
 	justify-items: center;
 	text-align: center;
 	font-weight: 700;
@@ -15,8 +15,23 @@
 	border: none;
 	color: black;
 	display: inline-block;
+	margin-top: 10px;
 }
 
 .groupLink:hover {
 	transform: translateY(-3px);
 }
+
+@media only screen and (max-width: 900px) {
+    #groupsGridContainer {
+         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #groupsGridContainer {
+         grid-template-columns: repeat(1, 1fr);
+    }
+    
+}
+

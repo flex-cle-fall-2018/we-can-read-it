@@ -97,4 +97,35 @@ ul, ol {
 	grid-template-columns: repeat(3, 1fr);
 	font-size: 1.15rem;
 	text-align: center;
+	
+}
+
+textarea {
+	width: 75%;
+	height: 4em;
+}
+
+#messageBoardSubmit {
+	
+	margin-top: 10px;
+}
+
+
+
+@media only screen and (max-width: 700px) {
+     .gridContainer {
+         grid-template-columns: repeat(2, 1fr);
+         
+    }
+}
+
+@media only screen and (max-width: 550px) {
+     .gridContainer {
+         grid-template-columns: repeat(1, 1fr);
+         
+    }
+    
+    textarea {
+    	width: 100%;
+    }
 }

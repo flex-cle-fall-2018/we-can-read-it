@@ -28,18 +28,6 @@ a {
     margin: 0;
 }
 
-@media only screen and (max-width: 900px) {
-    #progressGridContainer {
-         grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media only screen and (max-width: 550px) {
-    #progressGridContainer {
-         grid-template-columns: 1fr;
-    }
-}
-
 #readerNav {
 	display: flex;
 	justify-content: space-around;
@@ -58,6 +46,30 @@ a {
 
 .fa-users, .fa-user-friends {
 	margin-right: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+    #progressGridContainer {
+         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    #progressGridContainer {
+         grid-template-columns: 1fr;
+    }
+    
+    #readerNav {
+    	flex-direction: column;
+    	align-items: center;
+    }
+    
+    #readerNav a {
+    	margin: 5px 0;
+    	display: block;
+    	width: 100%;
+    }
+   
 }
 
 
