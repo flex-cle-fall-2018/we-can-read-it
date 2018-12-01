@@ -1,13 +1,10 @@
 package org.wecanreadit;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,12 +23,14 @@ public class Librarian {
 	private String groupName;
 	private String topic;
 	
-	@ManyToMany
-	private Collection<Reader> readingGroup;
+	@OneToMany(mappedBy = "librarian")
+	private Collection<Reader> readers;
 	
-	@OneToMany(mappedBy = "readingGroup")
-	private Collection<GroupBook> groupBooks;
-
+	@OneToMany(mappedBy = "librarian")
+	private Collection<GroupBook> books;
+	
+	@OneToMany(mappedBy = "librarian")
+	private Collection<ReadingGroup> groups;
 
 	public Librarian() {
 
@@ -48,11 +47,6 @@ public class Librarian {
 		this.favoriteGenre = favoriteGenre;
 	}
 	
-	public void ReadingGroup(String groupName, String topic, Reader... members) {
-		this.groupName = groupName;
-		this.topic = topic;
-		this.readingGroup = new HashSet<>(Arrays.asList(members));
-	}
 	
 	public Long getId() {
 		return id;
@@ -91,8 +85,16 @@ public class Librarian {
 		return favoriteGenre;
 	}
 		
-	public Collection<Reader> getAllMembers() {
-		return readingGroup;
+	public Collection<ReadingGroup> getAllGroups() {
+		return groups;
+	}
+	
+	public Collection<Reader> getAllReaders(){
+		return readers;
+	}
+	
+	public Collection<GroupBook> getBooks(){
+		return books;
 	}
 
 	public String getGroupName() {

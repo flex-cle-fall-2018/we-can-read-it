@@ -19,6 +19,8 @@ public class GroupBook {
 	 * (11-17-18), so the librarian would need to create separate groupBooks for each
 	 * group
 	 */
+	
+	/*test*/
 
 	@Id
 	@GeneratedValue
@@ -31,6 +33,9 @@ public class GroupBook {
 	@JsonIgnore
 	@ManyToOne
 	private ReadingGroup readingGroup;
+	
+	@ManyToOne
+	private Librarian librarian;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "groupBook")
@@ -94,6 +99,10 @@ public class GroupBook {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+	
+	public void setLibrarian(Librarian lib) {
+		this.librarian = lib;
 	}
 
 }
