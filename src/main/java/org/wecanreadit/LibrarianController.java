@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.wecanreadit.ProfileController.LoginRequest;
 
 @Controller
@@ -65,13 +67,7 @@ public class LibrarianController {
 
 	@RequestMapping("/librarian-login")
 	public String adminLogin(HttpServletResponse response) {
-
-		Cookie adminRoleCookie = new Cookie("role", "librarian");
-		adminRoleCookie.setHttpOnly(true);
-		adminRoleCookie.setMaxAge(300);
-		response.addCookie(adminRoleCookie);
-
-		return "librarian-login";
+		return "LibrarianLogin";
 	}
 
 	@RequestMapping("/librarian-logout")
@@ -132,19 +128,22 @@ public class LibrarianController {
 	}
 	
     //Add custom Exceptions
-    @RequestMapping("/verifyLibrarianLogin")
+	@ResponseBody
+    @PostMapping("/verifyLibrarianLogin")
     public Librarian verifyLogin(
-    	@RequestBody LoginRequest login,
-    	HttpServletResponse response) throws Exception {
+    	@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
+    	String isLibrarian = "true";
+    	
     	Librarian librarian = librarianRepo.findByUsername(login.name);
     	
-    	String readerPassword = librarian.getPassword();
     	if (!librarian.getPassword().equals(login.password)) {
     		throw new Exception();
     	}
     	//Makes new cookie, takes in string,string name, id
     	Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString()); 
     	response.addCookie(librarianIdCookie);
+    	Cookie isALibrarian = new Cookie("isALibrarian", isLibrarian);
+    	response.addCookie(isALibrarian);
     	return librarian;
     	
     }
