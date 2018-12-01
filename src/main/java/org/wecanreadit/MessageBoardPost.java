@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class MessageBoardPost {
@@ -15,6 +16,9 @@ public class MessageBoardPost {
 	private long id;
 
 	private String content;
+
+	@ManyToOne
+	private Reader reader;
 
 	@ManyToMany(mappedBy = "posts")
 	private Collection<ReadingGroup> groups;
@@ -32,6 +36,14 @@ public class MessageBoardPost {
 
 	public Collection<ReadingGroup> getGroups() {
 		return groups;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public Reader getReader() {
+		return reader;
 	}
 
 }

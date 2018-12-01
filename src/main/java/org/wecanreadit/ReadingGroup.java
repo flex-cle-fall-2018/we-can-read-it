@@ -127,5 +127,13 @@ public class ReadingGroup {
 		posts.add(newPost);
 		
 	}
+	
+	public Collection<GroupBook> getBooks(){
+		return groupBooks;
+	}
+	
+	public void addBook(GroupBook book) {
+		groupBooks.add(book);
+	}
 
 }

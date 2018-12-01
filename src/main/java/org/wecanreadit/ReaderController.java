@@ -1,12 +1,15 @@
 package org.wecanreadit;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,13 +39,14 @@ public class ReaderController {
 
 	@Resource
 	ReaderProgressRecordRepository readerProgressRecordRepo;
-	
+
 	@Resource
 	MessageBoardPostRepository postRepo;
 
 	@RequestMapping("/questionlist")
-	public String findQuestions(Model model) {
-		model.addAttribute("groups", groupRepo.findAll());
+	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
+
+		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
 		return "groupquestionlist";
 	}
 
@@ -50,17 +54,32 @@ public class ReaderController {
 	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		model.addAttribute("groups", group);
+		model.addAttribute("books", group.getBooks());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("posts", group.getPosts());
 		return "singlegroupquestions";
 	}
 	
+	@PostMapping("/createnewreader")
+	public String createNewReader(String username, String password, String firstName, String lastName) {
+		Reader newReader = new Reader(username, password, firstName, lastName);
+		readerRepo.save(newReader);		
+		return "redirect:/readers";
+	}
+
 	@PostMapping("/savePost")
-	public String saveNewPost(@RequestParam(required = true) String newPost, long groupid) {
+	public String saveNewPost(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String newPost, long groupid) {
 		ReadingGroup group = groupRepo.findById(groupid).get();
-		group.addPost(postRepo.save(new MessageBoardPost(newPost)));
+		Reader reader = readerRepo.findById(readerId).get();
+		MessageBoardPost post = postRepo.save(new MessageBoardPost(newPost));
+		group.addPost(post);
+		post.setReader(reader);
+		reader.savePost(post);
 		groupRepo.save(group);
+		postRepo.save(post);
+		readerRepo.save(reader);
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
@@ -68,6 +87,7 @@ public class ReaderController {
 	public String findAllReader(Model model) {
 		model.addAttribute("readers", readerRepo.findAll());
 		model.addAttribute("groups", groupRepo.findAll());
+		model.addAttribute("books", bookRepo.findAll());
 		return "readers";
 	}
 
@@ -152,7 +172,15 @@ public class ReaderController {
 
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
-		groupRepo.deleteById(groupRepo.findByGroupName(groupName).getId());
+		ReadingGroup group = groupRepo.findByGroupName(groupName);
+		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
+		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
+		for (GroupBook book: books) {
+			readingRecords.addAll(book.getReaderProgressRecords());
+		}
+		readerProgressRecordRepo.deleteAll(readingRecords);
+		bookRepo.deleteAll(books);
+		groupRepo.delete(group);
 		return "redirect:/groups";
 	}
 
@@ -173,12 +201,28 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
+	
+	@PostMapping("/addbooktogroup")
+	public String addBookToGroup(String title, long groupId) {
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		GroupBook book = bookRepo.findByTitle(title);
+		group.addBook(book);
+		groupRepo.save(group);
+		return "redirect:/group?id=" + groupId;
+	}
 
 	@PostMapping("/saveanswer")
-	public String saveAnswer(@RequestParam(required = true) String answer, long id, long groupid) {
+	public String saveAnswer(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) String answer, long id, long groupid) {
 		DiscussionQuestion quest = questRepo.findById(id).get();
-		quest.addAnswer(ansRepo.save(new DiscussionAnswer(answer)));
+		Reader reader = readerRepo.findById(readerId).get();
+		DiscussionAnswer newAnswer = ansRepo.save(new DiscussionAnswer(answer));
+		quest.addAnswer(newAnswer);
+		reader.saveAnswer(newAnswer);
+		newAnswer.setReader(reader);
+		ansRepo.save(newAnswer);
 		questRepo.save(quest);
+		readerRepo.save(reader);
 		return "redirect:/singlegroupquestions?id=" + groupid;
 	}
 
