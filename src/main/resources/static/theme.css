@@ -50,6 +50,7 @@ ul, ol {
 	max-height: 200px;
 	max-width: 800px;
 	margin: 0 auto;
+	font-weight: 700;
 }
 
 a {
@@ -73,4 +74,58 @@ th {
 .answer{
 	max-width: 600px;
 	word-wrap: break-word;
+}
+
+input[type="submit"], button {
+	font-size: 1rem;
+	background-color: #0ca8e5;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: 700;
+	padding: 5px 20px;
+	border: none;
+	cursor:pointer;
+}
+
+ul, ol {
+	list-style-type: none;
+}
+
+.gridContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	font-size: 1.15rem;
+	text-align: center;
+	
+}
+
+textarea {
+	width: 75%;
+	height: 4em;
+}
+
+#messageBoardSubmit {
+	
+	margin-top: 10px;
+}
+
+
+
+@media only screen and (max-width: 700px) {
+     .gridContainer {
+         grid-template-columns: repeat(2, 1fr);
+         
+    }
+}
+
+@media only screen and (max-width: 550px) {
+     .gridContainer {
+         grid-template-columns: repeat(1, 1fr);
+         
+    }
+    
+    textarea {
+    	width: 100%;
+    }
 }

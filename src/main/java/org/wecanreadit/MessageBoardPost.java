@@ -9,7 +9,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class DiscussionAnswer {
+public class MessageBoardPost {
 
 	@Id
 	@GeneratedValue
@@ -20,13 +20,13 @@ public class DiscussionAnswer {
 	@ManyToOne
 	private Reader reader;
 
-	@ManyToMany(mappedBy = "answers")
-	private Collection<DiscussionQuestion> questions;
+	@ManyToMany(mappedBy = "posts")
+	private Collection<ReadingGroup> groups;
 
-	DiscussionAnswer() {
+	MessageBoardPost() {
 	}
 
-	DiscussionAnswer(String content) {
+	MessageBoardPost(String content) {
 		this.content = content;
 	}
 
@@ -34,8 +34,8 @@ public class DiscussionAnswer {
 		return content;
 	}
 
-	public Collection<DiscussionQuestion> getQuestion() {
-		return questions;
+	public Collection<ReadingGroup> getGroups() {
+		return groups;
 	}
 
 	public void setReader(Reader reader) {

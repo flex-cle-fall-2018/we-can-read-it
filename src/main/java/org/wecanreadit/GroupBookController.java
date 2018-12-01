@@ -29,6 +29,19 @@ public class GroupBookController {
 		throw new GroupBookNotFoundException();
 	}
 	
+	@RequestMapping("/readerViewGroupBook")
+	public String findOneReaderGroupBook(@RequestParam(value = "id") long id, Model model) throws GroupBookNotFoundException {
+		Optional<GroupBook> result = groupBookRepo.findById(id);
+		GroupBook groupBook = result.get();
+		if (result.isPresent()) {
+			model.addAttribute("groupBook", groupBook);
+			model.addAttribute("group", groupBook.getReadingGroup());
+			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
+			return "readerViewGroupBook";
+		}
+		throw new GroupBookNotFoundException();
+	}
+	
 	@RequestMapping("/changePoints")
 	public String changePointValue(long id, int points) {
 		GroupBook result = groupBookRepo.findById(id).get();
