@@ -201,6 +201,15 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
+	
+	@PostMapping("/addbooktogroup")
+	public String addBookToGroup(String title, String author, long groupId) {
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		GroupBook book = bookRepo.findByTitle(title).get();
+		group.addBook(book);
+		groupRepo.save(group);
+		return "redirect:/group?id=" + groupId;
+	}
 
 	@PostMapping("/saveanswer")
 	public String saveAnswer(@CookieValue(value = "readerId") long readerId,

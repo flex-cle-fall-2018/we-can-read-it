@@ -82,10 +82,10 @@
 			<div class="panel" th:each="question: ${questions}">
 				<span th:text="${question.content}"></span> <a
 					th:href="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
-			
+
 				<div class="panel" th:each="answer:${question.getAnswers()}">
-						<strong th:text="${answer.getReader().username}"></strong>
-						<p class="answer" th:text="${answer.content}"></p>
+					<strong th:text="${answer.getReader().username}"></strong>
+					<p class="answer" th:text="${answer.content}"></p>
 				</div>
 
 			</div>
@@ -125,10 +125,10 @@
 	</section>
 
 	<section class="panel">
-		<h2>Add a book</h2>
+		<h2>Create a book</h2>
 		<div th:each="group: ${groups}">
 			<form id="bookForm" method="POST" th:action="@{/addBook}">
-				<input id="booktitle" type="text" placeholder="Enter book name"
+				<input id="booktitle" type="text" placeholder="Enter book Title"
 					name="book"> <input type="text"
 					placeholder="Enter author name" name="author"> <input
 					type="hidden" th:value="${group.id}" name="id"> <input
@@ -136,6 +136,20 @@
 					id="button" type="button" value="Submit">
 			</form>
 		</div>
+	</section>
+
+	<section class="panel">
+		<h2>Add a book to this group</h2>
+		<div th:each="group: ${groups}">
+			<form method="POST" th:action="@{/addbooktogroup}">
+				<input type="text" placeholder="Book Title" name="title" required>
+				<input type="hidden" th:value="${group.id}" name="groupId">
+				<input type="submit">
+			</form>
+
+		</div>
+
+
 	</section>
 
 

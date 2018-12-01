@@ -131,5 +131,9 @@ public class ReadingGroup {
 	public Collection<GroupBook> getBooks(){
 		return groupBooks;
 	}
+	
+	public void addBook(GroupBook book) {
+		groupBooks.add(book);
+	}
 
 }
