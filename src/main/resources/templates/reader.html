@@ -22,6 +22,7 @@
 
 
 		<section class="panel">
+		<h2>Books</h2>
 			<div id="progressGridContainer">
 			<div th:each="readerProgressRecord: ${readerProgressRecords}" id="progressGridItem">
 				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}" class="bookLink">

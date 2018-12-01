@@ -71,7 +71,7 @@ th {
 	width: 400px
 }
 
-.answer{
+.answer, .question, .goal, .post{
 	max-width: 600px;
 	word-wrap: break-word;
 }

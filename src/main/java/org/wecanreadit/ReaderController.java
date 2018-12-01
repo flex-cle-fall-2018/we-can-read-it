@@ -51,7 +51,8 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/singlegroupquestions")
-	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId, @RequestParam(required = true) long id, Model model) {
+	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		model.addAttribute("group", group);
@@ -62,11 +63,11 @@ public class ReaderController {
 		model.addAttribute("reader", reader);
 		return "singlegroupquestions";
 	}
-	
+
 	@PostMapping("/createnewreader")
 	public String createNewReader(String username, String password, String firstName, String lastName) {
 		Reader newReader = new Reader(username, password, firstName, lastName);
-		readerRepo.save(newReader);		
+		readerRepo.save(newReader);
 		return "redirect:/readers";
 	}
 
@@ -115,6 +116,7 @@ public class ReaderController {
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("groupBooks", group.getAllGroupBooks());
+		model.addAttribute("posts", group.getPosts());
 		return "group";
 	}
 
@@ -177,7 +179,7 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findByGroupName(groupName);
 		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
 		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
-		for (GroupBook book: books) {
+		for (GroupBook book : books) {
 			readingRecords.addAll(book.getReaderProgressRecords());
 		}
 		readerProgressRecordRepo.deleteAll(readingRecords);
@@ -203,7 +205,7 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
+
 	@PostMapping("/addbooktogroup")
 	public String addBookToGroup(String title, long groupId) {
 		ReadingGroup group = groupRepo.findById(groupId).get();

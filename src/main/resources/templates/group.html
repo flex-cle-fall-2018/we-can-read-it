@@ -107,7 +107,7 @@
 
 		<h2>Groups discussion questions</h2>
 		<div class="panel" th:each="question: ${questions}">
-			<span th:text="${question.content}"></span> <a
+			<span th:text="${question.content}" class="question"></span> <a
 				th:href="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
 
 			<div class="panel" th:each="answer:${question.getAnswers()}">
@@ -134,7 +134,8 @@
 
 		<h2>Group goals</h2>
 		<div th:each="goal: ${goals}">
-			<i class="fas fa-star"></i><span th:text="${goal.name}"></span> <a
+			<i class="fas fa-star"></i><span th:text="${goal.name}" class="goal"></span>
+			<a
 				th:href="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
 		</div>
 
@@ -158,22 +159,21 @@
 		<h2>Group Message Board</h2>
 
 		<div class="panel" th:each="post: ${posts}">
-			<ul>
-				<li th:text="${post.getReader().username}"></li>
-				<li th:text="${post.content}"></li>
-			</ul>
+			<strong th:text="${post.getReader().username}"></strong>
+			<p th:text="${post.content}" class="post"></p>
 
 		</div>
 
-		<form method="POST" th:action="@{/savePost}">
+		<!--  <form method="POST" th:action="@{/savePost}">
 			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
 				required></textarea>
 			<input type="hidden" th:value="${group.id}" name="groupid"> <input
 				type="submit" id="messageBoardSubmit">
 
-		</form>
+		</form>-->
 	</div>
 
+<!--
 	<section class="panel">
 		<h2>Create a book</h2>
 		<div th:each="group: ${groups}">
@@ -187,6 +187,7 @@
 			</form>
 		</div>
 	</section>
+
 
 	<section class="panel">
 		<h2>Add a book to this group</h2>
@@ -202,7 +203,7 @@
 
 	</section>
 
-
+-->
 
 	<section class="panel">
 		<a href="http://localhost:8080/groups">Back to Groups</a></br> <a
