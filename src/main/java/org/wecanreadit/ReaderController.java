@@ -42,6 +42,9 @@ public class ReaderController {
 
 	@Resource
 	MessageBoardPostRepository postRepo;
+	
+	@Resource
+	LibrarianRepository libRepo;
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
@@ -65,8 +68,9 @@ public class ReaderController {
 	}
 
 	@PostMapping("/createnewreader")
-	public String createNewReader(String username, String password, String firstName, String lastName) {
+	public String createNewReader(@CookieValue(value = "librarianId") long librarianId,String username, String password, String firstName, String lastName) {
 		Reader newReader = new Reader(username, password, firstName, lastName);
+		newReader.setLibrarian(libRepo.findById(librarianId).get());
 		readerRepo.save(newReader);
 		return "redirect:/readers";
 	}
@@ -87,10 +91,11 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/readers")
-	public String findAllReader(Model model) {
-		model.addAttribute("readers", readerRepo.findAll());
-		model.addAttribute("groups", groupRepo.findAll());
-		model.addAttribute("books", bookRepo.findAll());
+	public String findAllReader(@CookieValue(value = "librarianId") long librarianId, Model model) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		model.addAttribute("readers", lib.getAllReaders());
+		model.addAttribute("groups", lib.getAllGroups());
+		model.addAttribute("books", lib.getBooks());
 		return "readers";
 	}
 
@@ -169,8 +174,11 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGroup")
-	public String createGroup(@RequestParam(required = true) String groupName, String topic) {
-		groupRepo.save(new ReadingGroup(groupName, topic));
+	public String createGroup(@CookieValue(value = "librarianId") long librarianId, @RequestParam(required = true) String groupName, String topic) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		ReadingGroup group = new ReadingGroup(groupName, topic);
+		group.setLibrarian(lib);
+		groupRepo.save(group);
 		return "redirect:/groups";
 	}
 

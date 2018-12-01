@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,6 +20,9 @@ public class ReadingGroup {
 
 	private String groupName;
 	private String topic;
+
+	@ManyToOne
+	private Librarian librarian;
 
 	@ManyToMany
 	private Collection<Reader> readingGroup;
@@ -125,15 +129,19 @@ public class ReadingGroup {
 
 	public void addPost(MessageBoardPost newPost) {
 		posts.add(newPost);
-		
+
 	}
-	
-	public Collection<GroupBook> getBooks(){
+
+	public Collection<GroupBook> getBooks() {
 		return groupBooks;
 	}
-	
+
 	public void addBook(GroupBook book) {
 		groupBooks.add(book);
+	}
+
+	public void setLibrarian(Librarian lib) {
+		this.librarian = lib;
 	}
 
 }
