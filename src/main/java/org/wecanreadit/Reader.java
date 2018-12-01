@@ -178,7 +178,8 @@ public class Reader {
 	public void savePost(MessageBoardPost post) {
 		posts.add(post);
 	}
-
+	
+	@JsonIgnore
 	public Collection<ReadingGroup> getGroups() {
 		return groups;
 	}

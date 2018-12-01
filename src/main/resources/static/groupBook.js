@@ -47,8 +47,8 @@
 				if (this.responseText) {
 					console.log(this.responseText);
 					const newReaderProgressRecord = JSON.parse(this.responseText);
-					const readerProgressRecordsDiv = document.querySelector('#newReaderProgressRecordAjax');
-					updateReaderProgressRecords(readerProgressRecordsDiv, newReaderProgressRecord);
+					
+					updateReaderProgressRecords(newReaderProgressRecord);
 				}
 			}
 		};
@@ -59,10 +59,20 @@
 		xhr.send(body);
 	};
 
-	const updateReaderProgressRecords = function (readerProgressRecordsDiv, newReaderProgressRecord) {
-		var readerProgressRecordsPara = document.createElement('p');
-		readerProgressRecordsPara.innerText = newReaderProgressRecord.reader.username + " read this book " + newReaderProgressRecord.stringDateFinished;
-		readerProgressRecordsDiv.appendChild(readerProgressRecordsPara);
+	const updateReaderProgressRecords = function (newReaderProgressRecord) {
+		var readerProgressRecordsPara1 = document.createElement('p');
+		var readerProgressRecordsPara2 = document.createElement('p');
+		
+		const readerProgressRecordsContainer = document.createElement('div');
+		console.log(readerProgressRecordsContainer);
+		var gridContainer = document.querySelector('.gridContainer');
+		console.log(gridContainer);
+		readerProgressRecordsPara1.innerText = newReaderProgressRecord.reader.username
+		readerProgressRecordsPara2.innerText = newReaderProgressRecord.stringDateFinished;
+		readerProgressRecordsContainer.appendChild(readerProgressRecordsPara1);
+		readerProgressRecordsContainer.appendChild(readerProgressRecordsPara2);
+		gridContainer.appendChild(readerProgressRecordsContainer);
+		console.log(gridContainer);
 	}
 
 	addEventListeners();

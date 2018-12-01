@@ -1,0 +1,11 @@
+.fa-book-reader, .fa-star, .fa-user {
+	margin-right: 5px;
+}
+
+#messageBoardSubmit {
+	transform: translateY(-8px);
+}
+
+.gridContainer {
+	text-align: left;
+}

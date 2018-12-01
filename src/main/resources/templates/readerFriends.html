@@ -5,52 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" type="text/css" href="../../theme.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../../readerFriends.css">
 <title>Friends</title>
 </head>
 
 <body>
 	<main><img id="icon" src="../../icon.svg">
 
-	<div class="panel">
-		<input type="text" placeholder="Friend's Username"
-			name="friendUsername" id="friendUsername"> <input
-			type="hidden" th:value="${reader.id}" name="id" id="readerId">
-		<button id="addFriendButton">Add Friend</button>
-	</div>
+	
 
 
-	<div style="color:white;" id="messageDiv"></div>
+	
 
 	<div class="panel" id="friends">
 		<h2>Friends</h2>
-		<div th:each="friend: ${friends}" id="friendsList">
-			<a th:href="@{../../reader(id=${friend.id})}"
-				th:text="${friend.username}"></a>
+		<div id="friendsGridContainer">
+		<div th:each="friend: ${friends}" class="friendItem">
+			
+			<a th:href="@{../../reader(id=${friend.id})}">
+			<i class="fas fa-user-circle"></i>
+				<span th:text="${friend.username}"></span></a>
+				
+		</div>
 		</div>
 	</div>
-
+	<div class="panel" id="pendingFriendOf">
+		<h2>Friend Requests</h2>
+		<div th:each="pendingFriendOf: ${pendingFriendOf}"
+			class="pendingFriendOf">
+			<div  th:data-requestor="${pendingFriendOf.username}">
+				<a th:href="@{../../reader(id=${pendingFriendOf.id})}" th:text="${pendingFriendOf.username}"></a>
+				<button class="acceptFriendRequestButton"><i class="fas fa-user-check"></i>Accept</button>
+				<button class="declineFriendRequestButton"><i class="fas fa-user-times"></i>Decline</button>
+			</div>
+		</div>
+	</div>
 	<div class="panel" id="pendingFriends">
-		<h2>Pending Friends</h2>
+		<h2>Friend Requests Sent</h2>
+		<p>These readers must accept your request to confirm the connection</p>
 		<div th:each="pendingFriend: ${pendingFriends}"
 			id="pendingFriendsList">
 			<a th:href="@{../../reader(id=${pendingFriend.id})}"
 				th:text="${pendingFriend.username}"></a>
 		</div>
+		<input type="text" placeholder="Friend's Username"
+			name="friendUsername" id="friendUsername"> <input
+			type="hidden" th:value="${reader.id}" name="id" id="readerId">
+		<button id="addFriendButton">Send Request</button>
 	</div>
-
-
-	<div class="panel" id="pendingFriendOf">
-		<h2>Friend Requests</h2>
-		<div th:each="pendingFriendOf: ${pendingFriendOf}"
-			id="pendingFriendOfList">
-			<a th:href="@{../../reader(id=${pendingFriendOf.id})}"
-				th:text="${pendingFriendOf.username}"></a>
+	</main>
+	<div id="backdrop">
+		<div id="modal">
+			
+			<div id="modal-content">
+				<section>
+					<div id="messageDiv"></div>
+				</section>
+			</div>
+			<button class="modal-button">Close</button>
 		</div>
 	</div>
-
-
-
-	</main>
 
 	<script src='/addFriend.js'></script>
 
