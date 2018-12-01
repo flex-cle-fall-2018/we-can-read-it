@@ -67,28 +67,25 @@
 
 	<section class="panel">
 		<div th:each="group: ${groups}">
-			<h2>
-				Create a new question
-				</p>
-				<form method="POST" th:action="@{/addQuestion}">
-					<input type="text" placeholder="Question" name="content"> <input
-						type="hidden" th:value="${group.id}" name="id"> <input
-						type="submit">
-				</form>
+			<h2>Create a new question</h2>
+			<form method="POST" th:action="@{/addQuestion}">
+				<input type="text" placeholder="Question" name="content"> <input
+					type="hidden" th:value="${group.id}" name="id"> <input
+					type="submit">
+			</form>
 		</div>
 	</section>
 
 	<section class="panel">
 		<div th:each="group: ${groups}">
 			<h2>Groups discussion questions</h2>
-			<div th:each="question: ${questions}">
+			<div class="panel" th:each="question: ${questions}">
 				<span th:text="${question.content}"></span> <a
 					th:href="@{/removeQuestion/{questId}/{groupId}(questId=${question.id} , groupId=${group.id})}">[delete]</a>
 
-				<div th:each="answer:${question.getAnswers()}">
-					<ul>
-						<li class="answer" th:text="${answer.content}"></li>
-					</ul>
+				<div class="panel" th:each="answer:${question.getAnswers()}">
+					<strong th:text="${answer.getReader().username}"></strong>
+					<p class="answer" th:text="${answer.content}"></p>
 				</div>
 
 			</div>
@@ -97,14 +94,12 @@
 
 	<section class="panel">
 		<div th:each="group: ${groups}">
-			<h2>
-				Create a new goal
-				</p>
-				<form method="POST" th:action="@{/addGoal}">
-					<input type="text" placeholder="Goal Name" name="name"> <input
-						type="hidden" th:value="${group.id}" name="id"> <input
-						type="submit">
-				</form>
+			<h2>Create a new goal</h2>
+			<form method="POST" th:action="@{/addGoal}">
+				<input type="text" placeholder="Goal Name" name="name"> <input
+					type="hidden" th:value="${group.id}" name="id"> <input
+					type="submit">
+			</form>
 		</div>
 	</section>
 
@@ -128,28 +123,43 @@
 			</form>
 		</div>
 	</section>
-    
-    <section class="panel">
-    <h2>Add a book</h2>
-    <div th:each="group: ${groups}">
-    <form id="bookForm" method="POST" th:action="@{/addBook}">
-    	<input id="booktitle" type="text" placeholder="Enter book name" name="book">
-    	<input type="text" placeholder="Enter author name" name="author">
-    	<input type="hidden" th:value="${group.id}" name="id">
-    	<input id="pageCount" type="hidden" name="pageCount">
-    	<input id="button" type="button" value="Submit">
-    </form>
-    </div>
-    	</section>
-    
-    
+
+	<section class="panel">
+		<h2>Create a book</h2>
+		<div th:each="group: ${groups}">
+			<form id="bookForm" method="POST" th:action="@{/addBook}">
+				<input id="booktitle" type="text" placeholder="Enter book Title"
+					name="book"> <input type="text"
+					placeholder="Enter author name" name="author"> <input
+					type="hidden" th:value="${group.id}" name="id"> <input
+					id="pageCount" type="hidden" name="pageCount"> <input
+					id="button" type="button" value="Submit">
+			</form>
+		</div>
+	</section>
+
+	<section class="panel">
+		<h2>Add a book to this group</h2>
+		<div th:each="group: ${groups}">
+			<form method="POST" th:action="@{/addbooktogroup}">
+				<input type="text" placeholder="Book Title" name="title" required>
+				<input type="hidden" th:value="${group.id}" name="groupId">
+				<input type="submit">
+			</form>
+
+		</div>
+
+
+	</section>
+
+
 
 	<section class="panel">
 		<a href="http://localhost:8080/groups">Back to Groups</a></br> <a
 			href="http://localhost:8080/readers">Back to Readers</a>
 	</section>
 	</main>
-<script src='./group.js'></script>
+	<script src='./group.js'></script>
 
 
 </body>

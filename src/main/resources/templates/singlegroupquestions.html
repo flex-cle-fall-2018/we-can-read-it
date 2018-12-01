@@ -29,6 +29,20 @@
 		</div>
 
 	</div>
+
+	<div class="panel">
+		<h2>Group Books</h2>
+		<div th:each="book:${books}">
+			<a th:href="@{groupBook(id=${book.id})}"
+						th:text="${book.title}"></a>
+		</div>
+
+	</div>
+
+
+
+
+
 	<div class="panel">
 
 		<h2>Group Goals</h2>
@@ -58,13 +72,16 @@
 		</div>
 
 	</div>
+
+
 	<div class="panel">
 
 		<div th:each="group: ${groups}">
 			<h2>Group Message Board</h2>
 
 			<div class="panel" th:each="post: ${posts}">
-				<span th:text="${post.content}"></span>
+					<strong th:text="${post.getReader().username}"></strong>
+					<p th:text="${post.content}"></p>
 			</div>
 
 			<form method="POST" th:action="@{/savePost}">

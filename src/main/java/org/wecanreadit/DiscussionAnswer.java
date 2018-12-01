@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class DiscussionAnswer {
@@ -15,6 +16,9 @@ public class DiscussionAnswer {
 	private long id;
 
 	private String content;
+
+	@ManyToOne
+	private Reader reader;
 
 	@ManyToMany(mappedBy = "answers")
 	private Collection<DiscussionQuestion> questions;
@@ -32,6 +36,14 @@ public class DiscussionAnswer {
 
 	public Collection<DiscussionQuestion> getQuestion() {
 		return questions;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
+	public Reader getReader() {
+		return reader;
 	}
 
 }
