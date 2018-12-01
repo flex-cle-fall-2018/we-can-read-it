@@ -35,6 +35,9 @@ public class LibrarianController {
 
 	@Resource
 	ReaderRepository readerRepo;
+	
+	@Resource
+	LibrarianRepository libRepo;
 
 	@RequestMapping("/librarian")
 	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws LibrarianNotFoundException {
@@ -103,9 +106,11 @@ public class LibrarianController {
 	}
 
 	@RequestMapping("/addBook")
-	public String addBook(long id, String book, String author, String pageCount) {
+	public String addBook(@CookieValue(value = "librarianId") long librarianId, long id, String book, String author, String pageCount) {
 		int count = 0, pages = Integer.valueOf(pageCount);
 		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
+		Librarian lib = libRepo.findById(librarianId).get();
+		book1.setLibrarian(lib);
 		while (pages > 100) {
 			pages -= 100;
 			count += 5;

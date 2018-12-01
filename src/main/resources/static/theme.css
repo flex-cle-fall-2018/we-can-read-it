@@ -29,8 +29,7 @@ main {
 
 body {
 	padding: 1rem;
-	background-image:
-		url(https://images.pexels.com/photos/40799/paper-colorful-color-loose-40799.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+	background-image: url("background.jpeg");
 	background-position: center center;
 	background-attachment: fixed;
 	background-size: cover;
@@ -71,7 +70,7 @@ th {
 	width: 400px
 }
 
-.answer{
+.answer, .question, .goal, .post{
 	max-width: 600px;
 	word-wrap: break-word;
 }

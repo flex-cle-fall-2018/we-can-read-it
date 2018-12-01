@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,8 @@ public class Reader {
 	private int points = 0;
 	
 
+	@ManyToOne
+	private Librarian librarian;
 
 	@OneToMany(mappedBy = "reader")
 	private Collection<MessageBoardPost> posts;
@@ -182,6 +185,10 @@ public class Reader {
 	@JsonIgnore
 	public Collection<ReadingGroup> getGroups() {
 		return groups;
+	}
+	
+	public void setLibrarian(Librarian lib) {
+		this.librarian = lib;
 	}
 
 
