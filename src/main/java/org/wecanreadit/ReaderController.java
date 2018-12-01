@@ -203,9 +203,9 @@ public class ReaderController {
 	}
 	
 	@PostMapping("/addbooktogroup")
-	public String addBookToGroup(String title, String author, long groupId) {
+	public String addBookToGroup(String title, long groupId) {
 		ReadingGroup group = groupRepo.findById(groupId).get();
-		GroupBook book = bookRepo.findByTitle(title).get();
+		GroupBook book = bookRepo.findByTitle(title);
 		group.addBook(book);
 		groupRepo.save(group);
 		return "redirect:/group?id=" + groupId;
