@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.wecanreadit.ProfileController.LoginRequest;
 
 @Controller
 public class LibrarianController {
@@ -128,5 +130,26 @@ public class LibrarianController {
 		}
 
 	}
+    //Add custom Exceptions
+    @RequestMapping("/verifyLibrarianLogin")
+    public Librarian verifyLogin(
+    	@RequestBody LoginRequest login,
+    	HttpServletResponse response) throws Exception {
+    	Librarian librarian = librarianRepo.findByUsername(login.name);
+    	
+    	String readerPassword = librarian.getPassword();
+    	if (!librarian.getPassword().equals(login.password)) {
+    		throw new Exception();
+    	}
+    	//Makes new cookie, takes in string,string name, id
+    	Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString()); 
+    	response.addCookie(librarianIdCookie);
+    	return librarian;
+    	
+    }
+    public static class LoginRequest {
+    	public String name;
+    	public String password;
+    }	
 
 }

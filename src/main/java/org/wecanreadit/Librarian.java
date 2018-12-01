@@ -54,7 +54,7 @@ public class Librarian {
 		this.readingGroup = new HashSet<>(Arrays.asList(members));
 	}
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
