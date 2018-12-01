@@ -108,8 +108,9 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/groups")
-	public String findAllGroups(Model model) {
-		model.addAttribute("groups", groupRepo.findAll());
+	public String findAllGroups(@CookieValue(value = "LibrarianId") long librarianId, Model model) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		model.addAttribute("groups", lib.getAllGroups());
 		return "groups";
 	}
 
