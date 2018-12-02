@@ -101,4 +101,9 @@ public class GroupBook {
 		return true;
 	}
 
+	public void removeReadingGroup(ReadingGroup group) {
+		readingGroups.remove(group);
+		
+	}
+
 }

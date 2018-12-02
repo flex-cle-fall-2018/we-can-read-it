@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,26 +15,45 @@ public class GroupBookController {
 	
 	@Resource
 	GroupBookRepository groupBookRepo;
+	
+	@Resource
+	ReadingGroupRepository groupRepo;
 
 	
-	@RequestMapping("/groupBook")
-	public String findOneBook(@RequestParam(value = "id") long id, Model model) throws GroupBookNotFoundException {
-		Optional<GroupBook> result = groupBookRepo.findById(id);
+	@RequestMapping("/group/{groupId}/groupBook/{groupBookId}")
+	public String findOneBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
+		Optional<GroupBook> result = groupBookRepo.findById(groupBookId);
 		GroupBook groupBook = result.get();
+		ReadingGroup group = groupRepo.findById(groupId).get();
 		if (result.isPresent()) {
 			model.addAttribute("groupBook", groupBook);
+			model.addAttribute("group", group);
 			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
 			return "groupBook";
 		}
 		throw new GroupBookNotFoundException();
 	}
 	
-	@RequestMapping("/readerViewGroupBook")
-	public String findOneReaderGroupBook(@RequestParam(value = "id") long id, Model model) throws GroupBookNotFoundException {
+	@RequestMapping("/groupBook")
+	public String findOneBook(@RequestParam long id, Model model) throws GroupBookNotFoundException {
 		Optional<GroupBook> result = groupBookRepo.findById(id);
 		GroupBook groupBook = result.get();
 		if (result.isPresent()) {
 			model.addAttribute("groupBook", groupBook);
+			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
+			return "librarianBook";
+		}
+		throw new GroupBookNotFoundException();
+	}
+	
+	@RequestMapping("/readerViewGroupBook/{groupId}/groupBook/{groupBookId}")
+	public String findOneReaderGroupBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
+		Optional<GroupBook> result = groupBookRepo.findById(groupBookId);
+		GroupBook groupBook = result.get();
+		ReadingGroup group = groupRepo.findById(groupId).get();
+		if (result.isPresent()) {
+			model.addAttribute("groupBook", groupBook);
+			model.addAttribute("group", group);
 			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
 			return "readerViewGroupBook";
 		}
@@ -41,6 +61,14 @@ public class GroupBookController {
 	}
 	
 	@RequestMapping("/changePoints")
+	public String changePointValue(long id, int points, long groupId) {
+		GroupBook result = groupBookRepo.findById(id).get();
+		result.setPoints(points);
+		groupBookRepo.save(result);
+		return "redirect:/group/" + groupId + "/groupBook/" + id;
+	}
+	
+	@RequestMapping("/changePointsGroupBook")
 	public String changePointValue(long id, int points) {
 		GroupBook result = groupBookRepo.findById(id).get();
 		result.setPoints(points);

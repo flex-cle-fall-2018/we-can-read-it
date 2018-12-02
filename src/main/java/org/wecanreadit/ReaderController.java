@@ -177,13 +177,12 @@ public class ReaderController {
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
 		ReadingGroup group = groupRepo.findByGroupName(groupName);
-		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
-		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
-		for (GroupBook book : books) {
-			readingRecords.addAll(book.getReaderProgressRecords());
+		Collection<GroupBook> groupBooks = bookRepo.findByReadingGroupsContains(group);
+		for (GroupBook groupBook : groupBooks) {
+			groupBook.removeReadingGroup(group);
+			bookRepo.save(groupBook);
 		}
-		readerProgressRecordRepo.deleteAll(readingRecords);
-		bookRepo.deleteAll(books);
+	
 		groupRepo.delete(group);
 		return "redirect:/groups";
 	}

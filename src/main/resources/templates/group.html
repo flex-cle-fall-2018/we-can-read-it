@@ -63,7 +63,7 @@
 			<div th:each="groupBook: ${groupBooks}">
 				<tr>
 					<th><i class="fas fa-book-reader"></i><a
-						th:href="@{groupBook(id=${groupBook.id})}"
+						th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}"
 						th:text="${groupBook.title}" id="stubborn"></a></th>
 					<th><span th:text="${groupBook.author}"></span></th>
 				</tr>

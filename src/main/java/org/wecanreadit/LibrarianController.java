@@ -27,7 +27,6 @@ public class LibrarianController {
 	@Resource
 	GroupBookRepository groupBookRepo;
 
-
 	@Resource
 	ReadingGroupRepository readingGroupRepo;
 
