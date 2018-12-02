@@ -87,6 +87,11 @@ input[type="submit"], button {
 	cursor: pointer;
 }
 
+strong{
+	color:cadetblue;
+}
+
+
 ul, ol {
 	list-style-type: none;
 }
@@ -121,4 +126,3 @@ textarea {
 		width: 100%;
 	}
 }
-

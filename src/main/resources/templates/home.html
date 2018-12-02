@@ -5,22 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" type="text/css" href="theme.css">
+<link rel="stylesheet" type="text/css" href="home.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
 <title>Home</title>
 </head>
 <body>
-	<main>
-	<img id="icon" src="icon.svg">
+	<main> <img id="icon" src="icon.svg">
 
 	<div class="panel">
 		<h1>Home Page</h1>
 	</div>
 
-	<div class="panel">
-		<a th:href="@{/ReaderLogin}">Reader Login</a></br>
-		<a th:href="@{/librarian-login}">Librarian Login</a></br>
-		<a th:href="@{/librarian-sign-up}">Librarian Sign Up</a>
-	</div>
+	<div id="logintiles">
 
+
+		<a th:href="@{/ReaderLogin}"><div class="panel tile">
+				<i class="fas fa-sign-in-alt icon1"></i></br></br>Reader Login
+			</div></a> <a th:href="@{/librarian-login}"><div class="panel tile">
+				<i class="fas fa-sign-in-alt icon1"></i></br></br>Librarian Login
+			</div></a> <a th:href="@{/librarian-sign-up}"><div class="panel tile">
+				<i class="fas fa-user-plus icon1"></i></br></br>Librarian Sign Up
+			</div></a>
+
+	</div>
 	</main>
 </body>
 </html>
