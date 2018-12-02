@@ -120,7 +120,7 @@ public class ReaderController {
 				.getRequest();
 	    	
 	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
-	    	Cookie librarianIdCookie = WebUtils.getCookie(request, "librarianId");
+	    	Cookie librarianIdCookie = WebUtils.getCookie(request, "LibrarianId");
 	    	
 	    	if (readerIdCookie != null) {
 	    		Long readerId = new Long(readerIdCookie.getValue());
@@ -315,11 +315,28 @@ public class ReaderController {
 
 	@RequestMapping("/reader/{readerId}/friends")
 	public String readerFriends(@PathVariable long readerId, Model model) {
-		model.addAttribute("reader", readerRepo.findById(readerId).get());
-		model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
-		model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
-		model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
-		return "readerFriends";
+		HttpServletRequest request =
+				((ServletRequestAttributes) RequestContextHolder
+		        .getRequestAttributes())
+				.getRequest();
+	    	
+	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+		
+	    	if (readerIdCookie != null) {
+	    		Long readerLoggedInId = new Long(readerIdCookie.getValue());
+	    		Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
+	    		Reader profileOwner = readerRepo.findById(readerId).get();
+	    		if(readerLoggedIn == profileOwner) {
+	    			model.addAttribute("reader", readerRepo.findById(readerId).get());
+	    			model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+	    			model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
+	    			model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
+	    			return "readerFriends";
+	    		} 
+	    	}
+	
+		return "notAuthorized";
 	}
+	    	
 
 }
