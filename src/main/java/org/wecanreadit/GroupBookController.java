@@ -43,7 +43,7 @@ public class GroupBookController {
 		if (result.isPresent()) {
 			model.addAttribute("groupBook", groupBook);	
 			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
-			return "groupBook";
+			return "librarianBook";
 		}
 		throw new GroupBookNotFoundException();
 	}

@@ -81,8 +81,7 @@ public class LibrarianController {
 	}
 
 	@RequestMapping("/addBook")
-	public String addBook(@CookieValue(value = "LibrarianId") long librarianId, long id, String book, String author,
-			String pageCount) {
+	public String addBook(@CookieValue(value = "LibrarianId") long librarianId, long id, String book, String author, String pageCount) {
 		int count = 0, pages = Integer.valueOf(pageCount);
 		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
 		Librarian lib = libRepo.findById(librarianId).get();
@@ -100,7 +99,6 @@ public class LibrarianController {
 	@ResponseBody
 	@PostMapping("/verifyLibrarianLogin")
 	public Librarian verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
-		String isLibrarian = "true";
 
 		Librarian librarian = librarianRepo.findByUsername(login.name);
 
@@ -110,6 +108,8 @@ public class LibrarianController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString());
 		response.addCookie(librarianIdCookie);
+		Cookie isALibrarian = new Cookie("isALibrarian", "true");
+		response.addCookie(isALibrarian);
 		return librarian;
 
 	}

@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Hind');
+
+#logintiles {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: auto;
+}
+
+.tile {
+	height: auto;
+	font-family: 'Hind', sans-serif;
+	font-size: 2rem;
+	text-align: center;
+	width: auto;
+	height: 200px;
+}
+
+a {
+	border: none;
+	width: 25%;
+}
+
+a:hover {
+	color: rebeccapurple;
+}
+
+.icon1 {
+	font-size: 4rem;
+}
+
+#heading, h1 {
+	text-align: center;
+	font-family: 'Hind', sans-serif;
+}
+
+@media only screen and (max-width: 769px) {
+	#logintiles {
+		flex-direction: column;
+		max-width: 70vw;
+	}
+	#heading {
+		max-width: 70vw;
+		margin: auto;
+	}
+	a {
+		width: auto;
+	}
+}
