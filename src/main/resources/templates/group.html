@@ -47,7 +47,7 @@
 
 	<section class="panel">
 
-		<h2>Delete a reader</h2>
+		<h2>Remove a reader from this group</h2>
 		<form method="GET" th:action="@{/deleteReader}">
 			<input type="text" placeholder="Reader's Username" name="username">
 			<input type="hidden" th:value="${group.id}" name="id"> <input

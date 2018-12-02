@@ -29,8 +29,9 @@ a:hover {
 	font-size: 4rem;
 }
 
-#heading {
+#heading, h1 {
 	text-align: center;
+	font-family: 'Hind', sans-serif;
 }
 
 @media only screen and (max-width: 769px) {

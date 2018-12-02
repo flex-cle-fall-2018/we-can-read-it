@@ -75,7 +75,7 @@ th {
 	word-wrap: break-word;
 }
 
-input[type="submit"], button {
+input[type="submit"], button, input[type="button"] {
 	font-size: 1rem;
 	background-color: #0ca8e5;
 	color: white;

@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -15,6 +16,7 @@ public class MessageBoardPost {
 	@GeneratedValue
 	private long id;
 
+	@Lob
 	private String content;
 
 	@ManyToOne
