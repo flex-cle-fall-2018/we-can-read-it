@@ -6,7 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="stylesheet" type="text/css" href="theme.css">
 <link rel="stylesheet" type="text/css" href="reader.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
 <title th:text="${reader.firstName}"></title>
 
 
@@ -22,45 +25,49 @@
 
 
 		<section class="panel">
+			<h2>Books</h2>
 			<div id="progressGridContainer">
-			<div th:each="readerProgressRecord: ${readerProgressRecords}" id="progressGridItem">
-				<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}" class="bookLink">
-				<span class="bookIcon"><i class="fa fa-book-open" aria-hidden="true"></i></span>
-				 <p th:text="${readerProgressRecord.groupBook.title}"></p>
+				<div th:each="readerProgressRecord: ${readerProgressRecords}"
+					id="progressGridItem">
+					<a th:href="@{readerProgressRecord(id=${readerProgressRecord.id})}"
+						class="bookLink"> <span class="bookIcon"><i
+							class="fa fa-book-open" aria-hidden="true"></i></span>
+						<p th:text="${readerProgressRecord.groupBook.title}"></p>
 
-				<p th:text="${readerProgressRecord.groupBook.author}"></p>
-				<p>
-					Finished: <span
-						th:text="${readerProgressRecord.stringDateFinished}"
-						id="dateFinishedParagraph"></span>
-				</p>
-				<p>
-					<span
-						th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span>
-				</p>
-				</a>
-				
-			</div>
+						<p th:text="${readerProgressRecord.groupBook.author}"></p>
+						<p>
+							Finished: <span
+								th:text="${readerProgressRecord.stringDateFinished}"
+								id="dateFinishedParagraph"></span>
+						</p>
+						<p>
+							<span
+								th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span>
+						</p>
+					</a>
+
+				</div>
 			</div>
 		</section>
 
 
 		<section class="panel" id="readerNav">
-			<a th:href="@{'/questionlist'}"  class='navLink'><i class="fas fa-users"></i>Groups</a>
-			<a th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
-				<i class="fas fa-user-friends"></i>Friends</a>
-				</section>
-				
-
-		<section class="panel">
-		Points: <span th:text="${reader.points}"></span>
+			<a th:href="@{'/questionlist'}" class='navLink'><i
+				class="fas fa-users"></i>Groups</a> <a
+				th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
+				<i class="fas fa-user-friends"></i>Friends
+			</a>
 		</section>
 
-		
+		<section class="panel">
+			Points: <span th:text="${reader.points}"></span>
+		</section>
 
-		
+		<button id="logout">Go Away</button>
 	</main>
-  <script src='./ProfilePutRequest.js'></script>
+	<script src='./ProfilePutRequest.js'></script>
+	<script src='./readerlogout.js'></script>
+
 
 </body>
 </html>

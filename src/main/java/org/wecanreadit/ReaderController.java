@@ -43,6 +43,9 @@ public class ReaderController {
 	@Resource
 	MessageBoardPostRepository postRepo;
 
+	@Resource
+	LibrarianRepository libRepo;
+
 	@RequestMapping("/questionlist")
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
 
@@ -51,7 +54,8 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/singlegroupquestions")
-	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId, @RequestParam(required = true) long id, Model model) {
+	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId,
+			@RequestParam(required = true) long id, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		model.addAttribute("group", group);
@@ -62,11 +66,13 @@ public class ReaderController {
 		model.addAttribute("reader", reader);
 		return "singlegroupquestions";
 	}
-	
+
 	@PostMapping("/createnewreader")
-	public String createNewReader(String username, String password, String firstName, String lastName) {
+	public String createNewReader(@CookieValue(value = "LibrarianId") long librarianId, String username,
+			String password, String firstName, String lastName) {
 		Reader newReader = new Reader(username, password, firstName, lastName);
-		readerRepo.save(newReader);		
+		newReader.setLibrarian(libRepo.findById(librarianId).get());
+		readerRepo.save(newReader);
 		return "redirect:/readers";
 	}
 
@@ -86,10 +92,11 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/readers")
-	public String findAllReader(Model model) {
-		model.addAttribute("readers", readerRepo.findAll());
-		model.addAttribute("groups", groupRepo.findAll());
-		model.addAttribute("books", bookRepo.findAll());
+	public String findAllReader(@CookieValue(value = "LibrarianId") long librarianId, Model model) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		model.addAttribute("readers", lib.getAllReaders());
+		model.addAttribute("groups", lib.getAllGroups());
+		model.addAttribute("books", lib.getBooks());
 		return "readers";
 	}
 
@@ -102,8 +109,9 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/groups")
-	public String findAllGroups(Model model) {
-		model.addAttribute("groups", groupRepo.findAll());
+	public String findAllGroups(@CookieValue(value = "LibrarianId") long librarianId, Model model) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		model.addAttribute("groups", lib.getAllGroups());
 		return "groups";
 	}
 
@@ -115,6 +123,7 @@ public class ReaderController {
 		model.addAttribute("goals", group.getGoals());
 		model.addAttribute("questions", group.getQuestions());
 		model.addAttribute("groupBooks", group.getAllGroupBooks());
+		model.addAttribute("posts", group.getPosts());
 		return "group";
 	}
 
@@ -167,8 +176,12 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGroup")
-	public String createGroup(@RequestParam(required = true) String groupName, String topic) {
-		groupRepo.save(new ReadingGroup(groupName, topic));
+	public String createGroup(@CookieValue(value = "LibrarianId") long librarianId,
+			@RequestParam(required = true) String groupName, String topic) {
+		Librarian lib = libRepo.findById(librarianId).get();
+		ReadingGroup group = new ReadingGroup(groupName, topic);
+		group.setLibrarian(lib);
+		groupRepo.save(group);
 		return "redirect:/groups";
 	}
 
@@ -177,7 +190,7 @@ public class ReaderController {
 		ReadingGroup group = groupRepo.findByGroupName(groupName);
 		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
 		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
-		for (GroupBook book: books) {
+		for (GroupBook book : books) {
 			readingRecords.addAll(book.getReaderProgressRecords());
 		}
 		readerProgressRecordRepo.deleteAll(readingRecords);
@@ -203,7 +216,7 @@ public class ReaderController {
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
-	
+
 	@PostMapping("/addbooktogroup")
 	public String addBookToGroup(String title, long groupId) {
 		ReadingGroup group = groupRepo.findById(groupId).get();

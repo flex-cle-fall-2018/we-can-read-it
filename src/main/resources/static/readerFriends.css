@@ -1,8 +1,5 @@
-
-
-
 #friends {
-	font-weight: 700;	
+	font-weight: 700;
 }
 
 #friends a {
@@ -47,29 +44,27 @@ i {
 	margin: 5px 0;
 }
 
-
-
 body.modal-open {
 	/* hide scrolling when modal open */
 	overflow: hidden;
-  }
-  
-  #backdrop {
+}
+
+#backdrop {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background: rgba(0,0,0,0.7);
+	background: rgba(0, 0, 0, 0.7);
 	display: none;
 	align-items: flex-end;
 	justify-content: center;
 }
-  
+
 .modal-open #backdrop {
 	display: flex;
 }
-  
+
 #modal {
 	width: 60vw;
 	height: 30vh;
@@ -79,16 +74,16 @@ body.modal-open {
 	box-shadow: 0 0 5px 5px #333;
 	margin-bottom: 60vh;
 }
-  
+
 #modal h4 {
 	float: left;
 }
- 
+
 .modal-button {
 	display: block;
 	margin: 25px auto 0 auto;
 }
-  
+
 #modal #modal-content {
 	clear: both;
 	padding-top: 1em;
@@ -100,31 +95,22 @@ body.modal-open {
 }
 
 @media only screen and (max-width: 900px) {
-    #friendsGridContainer {
-         grid-template-columns: repeat(3, 1fr);
-         
-    }
+	#friendsGridContainer {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 @media only screen and (max-width: 700px) {
-    #friendsGridContainer {
-         grid-template-columns: repeat(2, 1fr);
-         
-    }
+	#friendsGridContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media only screen and (max-width: 550px) {
-    #friendsGridContainer {
-         grid-template-columns: repeat(1, 1fr);
-         
-    }
-    
-    #addFriendButton {
-    	margin-top: 10px;
-    }
+	#friendsGridContainer {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	#addFriendButton {
+		margin-top: 10px;
+	}
 }
-
-
-
-
-
