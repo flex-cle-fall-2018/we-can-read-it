@@ -23,8 +23,8 @@
 		<h1 th:text="${reader.firstName}"></h1>
 
 
-
-		<section class="panel">
+		
+		<section class="panel" th:if="${isOwner or isFriend or isLibrarian}">
 			<h2>Books</h2>
 			<div id="progressGridContainer">
 				<div th:each="readerProgressRecord: ${readerProgressRecords}"
@@ -34,24 +34,23 @@
 							class="fa fa-book-open" aria-hidden="true"></i></span>
 						<p th:text="${readerProgressRecord.groupBook.title}"></p>
 
-						<p th:text="${readerProgressRecord.groupBook.author}"></p>
-						<p>
-							Finished: <span
-								th:text="${readerProgressRecord.stringDateFinished}"
-								id="dateFinishedParagraph"></span>
-						</p>
-						<p>
-							<span
-								th:text="${readerProgressRecord.groupBook.readingGroup.groupName}"></span>
-						</p>
-					</a>
 
-				</div>
+				<p th:text="${readerProgressRecord.groupBook.author}"></p>
+				<p>
+					Finished: <span
+						th:text="${readerProgressRecord.stringDateFinished}"
+						id="dateFinishedParagraph"></span>
+				</p>
+				
+				</a>
+				
+			</div>
+
 			</div>
 		</section>
 
 
-		<section class="panel" id="readerNav">
+		<section class="panel" id="readerNav" th:if="${isOwner}">
 			<a th:href="@{'/questionlist'}" class='navLink'><i
 				class="fas fa-users"></i>Groups</a> <a
 				th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
@@ -59,15 +58,19 @@
 			</a>
 		</section>
 
-		<section class="panel">
+		<section class="panel" th:if="${isOwner or isFriend or isLibrarian}">
 			Points: <span th:text="${reader.points}"></span>
 		</section>
+		
+		<!-- <section class="panel" th:if="not ${isOwner or isLibrarian or isFriend}">
+			<button>Add Friend</button>
+		</section> -->
 
-		<button id="logout">Go Away</button>
+		<button id="logout">Logout</button>
 	</main>
 	<script src='./ProfilePutRequest.js'></script>
 	<script src='./readerlogout.js'></script>
-
+	
 
 </body>
 </html>

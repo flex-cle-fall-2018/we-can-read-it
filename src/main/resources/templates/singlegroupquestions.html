@@ -46,8 +46,9 @@
 			<div th:each="book: ${books}">
 				<tr>
 					<th><i class="fas fa-book-reader"></i><a
-						th:href="@{readerViewGroupBook(id=${book.id})}"
-						th:text="${book.title}" id="stubborn"></a></th>
+						th:href="@{'readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}" th:text="${book.title}"
+						id="stubborn"></a></th>
+
 					<th><span th:text="${book.author}"></span></th>
 				</tr>
 
@@ -120,6 +121,8 @@
 		</form>
 
 	</div>
+	<button id="logout">Logout</button>
 	</main>
+	<script src='./readerlogout.js'></script>
 </body>
 </html>

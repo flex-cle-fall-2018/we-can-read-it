@@ -45,7 +45,6 @@ public class ProfileController {
 		Cookie isALibrarian = new Cookie("isALibrarian", "false");
 		response.addCookie(isALibrarian);
 		return reader;
-
 	}
 
 	public static class LoginRequest {
