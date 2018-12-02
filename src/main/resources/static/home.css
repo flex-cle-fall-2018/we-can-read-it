@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Sedgwick+Ave');
+@import url('https://fonts.googleapis.com/css?family=Hind');
 
 #logintiles {
 	display: flex;
@@ -9,14 +9,16 @@
 
 .tile {
 	height: auto;
-	font-family: 'Sedgwick Ave', cursive;
+	font-family: 'Hind', sans-serif;
 	font-size: 2rem;
 	text-align: center;
 	width: auto;
+	height: 200px;
 }
 
 a {
 	border: none;
+	width: 25%;
 }
 
 a:hover {
@@ -24,7 +26,7 @@ a:hover {
 }
 
 .icon1 {
-	font-size: 5rem;
+	font-size: 4rem;
 }
 
 #heading {
@@ -39,5 +41,8 @@ a:hover {
 	#heading {
 		max-width: 70vw;
 		margin: auto;
+	}
+	a {
+		width: auto;
 	}
 }
