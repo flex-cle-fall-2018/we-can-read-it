@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 @Controller
 public class ReaderController {
@@ -102,9 +108,48 @@ public class ReaderController {
 
 	@RequestMapping("/reader")
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
-		Reader reader = readerRepo.findById(id).get();
-		model.addAttribute("reader", reader);
-		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(reader));
+		boolean isOwner = false;
+		boolean isFriend = false;
+		boolean  isLibrarian = false;
+		
+		Reader profileOwner = readerRepo.findById(id).get();
+		
+		HttpServletRequest request =
+				((ServletRequestAttributes) RequestContextHolder
+		        .getRequestAttributes())
+				.getRequest();
+	    	
+	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+	    	Cookie librarianIdCookie = WebUtils.getCookie(request, "LibrarianId");
+	    	
+	    	if (readerIdCookie != null) {
+	    		Long readerId = new Long(readerIdCookie.getValue());
+	    		Reader readerLoggedIn = readerRepo.findById(readerId).get();
+	    		if(readerLoggedIn == profileOwner) {
+	    			isOwner = true;
+	    		} else {
+	    			Collection<Reader> ownerFriends = profileOwner.getFriends();
+	    			if (ownerFriends.contains(readerLoggedIn)) {
+	    				isFriend = true;
+	    			}
+	    		}
+	    	}
+	    	
+	    	if (librarianIdCookie != null) {
+	    		Long librarianId = new Long(librarianIdCookie.getValue());
+	    		Librarian librarian = libRepo.findById(librarianId).get();
+	    		Collection<Reader> librarianReaders = librarian.getAllReaders();
+	    		if (librarianReaders.contains(profileOwner)) {
+	    			isLibrarian = true;
+	    		}
+	    	}
+	    	
+	    	
+	    model.addAttribute("isOwner", isOwner);	
+	    model.addAttribute("isFriend", isFriend);
+		model.addAttribute("isLibrarian", isLibrarian);
+		model.addAttribute("reader", profileOwner);
+		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(profileOwner));
 		return "reader";
 	}
 
@@ -270,11 +315,28 @@ public class ReaderController {
 
 	@RequestMapping("/reader/{readerId}/friends")
 	public String readerFriends(@PathVariable long readerId, Model model) {
-		model.addAttribute("reader", readerRepo.findById(readerId).get());
-		model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
-		model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
-		model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
-		return "readerFriends";
+		HttpServletRequest request =
+				((ServletRequestAttributes) RequestContextHolder
+		        .getRequestAttributes())
+				.getRequest();
+	    	
+	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+		
+	    	if (readerIdCookie != null) {
+	    		Long readerLoggedInId = new Long(readerIdCookie.getValue());
+	    		Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
+	    		Reader profileOwner = readerRepo.findById(readerId).get();
+	    		if(readerLoggedIn == profileOwner) {
+	    			model.addAttribute("reader", readerRepo.findById(readerId).get());
+	    			model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+	    			model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
+	    			model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
+	    			return "readerFriends";
+	    		} 
+	    	}
+	
+		return "notAuthorized";
 	}
+	    	
 
 }
