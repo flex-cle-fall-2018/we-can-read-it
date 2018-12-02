@@ -3,8 +3,6 @@ package org.wecanreadit;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.Collection;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +15,13 @@ public class LibrarianTest {
 	@Before
 	public void setup() {
 		librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password", "favoriteGenre");
-		
+
 	}
-	
 
 	@Test
 	public void shouldBeAbleToCreateLibrarian() {
-		Librarian librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password", "favoriteGenre");
+		Librarian librarian = new Librarian("firstName", "lastName", "library", "email", "username", "password",
+				"favoriteGenre");
 
 	}
 
@@ -52,7 +50,8 @@ public class LibrarianTest {
 		String email = librarian.getEmail();
 		assertThat(email, is("email"));
 	}
-	@Test 
+
+	@Test
 	public void shouldBeAbleToGetUsername() {
 		String username = librarian.getUsername();
 		assertThat(username, is("username"));
@@ -69,12 +68,5 @@ public class LibrarianTest {
 		String favoriteGenre = librarian.getFavoriteGenre();
 		assertThat(favoriteGenre, is("favoriteGenre"));
 	}
-			
-	@Test 
-	public void shouldBeAbleToAddBooksToGroup() {
-		Librarian readingGroup = new Librarian();
-		GroupBook book = new GroupBook();
-		readingGroup.addBook(book);
-	
-	}
+
 }

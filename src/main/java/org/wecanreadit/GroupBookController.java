@@ -12,17 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GroupBookController {
-	
+
 	@Resource
 	GroupBookRepository groupBookRepo;
 	
 	@Resource
 	ReadingGroupRepository groupRepo;
 
+
 	
 	@RequestMapping("/group/{groupId}/groupBook/{groupBookId}")
 	public String findOneBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
 		Optional<GroupBook> result = groupBookRepo.findById(groupBookId);
+
 		GroupBook groupBook = result.get();
 		ReadingGroup group = groupRepo.findById(groupId).get();
 		if (result.isPresent()) {
@@ -33,9 +35,12 @@ public class GroupBookController {
 		}
 		throw new GroupBookNotFoundException();
 	}
-	
-	@RequestMapping("/groupBook")
-	public String findOneBook(@RequestParam long id, Model model) throws GroupBookNotFoundException {
+
+
+	@RequestMapping("/readerViewGroupBook")
+	public String findOneReaderGroupBook(@RequestParam(value = "id") long id, Model model)
+			throws GroupBookNotFoundException {
+
 		Optional<GroupBook> result = groupBookRepo.findById(id);
 		GroupBook groupBook = result.get();
 		if (result.isPresent()) {
@@ -59,7 +64,7 @@ public class GroupBookController {
 		}
 		throw new GroupBookNotFoundException();
 	}
-	
+
 	@RequestMapping("/changePoints")
 	public String changePointValue(long id, int points, long groupId) {
 		GroupBook result = groupBookRepo.findById(id).get();
@@ -75,12 +80,5 @@ public class GroupBookController {
 		groupBookRepo.save(result);
 		return "redirect:/groupBook?id=" + id;
 	}
-//	@RequestMapping("/pageCount")
-//	public void getPageCount(@RequestParam(value = "id") long id, int pageCount) {
-//		int count = 0;
-//		while(pageCount > 100) {
-//			pageCount -= 100;
-//			count ++;
-//		}
-//	}
+
 }

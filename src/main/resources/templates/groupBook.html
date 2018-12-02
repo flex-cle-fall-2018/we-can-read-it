@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,21 +12,11 @@
 <body>
 <main>
 	<img id = "icon" src="../../../icon.svg">
-	<div class="panel">
-	<h1 th:text="${groupBook.title}"></h1>
-	<h2 th:text="${groupBook.author}"></h2>
-	</div>
-	
-	 
-	</div>
-	<div class="panel">
-	<h2>Members who have finished this book:</h2>
-	<div class="gridContainer" id="readerProgressGrid">
-	<div th:each="readerProgressRecord: ${readerProgressRecords}" class="readerProgressRecordsContainer">
-	<p th:text="${readerProgressRecord.reader.username}"></p><p th:text="${readerProgressRecord.stringDateFinished}"></p>
-	</div>
-	</div>
 
+	<div class="panel">
+		<h1 th:text="${groupBook.title}"></h1>
+		<h2 th:text="${groupBook.author}"></h2>
+	</div>
 	
 	<form method="POST" th:action="@{/changePoints}">
 		<input type="number" name="points" placeholder="Enter Point Value">
@@ -35,13 +26,23 @@
 	</form>
 	<span th:text="${groupBook.points}"></span>
 
-
 	<a th:href="@{../../../group(id=${group.id})}">Back to Group</a>
 	
+	<div class="panel">
+		<h2>Members who have finished this book:</h2>
+		<div class="gridContainer" id="readerProgressGrid">
+			<div th:each="readerProgressRecord: ${readerProgressRecords}"
+				class="readerProgressRecordsContainer">
+				<p th:text="${readerProgressRecord.reader.username}"></p>
+				<p th:text="${readerProgressRecord.stringDateFinished}"></p>
+			</div>
+		</div>
 	</div>
-	
+
 	</main>
+
 	
 	<script src='/groupBook.js'></script>
+
 </body>
 </html>

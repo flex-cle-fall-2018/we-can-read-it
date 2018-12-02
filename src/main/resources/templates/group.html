@@ -164,16 +164,18 @@
 
 		</div>
 
-		<!--  <form method="POST" th:action="@{/savePost}">
+		<!--  
+		<form method="POST" th:action="@{/savePost}">
 			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
 				required></textarea>
 			<input type="hidden" th:value="${group.id}" name="groupid"> <input
 				type="submit" id="messageBoardSubmit">
 
-		</form>-->
+		</form>
+		-->
 	</div>
 
-<!--
+	<!--
 	<section class="panel">
 		<h2>Create a book</h2>
 		<div th:each="group: ${groups}">
@@ -206,8 +208,7 @@
 -->
 
 	<section class="panel">
-		<a href="http://localhost:8080/groups">Back to Groups</a></br> <a
-			href="http://localhost:8080/readers">Back to Readers</a>
+		<a href="http://localhost:8080/readers">Back to Readers</a>
 	</section>
 	</main>
 	<script src='./group.js'></script>

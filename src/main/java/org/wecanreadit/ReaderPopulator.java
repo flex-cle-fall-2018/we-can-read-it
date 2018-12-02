@@ -29,6 +29,9 @@ public class ReaderPopulator implements CommandLineRunner {
 	@Resource
 	private ReaderProgressRecordRepository readerBookRepo;
 
+	@Resource
+	private LibrarianRepository librarianRepo;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
@@ -83,6 +86,21 @@ public class ReaderPopulator implements CommandLineRunner {
 		readerRepo.save(zack);
 		readerRepo.save(shane);
 		readerRepo.save(doug);
+
+		Librarian mike = new Librarian("Mike", "Myers", "Beachwood", "waynesworld.com", "waynesworld1", "password",
+				"action");
+		Librarian angie = new Librarian("Angie", "Smith", "Heights", "smithtown.com", "smittylady5", "password5",
+				"biography");
+
+		Librarian ashley = new Librarian("Ashley", "Stanley", "South Euclid-Lyndhurst", "sheslays.com", "ash321",
+				"password91", "science fiction");
+
+		mike = librarianRepo.save(mike);
+		angie = librarianRepo.save(angie);
+		ashley = librarianRepo.save(ashley);
+		
+		shane.setLibrarian(mike);
+		readerRepo.save(shane);
 	}
 
 }

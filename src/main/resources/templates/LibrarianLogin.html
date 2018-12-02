@@ -4,23 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Log In</title>
 <link rel="stylesheet" type="text/css" href="theme.css">
-<title>Home</title>
 </head>
 <body>
-	<main>
-	<img id="icon" src="icon.svg">
+	<main> <img id="icon" src="icon.svg">
 
 	<div class="panel">
-		<h1>Home Page</h1>
-	</div>
 
-	<div class="panel">
-		<a th:href="@{/ReaderLogin}">Reader Login</a></br>
-		<a th:href="@{/librarian-login}">Librarian Login</a></br>
-		<a th:href="@{/librarian-sign-up}">Librarian Sign Up</a>
+		<input type="text" placeholder="User Name" id="username"> <input
+			type="text" placeholder="Password" id="password">
+		<button id="submit">Enter</button>
 	</div>
 
 	</main>
+	<script src="librarianLogin.js"></script>
 </body>
 </html>

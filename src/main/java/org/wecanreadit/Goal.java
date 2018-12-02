@@ -16,7 +16,7 @@ public class Goal {
 
 	private String name;
 
-	@ManyToMany(mappedBy ="goals")
+	@ManyToMany(mappedBy = "goals")
 	private Collection<ReadingGroup> groups;
 
 	Goal() {

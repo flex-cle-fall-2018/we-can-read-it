@@ -1,13 +1,10 @@
 package org.wecanreadit;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,14 +21,16 @@ public class Librarian {
 	private String password;
 	private String favoriteGenre;
 	private String groupName;
-	private String topic;
-	
-	@ManyToMany
-	private Collection<Reader> readingGroups;
-	
-	@ManyToMany(mappedBy = "readingGroups")
-	private Collection<GroupBook> groupBooks;
 
+
+	@OneToMany(mappedBy = "librarian")
+	private Collection<Reader> readers;
+
+	@OneToMany(mappedBy = "librarian")
+	private Collection<GroupBook> books;
+
+	@OneToMany(mappedBy = "librarian")
+	private Collection<ReadingGroup> groups;
 
 	public Librarian() {
 
@@ -47,13 +46,10 @@ public class Librarian {
 		this.password = password;
 		this.favoriteGenre = favoriteGenre;
 	}
-	
 
-	
 	public Long getId() {
 		return id;
 	}
-
 
 	public String getFirstName() {
 
@@ -86,26 +82,22 @@ public class Librarian {
 	public String getFavoriteGenre() {
 		return favoriteGenre;
 	}
-		
 
-
-	public String getGroupName() {
-		
-		return groupName;
+	public Collection<ReadingGroup> getAllGroups() {
+		return groups;
 	}
 
-public String addBook() {
-	return addBook();
-}
+	public Collection<Reader> getAllReaders() {
+		return readers;
+	}
 
-public void addBook(GroupBook book) {
-	
-	
-}
+	public Collection<GroupBook> getBooks() {
+		return books;
+	}
 
-public static Object findAll() {
-	// TODO Auto-generated method stub
-	return null;
-}
+	public String getGroupName() {
+
+		return groupName;
+	}
 
 }

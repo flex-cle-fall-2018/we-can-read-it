@@ -48,6 +48,7 @@
 					<th><i class="fas fa-book-reader"></i><a
 						th:href="@{'readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}" th:text="${book.title}"
 						id="stubborn"></a></th>
+
 					<th><span th:text="${book.author}"></span></th>
 				</tr>
 
@@ -103,13 +104,13 @@
 
 		<h2>Group Message Board</h2>
 
-			<div class="panel" th:each="post: ${posts}">
-					<strong th:text="${post.getReader().username}"></strong>
-					<p th:text="${post.content}"></p>
-			</div>
+		<div class="panel" th:each="post: ${posts}">
+			<strong th:text="${post.getReader().username}"></strong>
+			<p th:text="${post.content}"></p>
+		</div>
 
 
-		
+
 
 		<form method="POST" th:action="@{/savePost}">
 			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
@@ -120,6 +121,8 @@
 		</form>
 
 	</div>
+	<script src='./readerlogout.js'></script>
+	<button id="logout">Logout</button>
 	</main>
 </body>
 </html>

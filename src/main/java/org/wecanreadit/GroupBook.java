@@ -16,15 +16,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class GroupBook {
 
-	/*
-	 * This class allows a book to be created within a reading group. Note there is
-	 * currently no shared repository for librarians to access books
-	 * (11-17-18), so the librarian would need to create separate groupBooks for each
-	 * group
-	 */
-	
-	/*test*/
-
 	@Id
 	@GeneratedValue
 	private long id;
@@ -36,6 +27,9 @@ public class GroupBook {
 	@JsonIgnore
 	@ManyToMany
 	private Collection<ReadingGroup> readingGroups;
+
+	@ManyToOne
+	private Librarian librarian;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "groupBook")
@@ -50,11 +44,11 @@ public class GroupBook {
 		this.author = author;
 		this.readingGroups = new HashSet<>(Arrays.asList(readingGroups));
 	}
-	
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
@@ -101,9 +95,14 @@ public class GroupBook {
 		return true;
 	}
 
+
 	public void removeReadingGroup(ReadingGroup group) {
 		readingGroups.remove(group);
 		
+
+	public void setLibrarian(Librarian lib) {
+		this.librarian = lib;
+
 	}
 
 }

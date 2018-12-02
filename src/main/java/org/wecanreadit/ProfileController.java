@@ -33,7 +33,7 @@ public class ProfileController {
 
 	// Add custom Exceptions
 	@PostMapping("/verifyLogin")
-	public LoginRequest verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
+	public Reader verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
 		Reader reader = readerRepo.findByUsername(login.name);
 
 		if (!reader.getPassword().equals(login.password)) {
@@ -42,7 +42,7 @@ public class ProfileController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie readerIdCookie = new Cookie("readerId", reader.getId().toString());
 		response.addCookie(readerIdCookie);
-		return login;
+		return reader;
 
 	}
 
