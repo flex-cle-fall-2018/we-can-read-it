@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ReaderRestController {
-	
+
 	@Resource
 	ReaderRepository readerRepo;
-	
+
 	@PutMapping("/addFriend")
 	public NewFriend addFriend(@RequestBody NewFriend newFriend) {
 		Reader reader = readerRepo.findById(newFriend.readerId).get();
 		Reader friend = readerRepo.findByUsername(newFriend.friendUsername);
-		if(friend == null) {
+		if (friend == null) {
 			return null;
 		} else if (friend.getUsername().equals(reader.getUsername())) {
 			newFriend.isUser = true;
@@ -57,7 +57,7 @@ public class ReaderRestController {
 		newFriend.pendingFriend = true;
 		return newFriend;
 	}
-	
+
 	public static class NewFriend {
 		public String friendUsername;
 		public long readerId;
@@ -66,22 +66,19 @@ public class ReaderRestController {
 		public boolean pendingFriend = false;
 		public boolean isUser = false;
 	}
-	
+
 	@PutMapping("/declineFriend")
 	public DeclineFriend declineFriend(@RequestBody DeclineFriend declineFriend) {
 		Reader reader = readerRepo.findById(declineFriend.readerId).get();
 		Reader friend = readerRepo.findByUsername(declineFriend.friendUsername);
-		Collection<Reader> friendPendingFriends = friend.getPendingFriends();
 		friend.getPendingFriends().remove(reader);
 		readerRepo.save(friend);
 		return declineFriend;
 	}
-	
+
 	public static class DeclineFriend {
 		public String friendUsername;
 		public long readerId;
 	}
-	
-	
-	
+
 }

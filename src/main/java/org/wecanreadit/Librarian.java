@@ -107,9 +107,4 @@ public class Librarian {
 
 	}
 
-	public static Object findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

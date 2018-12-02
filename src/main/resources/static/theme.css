@@ -70,7 +70,7 @@ th {
 	width: 400px
 }
 
-.answer, .question, .goal, .post{
+.answer, .question, .goal, .post {
 	max-width: 600px;
 	word-wrap: break-word;
 }
@@ -84,7 +84,7 @@ input[type="submit"], button {
 	font-weight: 700;
 	padding: 5px 20px;
 	border: none;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 ul, ol {
@@ -96,7 +96,6 @@ ul, ol {
 	grid-template-columns: repeat(3, 1fr);
 	font-size: 1.15rem;
 	text-align: center;
-	
 }
 
 textarea {
@@ -105,26 +104,20 @@ textarea {
 }
 
 #messageBoardSubmit {
-	
 	margin-top: 10px;
 }
 
-
-
 @media only screen and (max-width: 700px) {
-     .gridContainer {
-         grid-template-columns: repeat(2, 1fr);
-         
-    }
+	.gridContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media only screen and (max-width: 550px) {
-     .gridContainer {
-         grid-template-columns: repeat(1, 1fr);
-         
-    }
-    
-    textarea {
-    	width: 100%;
-    }
+	.gridContainer {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	textarea {
+		width: 100%;
+	}
 }

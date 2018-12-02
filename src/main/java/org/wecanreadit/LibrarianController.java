@@ -28,13 +28,12 @@ public class LibrarianController {
 	@Resource
 	GroupBookRepository groupBookRepo;
 
-
 	@Resource
 	ReadingGroupRepository readingGroupRepo;
 
 	@Resource
 	ReaderRepository readerRepo;
-	
+
 	@Resource
 	LibrarianRepository libRepo;
 
@@ -46,12 +45,6 @@ public class LibrarianController {
 			return "librarian";
 		}
 		throw new LibrarianNotFoundException();
-	}
-
-	@RequestMapping("/show-librarians")
-	public String findAllLibrarians(Model model) {
-		model.addAttribute("librarians", librarianRepo.findAll());
-		return "librarians";
 	}
 
 	@PostMapping("/add-librarian")
@@ -88,7 +81,8 @@ public class LibrarianController {
 	}
 
 	@RequestMapping("/addBook")
-	public String addBook(@CookieValue(value = "LibrarianId") long librarianId, long id, String book, String author, String pageCount) {
+	public String addBook(@CookieValue(value = "LibrarianId") long librarianId, long id, String book, String author,
+			String pageCount) {
 		int count = 0, pages = Integer.valueOf(pageCount);
 		GroupBook book1 = new GroupBook(book, author, groupRepo.findById(id).get());
 		Librarian lib = libRepo.findById(librarianId).get();
@@ -102,41 +96,29 @@ public class LibrarianController {
 		return "redirect:/group?id=" + id;
 	}
 
-	@RequestMapping("librarian/addNewReader")
-	public String addNewReader(Reader reader) {
-		if (reader.getFirstName() != null && reader.getLastName() != null && reader.getUsername() != null
-				&& reader.getPassword() != null) {
-			readerRepo.save(reader);
-			return "Worked";
-		} else {
-			return "Nerp";
+	// Add custom Exceptions
+	@ResponseBody
+	@PostMapping("/verifyLibrarianLogin")
+	public Librarian verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
+		String isLibrarian = "true";
+
+		Librarian librarian = librarianRepo.findByUsername(login.name);
+
+		if (!librarian.getPassword().equals(login.password)) {
+			throw new Exception();
 		}
+		// Makes new cookie, takes in string,string name, id
+		Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString());
+		response.addCookie(librarianIdCookie);
+		Cookie isALibrarian = new Cookie("isALibrarian", isLibrarian);
+		response.addCookie(isALibrarian);
+		return librarian;
 
 	}
-	
-    //Add custom Exceptions
-	@ResponseBody
-    @PostMapping("/verifyLibrarianLogin")
-    public Librarian verifyLogin(
-    	@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
-    	String isLibrarian = "true";
-    	
-    	Librarian librarian = librarianRepo.findByUsername(login.name);
-    	
-    	if (!librarian.getPassword().equals(login.password)) {
-    		throw new Exception();
-    	}
-    	//Makes new cookie, takes in string,string name, id
-    	Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString()); 
-    	response.addCookie(librarianIdCookie);
-    	Cookie isALibrarian = new Cookie("isALibrarian", isLibrarian);
-    	response.addCookie(isALibrarian);
-    	return librarian;
-    	
-    }
-    public static class LoginRequest {
-    	public String name;
-    	public String password;
-    }	
+
+	public static class LoginRequest {
+		public String name;
+		public String password;
+	}
 
 }

@@ -42,7 +42,7 @@ public class ReaderController {
 
 	@Resource
 	MessageBoardPostRepository postRepo;
-	
+
 	@Resource
 	LibrarianRepository libRepo;
 
@@ -68,7 +68,8 @@ public class ReaderController {
 	}
 
 	@PostMapping("/createnewreader")
-	public String createNewReader(@CookieValue(value = "LibrarianId") long librarianId,String username, String password, String firstName, String lastName) {
+	public String createNewReader(@CookieValue(value = "LibrarianId") long librarianId, String username,
+			String password, String firstName, String lastName) {
 		Reader newReader = new Reader(username, password, firstName, lastName);
 		newReader.setLibrarian(libRepo.findById(librarianId).get());
 		readerRepo.save(newReader);
@@ -175,7 +176,8 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGroup")
-	public String createGroup(@CookieValue(value = "LibrarianId") long librarianId, @RequestParam(required = true) String groupName, String topic) {
+	public String createGroup(@CookieValue(value = "LibrarianId") long librarianId,
+			@RequestParam(required = true) String groupName, String topic) {
 		Librarian lib = libRepo.findById(librarianId).get();
 		ReadingGroup group = new ReadingGroup(groupName, topic);
 		group.setLibrarian(lib);
