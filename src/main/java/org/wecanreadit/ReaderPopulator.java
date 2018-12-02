@@ -80,11 +80,11 @@ public class ReaderPopulator implements CommandLineRunner {
 		vi.getPendingFriends().add(shane);
 		shane.getFriends().add(doug);
 		doug.getFriends().add(shane);
-		readerRepo.save(joe);
-		readerRepo.save(vi);
-		readerRepo.save(zack);
-		readerRepo.save(shane);
-		readerRepo.save(doug);
+		joe = readerRepo.save(joe);
+		vi = readerRepo.save(vi);
+		zack = readerRepo.save(zack);
+		shane = readerRepo.save(shane);
+		doug = readerRepo.save(doug);
 
 		Librarian mike = new Librarian("Mike", "Myers", "Beachwood", "waynesworld.com", "waynesworld1", "password",
 				"action");
@@ -100,6 +100,10 @@ public class ReaderPopulator implements CommandLineRunner {
 		mike = librarianRepo.save(mike);
 		angie = librarianRepo.save(angie);
 		ashley = librarianRepo.save(ashley);
+
+		
+		shane.setLibrarian(mike);
+		shane = readerRepo.save(shane);
 
 	}
 
