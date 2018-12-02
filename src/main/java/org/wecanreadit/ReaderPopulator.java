@@ -46,7 +46,6 @@ public class ReaderPopulator implements CommandLineRunner {
 		joe = readerRepo.save(joe);
 		vi = readerRepo.save(vi);
 		doug = readerRepo.save(doug);
-		
 
 		ReadingGroup test1 = new ReadingGroup("Group 1", "Everything", shane, zack, joe);
 		ReadingGroup test2 = new ReadingGroup("Group 2", "Everything", vi, doug, joe, shane);
@@ -94,16 +93,14 @@ public class ReaderPopulator implements CommandLineRunner {
 
 		Librarian ashley = new Librarian("Ashley", "Stanley", "South Euclid-Lyndhurst", "sheslays.com", "ash321",
 				"password91", "science fiction");
-		
+
 		Librarian testLib = new Librarian("Test", "Test", "Test", "Test", "Test", "Test", "Test");
 
 		testLib = librarianRepo.save(testLib);
 		mike = librarianRepo.save(mike);
 		angie = librarianRepo.save(angie);
 		ashley = librarianRepo.save(ashley);
-		
-		shane.setLibrarian(mike);
-		readerRepo.save(shane);
+
 	}
 
 }
