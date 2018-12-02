@@ -56,13 +56,7 @@ public class LibrarianControllerTest {
 		underTest.findOneLibrarian(librarianId, model);
 		verify(model).addAttribute("librarian",librarian);
 }
-	@Test
-	public void shouldBeAbleToAddAllLibrarians() {
-		Collection<Librarian> allLibrarians = asList(librarian, librarian2);
-		when(librarianRepo.findAll()).thenReturn(allLibrarians);
-		underTest.findAllLibrarians(model);
-		verify(model).addAttribute("librarians", allLibrarians);
-	}
+	
 	
 	
 	

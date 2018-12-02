@@ -26,7 +26,6 @@ public class Reader {
 	private String bio;
 	private String profileUrl;
 	private int points = 0;
-	
 
 	@ManyToOne
 	private Librarian librarian;
@@ -36,7 +35,6 @@ public class Reader {
 
 	@OneToMany(mappedBy = "reader")
 	private Collection<DiscussionAnswer> answers;
-
 
 	@ManyToMany(mappedBy = "readingGroup")
 	private Collection<ReadingGroup> groups;
@@ -118,7 +116,7 @@ public class Reader {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
@@ -126,7 +124,7 @@ public class Reader {
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
+
 	public void addPoints(int points) {
 		this.points += points;
 	}
@@ -181,15 +179,14 @@ public class Reader {
 	public void savePost(MessageBoardPost post) {
 		posts.add(post);
 	}
-	
+
 	@JsonIgnore
 	public Collection<ReadingGroup> getGroups() {
 		return groups;
 	}
-	
+
 	public void setLibrarian(Librarian lib) {
 		this.librarian = lib;
 	}
-
 
 }
