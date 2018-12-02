@@ -27,9 +27,9 @@ public class Librarian {
 	private String topic;
 	
 	@ManyToMany
-	private Collection<Reader> readingGroup;
+	private Collection<Reader> readingGroups;
 	
-	@OneToMany(mappedBy = "readingGroup")
+	@ManyToMany(mappedBy = "readingGroups")
 	private Collection<GroupBook> groupBooks;
 
 
@@ -48,11 +48,7 @@ public class Librarian {
 		this.favoriteGenre = favoriteGenre;
 	}
 	
-	public void ReadingGroup(String groupName, String topic, Reader... members) {
-		this.groupName = groupName;
-		this.topic = topic;
-		this.readingGroup = new HashSet<>(Arrays.asList(members));
-	}
+
 	
 	public Long getId() {
 		return id;
@@ -91,9 +87,7 @@ public class Librarian {
 		return favoriteGenre;
 	}
 		
-	public Collection<Reader> getAllMembers() {
-		return readingGroup;
-	}
+
 
 	public String getGroupName() {
 		

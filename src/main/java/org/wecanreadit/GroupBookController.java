@@ -22,7 +22,6 @@ public class GroupBookController {
 		GroupBook groupBook = result.get();
 		if (result.isPresent()) {
 			model.addAttribute("groupBook", groupBook);
-			model.addAttribute("group", groupBook.getReadingGroup());
 			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
 			return "groupBook";
 		}
@@ -35,7 +34,6 @@ public class GroupBookController {
 		GroupBook groupBook = result.get();
 		if (result.isPresent()) {
 			model.addAttribute("groupBook", groupBook);
-			model.addAttribute("group", groupBook.getReadingGroup());
 			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
 			return "readerViewGroupBook";
 		}

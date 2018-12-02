@@ -16,7 +16,7 @@ public interface ReaderProgressRecordRepository extends CrudRepository<ReaderPro
 			// connected to Group via GroupBook
 			// sorted by GROUP
 	
-	default Collection<ReaderProgressRecord> findByReaderSortByGroup(Reader reader) {
+/*	default Collection<ReaderProgressRecord> findByReaderSortByGroup(Reader reader) {
 		
 		Collection<ReaderProgressRecord> progressRecords = findByReader(reader);
 		
@@ -25,5 +25,5 @@ public interface ReaderProgressRecordRepository extends CrudRepository<ReaderPro
 				recordA.getGroupBook().getReadingGroup().getGroupName()
 					.compareTo(recordB.getGroupBook().getReadingGroup().getGroupName()))
 		    .collect(Collectors.toList());
-	}
+	}*/
 }
