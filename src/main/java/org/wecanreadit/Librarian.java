@@ -99,12 +99,4 @@ public class Librarian {
 		return groupName;
 	}
 
-	public String addBook() {
-		return addBook();
-	}
-
-	public void addBook(GroupBook book) {
-
-	}
-
 }
