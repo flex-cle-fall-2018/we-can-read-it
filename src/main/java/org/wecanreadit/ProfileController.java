@@ -42,6 +42,8 @@ public class ProfileController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie readerIdCookie = new Cookie("readerId", reader.getId().toString());
 		response.addCookie(readerIdCookie);
+		Cookie isALibrarian = new Cookie("isALibrarian", "false");
+		response.addCookie(isALibrarian);
 		return reader;
 
 	}
