@@ -19,10 +19,11 @@
 a {
 	border: none;
 	width: 25%;
+	color: rebeccapurple;
 }
 
 a:hover {
-	color: rebeccapurple;
+	color: purple;
 }
 
 .icon1 {
