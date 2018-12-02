@@ -264,6 +264,7 @@ public class ReaderController {
 	public String removeReaderProgressRecord(@RequestParam long id) {
 		Optional<ReaderProgressRecord> readerProgressRecord = readerProgressRecordRepo.findById(id);
 		ReaderProgressRecord readerProgressResult = readerProgressRecord.get();
+		readerProgressResult.getReader().addPoints(-(readerProgressResult.getReader().getPoints()));
 		long readerId = readerProgressResult.getReader().getId();
 		readerProgressRecordRepo.delete(readerProgressResult);
 		return "redirect:/reader?id=" + readerId;
