@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,8 +47,8 @@ public class ReaderProgressRecordRestController {
 	}
 
 	@PutMapping("/addReaderProgressRecord")
-	public ReaderProgressRecord addReaderProgressRecord(@RequestBody NewReaderProgressRecord newReaderProgressRecord) {
-		Optional<Reader> reader = readerRepo.findById(newReaderProgressRecord.readerId);
+	public ReaderProgressRecord addReaderProgressRecord(@CookieValue(value = "readerId") long readerId, @RequestBody NewReaderProgressRecord newReaderProgressRecord) {
+		Optional<Reader> reader = readerRepo.findById(readerId);
 		Reader readerResult = reader.get();
 		Optional<GroupBook> groupBook = groupBookRepo.findById(newReaderProgressRecord.groupBookId);
 		GroupBook groupBookResult = groupBook.get();
