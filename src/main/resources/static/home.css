@@ -19,7 +19,7 @@ a {
 	border: none;
 }
 
-a:hover{
+a:hover {
 	color: rebeccapurple;
 }
 
@@ -27,6 +27,12 @@ a:hover{
 	font-size: 5rem;
 }
 
-#heading{
+#heading {
 	text-align: center;
+}
+
+@media only screen and (max-width: 750px) {
+	#logintiles {
+		flex-direction: column;
+	}
 }
