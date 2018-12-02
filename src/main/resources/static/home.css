@@ -31,8 +31,13 @@ a:hover {
 	text-align: center;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 769px) {
 	#logintiles {
 		flex-direction: column;
+		max-width: 70vw;
+	}
+	#heading {
+		max-width: 70vw;
+		margin: auto;
 	}
 }
