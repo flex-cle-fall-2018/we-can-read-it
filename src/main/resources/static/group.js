@@ -5,9 +5,11 @@
 	var submitButton = document.getElementById("button");
 	var bookTitle = document.getElementById("booktitle").value;
 	var pageCount = document.getElementById("pageCount");
+	var title = document.getElementById("title");
+	var author = document.getElementById("authorname");
 	var dataHolder;
 	submitButton.addEventListener('click', function(){
-		// event.preventDefault();
+		//event.preventDefault();
 		onClickEvent();
 	})
 	console.log(bookTitle)
@@ -26,6 +28,8 @@
 		    var desc = myJson.items;
 			console.log(desc)
 			pageCount.value = desc[0].volumeInfo.pageCount;
+			title.value = desc[0].volumeInfo.title;
+			author.value = desc[0].volumeInfo.authors[0];
 			console.log(pageCount)
 			bookForm.submit();
 		  });
