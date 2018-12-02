@@ -104,7 +104,7 @@ public class GroupBooksToReadingGroupJPAMapping {
 				entityManager.flush();
 				entityManager.clear();
 				
-				Collection<GroupBook> result = bookRepo.findByReadingGroup(readingGroup);
+				Collection<GroupBook> result = bookRepo.findByReadingGroupsContains(readingGroup);
 				
 				assertThat(result, containsInAnyOrder(book, book2, book3));
 	}

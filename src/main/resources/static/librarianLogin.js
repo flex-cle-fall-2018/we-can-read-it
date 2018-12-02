@@ -2,19 +2,19 @@
     var btn = document.getElementById('submit');
     btn.addEventListener('click', function(){
 
-        var name = document.getElementById('readerLogin').value;
+        var name = document.getElementById('username').value;
         var password = document.getElementById('password').value;
         var userCookie;
         // var url = `verifyLogin?name=${name}&password=${password}`;
-        verifyLogin(`/verifyLogin`, {name, password})
+        verifyLogin(`/verifyLibrarianLogin`, {name, password})
         .then(function(myJson) {
             if(myJson.password == password){
                console.log('success');
-                //console.log(getCookie("readerId"));
-                userCookie = getCookie("readerId");
-                window.location.href = `/reader?id=${userCookie}`;
+                // console.log(getCookie("readerId"));
+                // userCookie = getCookie("readerId");
+                window.location.href = `/readers`;
             }
-            //console.log(JSON.stringify(myJson));
+            console.log(JSON.stringify(myJson));
             
         });
     });

@@ -29,13 +29,16 @@ public class ReaderPopulator implements CommandLineRunner {
 	@Resource
 	private ReaderProgressRecordRepository readerBookRepo;
 
+	@Resource
+	private LibrarianRepository librarianRepo;
+
 	@Override
 	public void run(String... args) throws Exception {
 		Reader shane = new Reader("Shane", "Em", "Shane", "Em");
 		Reader zack = new Reader("Zack", "Mike", "Zack", "Am");
 		Reader bob = new Reader("Bob", "Em", "Bob", "Em");
 		Reader joe = new Reader("Joe", "Mike", "Joe", "Am");
-		Reader vi = new Reader("Vi", "Em", "Shane", "Em");
+		Reader vi = new Reader("Vi", "Em", "Vi", "Em");
 		Reader doug = new Reader("Doug", "Mike", "Doug", "Am");
 		shane = readerRepo.save(shane);
 		zack = readerRepo.save(zack);
@@ -77,11 +80,31 @@ public class ReaderPopulator implements CommandLineRunner {
 		vi.getPendingFriends().add(shane);
 		shane.getFriends().add(doug);
 		doug.getFriends().add(shane);
-		readerRepo.save(joe);
-		readerRepo.save(vi);
-		readerRepo.save(zack);
-		readerRepo.save(shane);
-		readerRepo.save(doug);
+		joe = readerRepo.save(joe);
+		vi = readerRepo.save(vi);
+		zack = readerRepo.save(zack);
+		shane = readerRepo.save(shane);
+		doug = readerRepo.save(doug);
+
+		Librarian mike = new Librarian("Mike", "Myers", "Beachwood", "waynesworld.com", "waynesworld1", "password",
+				"action");
+		Librarian angie = new Librarian("Angie", "Smith", "Heights", "smithtown.com", "smittylady5", "password5",
+				"biography");
+
+		Librarian ashley = new Librarian("Ashley", "Stanley", "South Euclid-Lyndhurst", "sheslays.com", "ash321",
+				"password91", "science fiction");
+
+		Librarian testLib = new Librarian("Test", "Test", "Test", "Test", "Test", "Test", "Test");
+
+		testLib = librarianRepo.save(testLib);
+		mike = librarianRepo.save(mike);
+		angie = librarianRepo.save(angie);
+		ashley = librarianRepo.save(ashley);
+
+		
+		shane.setLibrarian(mike);
+		shane = readerRepo.save(shane);
+
 	}
 
 }

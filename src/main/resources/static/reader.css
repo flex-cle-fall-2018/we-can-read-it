@@ -1,19 +1,19 @@
 #progressGridContainer {
-    display: grid;
-    grid-gap: 20px;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: start;
-    justify-items: center;
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(3, 1fr);
+	align-items: start;
+	justify-items: center;
 }
 
 a {
-    color: black;
+	color: black;
 }
 
 .bookLink {
-    text-align: center;
-    border: none;
-    display: inline-block;
+	text-align: center;
+	border: none;
+	display: inline-block;
 }
 
 .bookLink:hover {
@@ -21,11 +21,11 @@ a {
 }
 
 .bookIcon {
-    display: block;
-    font-size: 2rem;
-    text-align: center;
-    width: 100%;
-    margin: 0;
+	display: block;
+	font-size: 2rem;
+	text-align: center;
+	width: 100%;
+	margin: 0;
 }
 
 #readerNav {
@@ -41,7 +41,6 @@ a {
 	text-align: center;
 	font-weight: 700;
 	padding: 10px;
-	
 }
 
 .fa-users, .fa-user-friends {
@@ -49,28 +48,22 @@ a {
 }
 
 @media only screen and (max-width: 900px) {
-    #progressGridContainer {
-         grid-template-columns: repeat(2, 1fr);
-    }
+	#progressGridContainer {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media only screen and (max-width: 550px) {
-    #progressGridContainer {
-         grid-template-columns: 1fr;
-    }
-    
-    #readerNav {
-    	flex-direction: column;
-    	align-items: center;
-    }
-    
-    #readerNav a {
-    	margin: 5px 0;
-    	display: block;
-    	width: 100%;
-    }
-   
+	#progressGridContainer {
+		grid-template-columns: 1fr;
+	}
+	#readerNav {
+		flex-direction: column;
+		align-items: center;
+	}
+	#readerNav a {
+		margin: 5px 0;
+		display: block;
+		width: 100%;
+	}
 }
-
-
-

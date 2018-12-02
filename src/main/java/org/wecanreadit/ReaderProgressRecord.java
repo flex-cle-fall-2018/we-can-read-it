@@ -10,15 +10,13 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class ReaderProgressRecord {
-	/*This class is for the reader to track when they finished a particular groupBook
-	 */
 
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	private LocalDate dateFinished;
-	
+
 	@ManyToOne
 	private GroupBook groupBook;
 
@@ -29,37 +27,38 @@ public class ReaderProgressRecord {
 
 	}
 
-	public ReaderProgressRecord(GroupBook groupBook, Reader reader, int monthFinished, int dayOfMonthFinished, int yearFinished) {
+	public ReaderProgressRecord(GroupBook groupBook, Reader reader, int monthFinished, int dayOfMonthFinished,
+			int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 		this.reader = reader;
 		this.groupBook = groupBook;
 		reader.addPoints(groupBook.getPoints());
 	}
-	
+
 	public long getId() {
 		return id;
 	}
 
 	public String getStringDateFinished() {
-		if(dateFinished.getDayOfMonth() < 10) {
+		if (dateFinished.getDayOfMonth() < 10) {
 			return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM d, yyyy"));
 		} else {
-		return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+			return this.dateFinished.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 		}
 	}
 
 	public LocalDate getDateFinished() {
 		return dateFinished;
 	}
-	
+
 	public GroupBook getGroupBook() {
 		return groupBook;
 	}
-	
+
 	protected void setDateFinished(int monthFinished, int dayOfMonthFinished, int yearFinished) {
 		dateFinished = LocalDate.of(yearFinished, monthFinished, dayOfMonthFinished);
 	}
-	
+
 	public Reader getReader() {
 		return reader;
 	}
@@ -85,10 +84,5 @@ public class ReaderProgressRecord {
 			return false;
 		return true;
 	}
-
-	
-
-	
-
 
 }

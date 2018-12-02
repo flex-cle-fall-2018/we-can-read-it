@@ -4,9 +4,10 @@
         .then(function(response) {
             return response.json();
         })
-        .then(function(myJson) {
-            console.log(JSON.stringify(myJson));
-        });
+       // .then(function(myJson) {
+            //console.log(JSON.stringify(myJson));
+            
+       // });
 })();
 
 (function(){
@@ -19,7 +20,7 @@
     putBio(url)
         .then(res => {
             //update FirstName Area Needs Done
-            console.log(res);
+            console.log('success');
         });
         
     //Sending PUT request to upload and retrieve data from api
@@ -41,3 +42,4 @@
                   .then(response => response.json()); // parses response to JSON
               }
 })();
+

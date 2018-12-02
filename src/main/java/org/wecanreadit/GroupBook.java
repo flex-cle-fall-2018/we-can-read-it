@@ -1,10 +1,13 @@
 package org.wecanreadit;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -12,13 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class GroupBook {
-
-	/*
-	 * This class allows a book to be created within a reading group. Note there is
-	 * currently no shared repository for librarians to access books
-	 * (11-17-18), so the librarian would need to create separate groupBooks for each
-	 * group
-	 */
 
 	@Id
 	@GeneratedValue
@@ -29,8 +25,11 @@ public class GroupBook {
 	private int points = 10;
 
 	@JsonIgnore
+	@ManyToMany
+	private Collection<ReadingGroup> readingGroups;
+
 	@ManyToOne
-	private ReadingGroup readingGroup;
+	private Librarian librarian;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "groupBook")
@@ -40,16 +39,16 @@ public class GroupBook {
 
 	}
 
-	public GroupBook(String title, String author, ReadingGroup readingGroup) {
+	public GroupBook(String title, String author, ReadingGroup...readingGroups) {
 		this.title = title;
 		this.author = author;
-		this.readingGroup = readingGroup;
+		this.readingGroups = new HashSet<>(Arrays.asList(readingGroups));
 	}
-	
+
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
+
 	public int getPoints() {
 		return points;
 	}
@@ -66,8 +65,8 @@ public class GroupBook {
 		return author;
 	}
 
-	public ReadingGroup getReadingGroup() {
-		return readingGroup;
+	public Collection<ReadingGroup> getReadingGroups() {
+		return readingGroups;
 	}
 
 	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
@@ -94,6 +93,18 @@ public class GroupBook {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+
+	public void removeReadingGroup(ReadingGroup group) {
+		readingGroups.remove(group);
+
+	}
+
+
+	public void setLibrarian(Librarian lib) {
+		this.librarian = lib;
+
 	}
 
 }
