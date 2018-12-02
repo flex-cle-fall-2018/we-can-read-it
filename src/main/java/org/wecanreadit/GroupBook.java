@@ -1,10 +1,13 @@
 package org.wecanreadit;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -22,8 +25,8 @@ public class GroupBook {
 	private int points = 10;
 
 	@JsonIgnore
-	@ManyToOne
-	private ReadingGroup readingGroup;
+	@ManyToMany
+	private Collection<ReadingGroup> readingGroups;
 
 	@ManyToOne
 	private Librarian librarian;
@@ -36,10 +39,10 @@ public class GroupBook {
 
 	}
 
-	public GroupBook(String title, String author, ReadingGroup readingGroup) {
+	public GroupBook(String title, String author, ReadingGroup...readingGroups) {
 		this.title = title;
 		this.author = author;
-		this.readingGroup = readingGroup;
+		this.readingGroups = new HashSet<>(Arrays.asList(readingGroups));
 	}
 
 	public void setPoints(int points) {
@@ -62,8 +65,8 @@ public class GroupBook {
 		return author;
 	}
 
-	public ReadingGroup getReadingGroup() {
-		return readingGroup;
+	public Collection<ReadingGroup> getReadingGroups() {
+		return readingGroups;
 	}
 
 	public Collection<ReaderProgressRecord> getReaderProgressRecords() {
@@ -92,8 +95,14 @@ public class GroupBook {
 		return true;
 	}
 
+
+	public void removeReadingGroup(ReadingGroup group) {
+		readingGroups.remove(group);
+		
+
 	public void setLibrarian(Librarian lib) {
 		this.librarian = lib;
+
 	}
 
 }

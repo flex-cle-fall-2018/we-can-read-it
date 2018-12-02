@@ -22,6 +22,7 @@ public class Librarian {
 	private String favoriteGenre;
 	private String groupName;
 
+
 	@OneToMany(mappedBy = "librarian")
 	private Collection<Reader> readers;
 

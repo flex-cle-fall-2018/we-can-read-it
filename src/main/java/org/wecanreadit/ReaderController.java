@@ -104,7 +104,7 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		Reader reader = readerRepo.findById(id).get();
 		model.addAttribute("reader", reader);
-		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReaderSortByGroup(reader));
+		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(reader));
 		return "reader";
 	}
 
@@ -188,13 +188,12 @@ public class ReaderController {
 	@GetMapping("/deleteGroup")
 	public String deleteGroup(@RequestParam(required = true) String groupName) {
 		ReadingGroup group = groupRepo.findByGroupName(groupName);
-		List<GroupBook> books = new ArrayList<GroupBook>(group.getBooks());
-		List<ReaderProgressRecord> readingRecords = new ArrayList<ReaderProgressRecord>();
-		for (GroupBook book : books) {
-			readingRecords.addAll(book.getReaderProgressRecords());
+		Collection<GroupBook> groupBooks = bookRepo.findByReadingGroupsContains(group);
+		for (GroupBook groupBook : groupBooks) {
+			groupBook.removeReadingGroup(group);
+			bookRepo.save(groupBook);
 		}
-		readerProgressRecordRepo.deleteAll(readingRecords);
-		bookRepo.deleteAll(books);
+	
 		groupRepo.delete(group);
 		return "redirect:/groups";
 	}

@@ -27,7 +27,7 @@ public class ReadingGroup {
 	@ManyToMany
 	private Collection<Reader> readingGroup;
 
-	@OneToMany(mappedBy = "readingGroup")
+	@ManyToMany(mappedBy = "readingGroups")
 	private Collection<GroupBook> groupBooks;
 
 	@ManyToMany
