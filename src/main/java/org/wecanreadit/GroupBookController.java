@@ -36,6 +36,18 @@ public class GroupBookController {
 		throw new GroupBookNotFoundException();
 	}
 	
+	@RequestMapping("/groupBook")
+	public String findOneBook(@RequestParam long id, Model model) throws GroupBookNotFoundException {
+		Optional<GroupBook> result = groupBookRepo.findById(id);
+		GroupBook groupBook = result.get();
+		if (result.isPresent()) {
+			model.addAttribute("groupBook", groupBook);	
+			model.addAttribute("readerProgressRecords", groupBook.getReaderProgressRecords());
+			return "groupBook";
+		}
+		throw new GroupBookNotFoundException();
+	}
+	
 	@RequestMapping("/readerViewGroupBook/{groupId}/groupBook/{groupBookId}")
 	public String findOneReaderGroupBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
 		Optional<GroupBook> result = groupBookRepo.findById(groupBookId);

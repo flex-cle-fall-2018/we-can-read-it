@@ -18,6 +18,7 @@
 		<h2 th:text="${groupBook.author}"></h2>
 	</div>
 	
+	<div class="panel">
 	<form method="POST" th:action="@{/changePoints}">
 		<input type="number" name="points" placeholder="Enter Point Value">
   		<input type="hidden" name="id" th:value="${groupBook.id}">
@@ -25,8 +26,9 @@
   		<input type="submit" value="Change Point Value">
 	</form>
 	<span th:text="${groupBook.points}"></span>
+	</div>
 
-	<a th:href="@{../../../group(id=${group.id})}">Back to Group</a>
+	
 	
 	<div class="panel">
 		<h2>Members who have finished this book:</h2>
@@ -38,7 +40,9 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="panel">
+<a th:href="@{../../../group(id=${group.id})}">Back to Group</a>
+</div>
 	</main>
 
 	

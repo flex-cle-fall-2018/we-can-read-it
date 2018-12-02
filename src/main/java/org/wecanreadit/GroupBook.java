@@ -98,8 +98,10 @@ public class GroupBook {
 
 	public void removeReadingGroup(ReadingGroup group) {
 		readingGroups.remove(group);
-		
+
 	}
+
+
 	public void setLibrarian(Librarian lib) {
 		this.librarian = lib;
 
