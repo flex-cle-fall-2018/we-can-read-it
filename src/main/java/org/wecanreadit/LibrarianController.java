@@ -100,7 +100,6 @@ public class LibrarianController {
 	@ResponseBody
 	@PostMapping("/verifyLibrarianLogin")
 	public Librarian verifyLogin(@RequestBody LoginRequest login, HttpServletResponse response) throws Exception {
-		String isLibrarian = "true";
 
 		Librarian librarian = librarianRepo.findByUsername(login.name);
 
@@ -110,6 +109,8 @@ public class LibrarianController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString());
 		response.addCookie(librarianIdCookie);
+		Cookie isALibrarian = new Cookie("isALibrarian", "true");
+		response.addCookie(isALibrarian);
 		return librarian;
 
 	}
