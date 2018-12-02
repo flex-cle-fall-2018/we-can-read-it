@@ -10,11 +10,11 @@
         .then(function(myJson) {
             if(myJson.password == password){
                console.log('success');
-                console.log(getCookie("readerId"));
+                //console.log(getCookie("readerId"));
                 userCookie = getCookie("readerId");
                 window.location.href = `/reader?id=${userCookie}`;
             }
-            console.log(JSON.stringify(myJson));
+            //console.log(JSON.stringify(myJson));
             
         });
     });
