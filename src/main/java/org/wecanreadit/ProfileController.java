@@ -43,7 +43,6 @@ public class ProfileController {
 		Cookie readerIdCookie = new Cookie("readerId", reader.getId().toString());
 		response.addCookie(readerIdCookie);
 		return reader;
-
 	}
 
 	public static class LoginRequest {
