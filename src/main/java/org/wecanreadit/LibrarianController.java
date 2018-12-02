@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.wecanreadit.ProfileController.LoginRequest;
 
 @Controller
 public class LibrarianController {
@@ -57,15 +56,15 @@ public class LibrarianController {
 
 	@RequestMapping("/add-librarian")
 	public String addLibrarian(String firstName, String lastName, String email, String username, String password,
-			String library, String favoriteGenre, Model model) {
+			String library, String favoriteGenre) {
 		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
 		librarianRepo.save(newLibrarian);
-		return "redirect:/show-librarians";
+		return "redirect:/";
 	}
 
-	@RequestMapping("/login")
-	public String adminLoginPage() {
-		return "login";
+	@RequestMapping("/librarian-sign-up")
+	public String librarianSignUp() {
+		return "librarianSignUp";
 	}
 
 	@RequestMapping("/librarian-login")
@@ -86,23 +85,6 @@ public class LibrarianController {
 		}
 		return "redirect:/librarian-login";
 
-	}
-
-	@RequestMapping("/admin")
-	public String adminPanel(@CookieValue(name = "role", defaultValue = "") String role, Model model) {
-
-		System.out.println("ROLE: " + role);
-
-		if (role == null || !role.equals("admin")) {
-			return "redirect:/login";
-		}
-
-		System.out.println("SUCCESS");
-
-		Iterable<Librarian> categories = librarianRepo.findAll();
-		model.addAttribute("categories", categories);
-
-		return "admin";
 	}
 
 	@RequestMapping("/addBook")

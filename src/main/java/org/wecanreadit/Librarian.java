@@ -21,14 +21,13 @@ public class Librarian {
 	private String password;
 	private String favoriteGenre;
 	private String groupName;
-	private String topic;
-	
+
 	@OneToMany(mappedBy = "librarian")
 	private Collection<Reader> readers;
-	
+
 	@OneToMany(mappedBy = "librarian")
 	private Collection<GroupBook> books;
-	
+
 	@OneToMany(mappedBy = "librarian")
 	private Collection<ReadingGroup> groups;
 
@@ -46,12 +45,10 @@ public class Librarian {
 		this.password = password;
 		this.favoriteGenre = favoriteGenre;
 	}
-	
-	
+
 	public Long getId() {
 		return id;
 	}
-
 
 	public String getFirstName() {
 
@@ -84,36 +81,35 @@ public class Librarian {
 	public String getFavoriteGenre() {
 		return favoriteGenre;
 	}
-		
+
 	public Collection<ReadingGroup> getAllGroups() {
 		return groups;
 	}
-	
-	public Collection<Reader> getAllReaders(){
+
+	public Collection<Reader> getAllReaders() {
 		return readers;
 	}
-	
-	public Collection<GroupBook> getBooks(){
+
+	public Collection<GroupBook> getBooks() {
 		return books;
 	}
 
 	public String getGroupName() {
-		
+
 		return groupName;
 	}
 
-public String addBook() {
-	return addBook();
-}
+	public String addBook() {
+		return addBook();
+	}
 
-public void addBook(GroupBook book) {
-	
-	
-}
+	public void addBook(GroupBook book) {
 
-public static Object findAll() {
-	// TODO Auto-generated method stub
-	return null;
-}
+	}
+
+	public static Object findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
