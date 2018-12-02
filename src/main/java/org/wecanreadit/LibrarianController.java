@@ -110,8 +110,6 @@ public class LibrarianController {
 		// Makes new cookie, takes in string,string name, id
 		Cookie librarianIdCookie = new Cookie("LibrarianId", librarian.getId().toString());
 		response.addCookie(librarianIdCookie);
-		Cookie isALibrarian = new Cookie("isALibrarian", isLibrarian);
-		response.addCookie(isALibrarian);
 		return librarian;
 
 	}
