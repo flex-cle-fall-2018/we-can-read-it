@@ -12,7 +12,7 @@
                console.log('success');
                 // console.log(getCookie("readerId"));
                 // userCookie = getCookie("readerId");
-                window.location.href = `/groups`;
+                window.location.href = `/readers`;
             }
             console.log(JSON.stringify(myJson));
             
