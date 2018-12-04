@@ -123,8 +123,9 @@
 
 		<h2>Create a new goal</h2>
 		<form method="POST" th:action="@{/addGoal}">
-			<input type="text" placeholder="Goal Name" name="name"> <input
-				type="hidden" th:value="${group.id}" name="id"> <input
+			<input type="text" placeholder="Goal Name" name="name"><input
+				type="text" placeholder="Point Value" name="pointValue"> <input
+				type="hidden" th:value="${group.id}" name="id"><input
 				type="submit">
 		</form>
 

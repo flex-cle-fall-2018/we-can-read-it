@@ -62,7 +62,13 @@ public class ReaderController {
 			@PathVariable("goalId") long goalId) {
 		Goal goal = goalRepo.findById(goalId).get();
 		Reader reader = readerRepo.findById(readerId).get();
+		if (goal.containsReader(reader)) {
+			goalRepo.save(goal);
+			readerRepo.save(reader);
+			return "redirect:/singlegroupquestions?id=" + groupId;
+		}
 		goal.addReader(reader);
+		reader.addPoints(goal.getPoints());
 		goalRepo.save(goal);
 		readerRepo.save(reader);
 		return "redirect:/singlegroupquestions?id=" + groupId;
@@ -219,9 +225,9 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGoal")
-	public String addAGoalToAGroup(@RequestParam(required = true) String name, long id) {
+	public String addAGoalToAGroup(@RequestParam(required = true) String name, long id, int pointValue) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		group.addGoal(goalRepo.save(new Goal(name)));
+		group.addGoal(goalRepo.save(new Goal(name, pointValue)));
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
