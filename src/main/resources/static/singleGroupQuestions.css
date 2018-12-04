@@ -9,3 +9,7 @@
 .readerAnswer {
 	margin-top: 1rem;
 }
+
+#goalCompleteBtn {
+	border: none;
+}

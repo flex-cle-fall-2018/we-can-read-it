@@ -138,8 +138,17 @@
 			<i class="fas fa-star"></i><span th:text="${goal.name}" class="goal"></span>
 			<a
 				th:href="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
+			<p>Completed this goal:</p>
+			<ul>
+				<l1>
+				<span th:if="${goal.getReaders().size() < 1}">No one has
+					completed this goal yet.</span></l1>
+			</ul>
 			<div th:each="reader: ${goal.getReaders()}">
-				<span th:text="${reader.username}"></span>
+				<ul>
+					<li><i class="fas fa-user"></i><span
+						th:text="${reader.username}"></span></li>
+				</ul>
 			</div>
 		</div>
 
