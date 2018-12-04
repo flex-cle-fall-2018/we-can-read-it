@@ -63,8 +63,6 @@ public class ReaderController {
 		Goal goal = goalRepo.findById(goalId).get();
 		Reader reader = readerRepo.findById(readerId).get();
 		if (goal.containsReader(reader)) {
-			goalRepo.save(goal);
-			readerRepo.save(reader);
 			return "redirect:/singlegroupquestions?id=" + groupId;
 		}
 		goal.addReader(reader);
