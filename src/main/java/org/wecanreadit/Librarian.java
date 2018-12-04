@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Librarian {
 
@@ -22,7 +24,7 @@ public class Librarian {
 	private String favoriteGenre;
 	private String groupName;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "librarian")
 	private Collection<Reader> readers;
 
@@ -83,14 +85,17 @@ public class Librarian {
 		return favoriteGenre;
 	}
 
+	@JsonIgnore
 	public Collection<ReadingGroup> getAllGroups() {
 		return groups;
 	}
 
+	@JsonIgnore
 	public Collection<Reader> getAllReaders() {
 		return readers;
 	}
 
+	@JsonIgnore
 	public Collection<GroupBook> getBooks() {
 		return books;
 	}

@@ -66,6 +66,7 @@
 		<h2>Goals</h2>
 		<div th:each="goal:${goals}">
 			<i class="fas fa-star"></i><span th:text="${goal.name}"></span>
+			<a th:href="@{'/goalComplete/' + ${group.id} + '/' + ${goal.id}}"><button>Complete</button></a>
 		</div>
 
 	</div>

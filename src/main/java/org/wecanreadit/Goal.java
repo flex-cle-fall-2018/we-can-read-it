@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Goal {
 
@@ -18,6 +20,10 @@ public class Goal {
 
 	@ManyToMany(mappedBy = "goals")
 	private Collection<ReadingGroup> groups;
+	
+	@JsonIgnore
+	@ManyToMany
+	private Collection<Reader> readers;
 
 	Goal() {
 	}
@@ -36,5 +42,14 @@ public class Goal {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void addReader(Reader reader) {
+		readers.add(reader);
+	}
+	
+	@JsonIgnore
+	public Collection<Reader> getReaders(){
+		return readers;
 	}
 }

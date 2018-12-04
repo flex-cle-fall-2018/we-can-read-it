@@ -57,6 +57,17 @@ public class ReaderController {
 		return "groupquestionlist";
 	}
 
+	@RequestMapping("/goalComplete/{groupId}/{goalId}")
+	public String completeGoal(@CookieValue(value = "readerId") long readerId, @PathVariable("groupId") long groupId,
+			@PathVariable("goalId") long goalId) {
+		Goal goal = goalRepo.findById(goalId).get();
+		Reader reader = readerRepo.findById(readerId).get();
+		goal.addReader(reader);
+		goalRepo.save(goal);
+		readerRepo.save(reader);
+		return "redirect:/singlegroupquestions?id=" + groupId;
+	}
+
 	@RequestMapping("/singlegroupquestions")
 	public String getSingleGroupsQuestions(@CookieValue(value = "readerId") long readerId,
 			@RequestParam(required = true) long id, Model model) {
@@ -108,43 +119,40 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		boolean isOwner = false;
 		boolean isFriend = false;
-		boolean  isLibrarian = false;
-		
+		boolean isLibrarian = false;
+
 		Reader profileOwner = readerRepo.findById(id).get();
-		
-		HttpServletRequest request =
-				((ServletRequestAttributes) RequestContextHolder
-		        .getRequestAttributes())
+
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-	    	
-	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
-	    	Cookie librarianIdCookie = WebUtils.getCookie(request, "LibrarianId");
-	    	
-	    	if (readerIdCookie != null) {
-	    		Long readerId = new Long(readerIdCookie.getValue());
-	    		Reader readerLoggedIn = readerRepo.findById(readerId).get();
-	    		if(readerLoggedIn == profileOwner) {
-	    			isOwner = true;
-	    		} else {
-	    			Collection<Reader> ownerFriends = profileOwner.getFriends();
-	    			if (ownerFriends.contains(readerLoggedIn)) {
-	    				isFriend = true;
-	    			}
-	    		}
-	    	}
-	    	
-	    	if (librarianIdCookie != null) {
-	    		Long librarianId = new Long(librarianIdCookie.getValue());
-	    		Librarian librarian = libRepo.findById(librarianId).get();
-	    		Collection<Reader> librarianReaders = librarian.getAllReaders();
-	    		if (librarianReaders.contains(profileOwner)) {
-	    			isLibrarian = true;
-	    		}
-	    	}
-	    	
-	    	
-	    model.addAttribute("isOwner", isOwner);	
-	    model.addAttribute("isFriend", isFriend);
+
+		Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+		Cookie librarianIdCookie = WebUtils.getCookie(request, "LibrarianId");
+
+		if (readerIdCookie != null) {
+			Long readerId = new Long(readerIdCookie.getValue());
+			Reader readerLoggedIn = readerRepo.findById(readerId).get();
+			if (readerLoggedIn == profileOwner) {
+				isOwner = true;
+			} else {
+				Collection<Reader> ownerFriends = profileOwner.getFriends();
+				if (ownerFriends.contains(readerLoggedIn)) {
+					isFriend = true;
+				}
+			}
+		}
+
+		if (librarianIdCookie != null) {
+			Long librarianId = new Long(librarianIdCookie.getValue());
+			Librarian librarian = libRepo.findById(librarianId).get();
+			Collection<Reader> librarianReaders = librarian.getAllReaders();
+			if (librarianReaders.contains(profileOwner)) {
+				isLibrarian = true;
+			}
+		}
+
+		model.addAttribute("isOwner", isOwner);
+		model.addAttribute("isFriend", isFriend);
 		model.addAttribute("isLibrarian", isLibrarian);
 		model.addAttribute("reader", profileOwner);
 		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(profileOwner));
@@ -236,7 +244,7 @@ public class ReaderController {
 			groupBook.removeReadingGroup(group);
 			bookRepo.save(groupBook);
 		}
-	
+
 		groupRepo.delete(group);
 		return "redirect:/groups";
 	}
@@ -314,28 +322,25 @@ public class ReaderController {
 
 	@RequestMapping("/reader/{readerId}/friends")
 	public String readerFriends(@PathVariable long readerId, Model model) {
-		HttpServletRequest request =
-				((ServletRequestAttributes) RequestContextHolder
-		        .getRequestAttributes())
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-	    	
-	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
-		
-	    	if (readerIdCookie != null) {
-	    		Long readerLoggedInId = new Long(readerIdCookie.getValue());
-	    		Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
-	    		Reader profileOwner = readerRepo.findById(readerId).get();
-	    		if(readerLoggedIn == profileOwner) {
-	    			model.addAttribute("reader", readerRepo.findById(readerId).get());
-	    			model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
-	    			model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
-	    			model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
-	    			return "readerFriends";
-	    		} 
-	    	}
-	
+
+		Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+
+		if (readerIdCookie != null) {
+			Long readerLoggedInId = new Long(readerIdCookie.getValue());
+			Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
+			Reader profileOwner = readerRepo.findById(readerId).get();
+			if (readerLoggedIn == profileOwner) {
+				model.addAttribute("reader", readerRepo.findById(readerId).get());
+				model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+				model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
+				model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
+				return "readerFriends";
+			}
+		}
+
 		return "notAuthorized";
 	}
-	    	
 
 }
