@@ -32,6 +32,9 @@
 				<a th:href="@{reader(id=${reader.id})}"><i class="fas fa-user"></i><span
 					th:text="${reader.username}"></span></a>
 			</div>
+			<div th:if="${readers.isEmpty()}">
+				<p>Your group has no members yet</p>
+			</div>
 		</div>
 	</section>
 	<section class="panel">

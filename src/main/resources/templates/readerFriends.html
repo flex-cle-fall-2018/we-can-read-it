@@ -35,17 +35,18 @@
 	</div>
 	<div class="panel" id="pendingFriendOf">
 		<h2>Friend Requests</h2>
-		<div th:each="pendingFriendOf: ${pendingFriendOf}"
-			class="pendingFriendOf">
-			<div th:data-requestor="${pendingFriendOf.username}">
+		<div th:each="pendingFriendOf: ${pendingFriendOf}" class="pendingFriendOf">
+			<div th:data-requestor="${pendingFriendOf.username}" class="pendingFriendItem">
 				<a th:href="@{../../reader(id=${pendingFriendOf.id})}"
 					th:text="${pendingFriendOf.username}"></a>
+				<div>
 				<button class="acceptFriendRequestButton">
 					<i class="fas fa-user-check"></i>Accept
 				</button>
 				<button class="declineFriendRequestButton">
 					<i class="fas fa-user-times"></i>Decline
 				</button>
+				</div>
 			</div>
 		</div>
 	</div>

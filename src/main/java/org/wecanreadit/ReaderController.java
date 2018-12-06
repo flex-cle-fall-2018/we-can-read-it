@@ -74,9 +74,12 @@ public class ReaderController {
 	@PostMapping("/createnewreader")
 	public String createNewReader(@CookieValue(value = "LibrarianId") long librarianId, String username,
 			String password, String firstName, String lastName) {
+		Reader reader = readerRepo.findByUsername(username);
+		if (reader == null) {
 		Reader newReader = new Reader(username, password, firstName, lastName);
 		newReader.setLibrarian(libRepo.findById(librarianId).get());
 		readerRepo.save(newReader);
+		}
 		return "redirect:/readers";
 	}
 
@@ -96,12 +99,16 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/readers")
-	public String findAllReader(@CookieValue(value = "LibrarianId") long librarianId, Model model) {
+	public String findAllReader(@CookieValue(required = false, value = "LibrarianId") Long librarianId, Model model) {
+		if (librarianId != null) {
 		Librarian lib = libRepo.findById(librarianId).get();
 		model.addAttribute("readers", lib.getAllReaders());
 		model.addAttribute("groups", lib.getAllGroups());
 		model.addAttribute("books", lib.getBooks());
 		return "readers";
+		} else {
+			return "notAuthorized";
+		}
 	}
 
 	@RequestMapping("/reader")
@@ -336,6 +343,8 @@ public class ReaderController {
 	
 		return "notAuthorized";
 	}
+	
+	
 	    	
 
 }
