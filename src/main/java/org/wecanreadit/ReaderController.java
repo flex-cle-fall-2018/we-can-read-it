@@ -49,6 +49,14 @@ public class ReaderController {
 
 	@Resource
 	LibrarianRepository libRepo;
+	
+	@PostMapping("/giveReaderPoints")
+	public String giveReaderPoints(@RequestParam(required = true) String userName, int points, long groupId) {
+		Reader reader = readerRepo.findByUsername(userName);
+		reader.addPoints(points);
+		readerRepo.save(reader);
+		return "redirect:/group?id=" + groupId;
+	}
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {

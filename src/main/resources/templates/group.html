@@ -34,6 +34,7 @@
 			</div>
 		</div>
 	</section>
+
 	<section class="panel">
 
 		<h2>Add a reader</h2>
@@ -44,6 +45,21 @@
 		</form>
 
 	</section>
+
+	<div class="panel">
+
+		<h2>Give a reader points</h2>
+		<form method="POST" th:action="@{/giveReaderPoints}">
+			<input type="text" placeholder="User Name" name="userName"> <input
+				type="text" placeholder="Amount of Points" name="points"> <input
+				type="hidden" th:value="${group.id}" name="groupId"> <input
+				type="submit">
+
+		</form>
+	</div>
+
+
+
 
 	<section class="panel">
 
@@ -138,11 +154,12 @@
 			<i class="fas fa-star"></i><span th:text="${goal.name}" class="goal"></span>
 			<a
 				th:href="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
-			<p>Completed this goal:</p>
 			<ul>
-				<l1>
-				<span th:if="${goal.getReaders().size() < 1}">No one has
-					completed this goal yet.</span></l1>
+				<li>Completed this goal:</li>
+			</ul>
+			<ul>
+				<l1> <span th:if="${goal.getReaders().size() < 1}">No
+					one has completed this goal yet.</span></l1>
 			</ul>
 			<div th:each="reader: ${goal.getReaders()}">
 				<ul>
@@ -154,6 +171,7 @@
 
 	</section>
 
+	<!--  
 	<section class="panel">
 
 		<h2>Delete a goal</h2>
@@ -164,7 +182,7 @@
 		</form>
 
 	</section>
-
+	-->
 
 	<div class="panel">
 
