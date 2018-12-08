@@ -62,7 +62,7 @@
 			Points: <span th:text="${reader.points}"></span>
 		</section>
 
-		
+
 		<!-- <section class="panel" th:if="not ${isOwner or isLibrarian or isFriend}">
 			<button>Add Friend</button>
 		</section> -->
@@ -78,10 +78,10 @@
 
 		<button id="logout">Logout</button>
 		<br>
-		
+
 		<div id="exp" th:if="${points != null}">
 			<h2>Your Points:&nbsp</h2>
-			<h3 th:text="${points}"></h3>
+			<h2 id="pointdisplay" th:text="${points}"></h2>
 		</div>
 	</main>
 	<script src='./ProfilePutRequest.js'></script>

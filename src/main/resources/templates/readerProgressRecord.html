@@ -45,14 +45,14 @@
 		<a th:href="@{/reader(id=${reader.id})}">Back to all books.</a>
 	</div>
 	<button id="logout">Logout</button>
-	
+
 	<div id="exp" th:if="${points != null}">
 		<h2>Your Points:&nbsp</h2>
-		<h3 th:text="${points}"></h3>
+		<h2 th:text="${points}"></h2>
 	</div>
-	
+
 	</main>
-	
+
 	<script src='./readerlogout.js'></script>
 	<script src='./readerProgressRecord.js'></script>
 </body>
