@@ -60,7 +60,7 @@ public class ReaderController {
 		reader.addPoints(points);
 		readerRepo.save(reader);
 		return "redirect:/group?id=" + groupId;
-
+	}
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
