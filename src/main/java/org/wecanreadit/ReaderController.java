@@ -54,6 +54,7 @@ public class ReaderController {
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
 
 		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
+		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 		return "groupquestionlist";
 	}
 
@@ -105,12 +106,14 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/reader")
-	public String findAReader(@RequestParam(required = true) long id, Model model) {
+	public String findAReader(@RequestParam(required = true) long id, @CookieValue(value = "readerId") long cookieId, Model model) {
 		boolean isOwner = false;
 		boolean isFriend = false;
 		boolean  isLibrarian = false;
 		
 		Reader profileOwner = readerRepo.findById(id).get();
+
+		model.addAttribute("points", readerRepo.findById(cookieId).get().getPoints());
 		
 		HttpServletRequest request =
 				((ServletRequestAttributes) RequestContextHolder

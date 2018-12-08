@@ -62,6 +62,11 @@
 			Points: <span th:text="${reader.points}"></span>
 		</section>
 		
+		<div id="exp">
+			<h2>Your Points:&nbsp</h2>
+			<h3 th:text="${points}"></h3>
+		</div>
+		
 		<!-- <section class="panel" th:if="not ${isOwner or isLibrarian or isFriend}">
 			<button>Add Friend</button>
 		</section> -->
@@ -69,6 +74,7 @@
 		<button id="logout">Logout</button>
 	</main>
 	<script src='./ProfilePutRequest.js'></script>
+	<script src='./xpBar.js'></script>
 	<script src='./readerlogout.js'></script>
 	
 

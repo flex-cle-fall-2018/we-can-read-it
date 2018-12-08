@@ -109,6 +109,16 @@ textarea {
 	overflow: auto;
 }
 
+#exp{
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	display: flex;
+	justify-content: center;
+	background-color: #efefefdd;
+}
+
 #messageBoardSubmit {
 	margin-top: 10px;
 }
