@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Goal {
 
@@ -14,16 +16,23 @@ public class Goal {
 	@GeneratedValue
 	private long id;
 
+	private int pointValue;
+
 	private String name;
 
 	@ManyToMany(mappedBy = "goals")
 	private Collection<ReadingGroup> groups;
 
+	@JsonIgnore
+	@ManyToMany
+	private Collection<Reader> readers;
+
 	Goal() {
 	}
 
-	Goal(String name) {
+	Goal(String name, int pointValue) {
 		this.name = name;
+		this.pointValue = pointValue;
 	}
 
 	public String getName() {
@@ -37,4 +46,27 @@ public class Goal {
 	public Long getId() {
 		return id;
 	}
+
+	public void addReader(Reader reader) {
+		readers.add(reader);
+	}
+
+	@JsonIgnore
+	public Collection<Reader> getReaders() {
+		return readers;
+	}
+
+	public int getPoints() {
+		return pointValue;
+	}
+
+	public boolean containsReader(Reader reader) {
+		for (Reader read : readers) {
+			if (read.equals(reader)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

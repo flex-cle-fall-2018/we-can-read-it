@@ -10,6 +10,7 @@
 	text-align: left;
 }
 
+
 #bookGridContainer {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -36,3 +37,4 @@
 .fa-book-reader {
 	font-size: 2em;
 }
+

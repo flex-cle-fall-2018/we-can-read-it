@@ -50,14 +50,38 @@ public class ReaderController {
 	@Resource
 	LibrarianRepository libRepo;
 	
+
 	@Resource
 	AuthService auth;
+
+	@PostMapping("/giveReaderPoints")
+	public String giveReaderPoints(@RequestParam(required = true) String userName, int points, long groupId) {
+		Reader reader = readerRepo.findByUsername(userName);
+		reader.addPoints(points);
+		readerRepo.save(reader);
+		return "redirect:/group?id=" + groupId;
+
 
 	@RequestMapping("/questionlist")
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
 
 		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
 		return "groupquestionlist";
+	}
+
+	@RequestMapping("/goalComplete/{groupId}/{goalId}")
+	public String completeGoal(@CookieValue(value = "readerId") long readerId, @PathVariable("groupId") long groupId,
+			@PathVariable("goalId") long goalId) {
+		Goal goal = goalRepo.findById(goalId).get();
+		Reader reader = readerRepo.findById(readerId).get();
+		if (goal.containsReader(reader)) {
+			return "redirect:/singlegroupquestions?id=" + groupId;
+		}
+		goal.addReader(reader);
+		reader.addPoints(goal.getPoints());
+		goalRepo.save(goal);
+		readerRepo.save(reader);
+		return "redirect:/singlegroupquestions?id=" + groupId;
 	}
 
 	@RequestMapping("/singlegroupquestions")
@@ -125,9 +149,10 @@ public class ReaderController {
 	public String findAReader(@RequestParam(required = true) long id, Model model) {
 		boolean isOwner = false;
 		boolean isFriend = false;
-		boolean  isLibrarian = false;
-		
+		boolean isLibrarian = false;
+
 		Reader profileOwner = readerRepo.findById(id).get();
+
 		
 		Optional<Reader> readerIdentity = auth.getReaderIdentity();
 		Optional<Librarian> librarianIdentity = auth.getLibrarianIdentity();
@@ -159,6 +184,7 @@ public class ReaderController {
 	    	
 	    model.addAttribute("isOwner", isOwner);	
 	    model.addAttribute("isFriend", isFriend);
+
 		model.addAttribute("isLibrarian", isLibrarian);
 		model.addAttribute("reader", profileOwner);
 		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(profileOwner));
@@ -232,9 +258,9 @@ public class ReaderController {
 	}
 
 	@PostMapping("/addGoal")
-	public String addAGoalToAGroup(@RequestParam(required = true) String name, long id) {
+	public String addAGoalToAGroup(@RequestParam(required = true) String name, long id, int pointValue) {
 		ReadingGroup group = groupRepo.findById(id).get();
-		group.addGoal(goalRepo.save(new Goal(name)));
+		group.addGoal(goalRepo.save(new Goal(name, pointValue)));
 		groupRepo.save(group);
 		return "redirect:/group?id=" + id;
 	}
@@ -257,7 +283,7 @@ public class ReaderController {
 			groupBook.removeReadingGroup(group);
 			bookRepo.save(groupBook);
 		}
-	
+
 		groupRepo.delete(group);
 		return "redirect:/groups";
 	}
@@ -335,30 +361,25 @@ public class ReaderController {
 
 	@RequestMapping("/reader/{readerId}/friends")
 	public String readerFriends(@PathVariable long readerId, Model model) {
-		HttpServletRequest request =
-				((ServletRequestAttributes) RequestContextHolder
-		        .getRequestAttributes())
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-	    	
-	    	Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
-		
-	    	if (readerIdCookie != null) {
-	    		Long readerLoggedInId = new Long(readerIdCookie.getValue());
-	    		Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
-	    		Reader profileOwner = readerRepo.findById(readerId).get();
-	    		if(readerLoggedIn == profileOwner) {
-	    			model.addAttribute("reader", readerRepo.findById(readerId).get());
-	    			model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
-	    			model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
-	    			model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
-	    			return "readerFriends";
-	    		} 
-	    	}
-	
+
+		Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+
+		if (readerIdCookie != null) {
+			Long readerLoggedInId = new Long(readerIdCookie.getValue());
+			Reader readerLoggedIn = readerRepo.findById(readerLoggedInId).get();
+			Reader profileOwner = readerRepo.findById(readerId).get();
+			if (readerLoggedIn == profileOwner) {
+				model.addAttribute("reader", readerRepo.findById(readerId).get());
+				model.addAttribute("friends", readerRepo.findById(readerId).get().getFriends());
+				model.addAttribute("pendingFriends", readerRepo.findById(readerId).get().getPendingFriends());
+				model.addAttribute("pendingFriendOf", readerRepo.findById(readerId).get().getPendingFriendOf());
+				return "readerFriends";
+			}
+		}
+
 		return "notAuthorized";
 	}
-	
-	
-	    	
 
 }

@@ -37,6 +37,7 @@
 			</div>
 		</div>
 	</section>
+
 	<section class="panel">
 
 		<h2>Add a reader</h2>
@@ -47,6 +48,21 @@
 		</form>
 
 	</section>
+
+	<div class="panel">
+
+		<h2>Give a reader points</h2>
+		<form method="POST" th:action="@{/giveReaderPoints}">
+			<input type="text" placeholder="User Name" name="userName"> <input
+				type="text" placeholder="Amount of Points" name="points"> <input
+				type="hidden" th:value="${group.id}" name="groupId"> <input
+				type="submit">
+
+		</form>
+	</div>
+
+
+
 
 	<section class="panel">
 
@@ -82,12 +98,12 @@
 		<h2>Add a book</h2>
 
 		<form id="bookForm" method="POST" th:action="@{/addBook}">
-			<input id="booktitle" type="text" placeholder="Enter book name"> 
-			<input type="hidden" th:value="${group.id}" name="id"> 
-			<input id="title" type="hidden" name="book">
-			<input id="authorname" type="hidden" name="author"> 
-			<input id="pageCount" type="hidden" name="pageCount">
-			<input id="button" type="button" value="Submit">
+			<input id="booktitle" type="text" placeholder="Enter book name">
+			<input type="hidden" th:value="${group.id}" name="id"> <input
+				id="title" type="hidden" name="book"> <input id="authorname"
+				type="hidden" name="author"> <input id="pageCount"
+				type="hidden" name="pageCount"> <input id="button"
+				type="button" value="Submit">
 		</form>
 
 	</section>
@@ -128,8 +144,9 @@
 
 		<h2>Create a new goal</h2>
 		<form method="POST" th:action="@{/addGoal}">
-			<input type="text" placeholder="Goal Name" name="name"> <input
-				type="hidden" th:value="${group.id}" name="id"> <input
+			<input type="text" placeholder="Goal Name" name="name"><input
+				type="text" placeholder="Point Value" name="pointValue"> <input
+				type="hidden" th:value="${group.id}" name="id"><input
 				type="submit">
 		</form>
 
@@ -142,10 +159,24 @@
 			<i class="fas fa-star"></i><span th:text="${goal.name}" class="goal"></span>
 			<a
 				th:href="@{/removeGoal/{goalId}/{groupId}(goalId=${goal.id} , groupId=${group.id})}">[delete]</a>
+			<ul>
+				<li>Completed this goal:</li>
+			</ul>
+			<ul>
+				<l1> <span th:if="${goal.getReaders().size() < 1}">No
+					one has completed this goal yet.</span></l1>
+			</ul>
+			<div th:each="reader: ${goal.getReaders()}">
+				<ul>
+					<li><i class="fas fa-user"></i><span
+						th:text="${reader.username}"></span></li>
+				</ul>
+			</div>
 		</div>
 
 	</section>
 
+	<!--  
 	<section class="panel">
 
 		<h2>Delete a goal</h2>
@@ -156,7 +187,7 @@
 		</form>
 
 	</section>
-
+	-->
 
 	<div class="panel">
 
@@ -214,8 +245,7 @@
 
 	<a href="http://localhost:8080/readers"><button>Back to Readers</button></a>
 	<button id="logout">Logout</button>
-	<script src="librarianlogout.js"></script>
-	</main>
+	<script src="librarianlogout.js"></script> </main>
 	<script src='./group.js'></script>
 
 

@@ -57,6 +57,10 @@ public class Reader {
 	@ManyToMany(mappedBy = "friends")
 	private Collection<Reader> friendOf;
 
+	@JsonIgnore
+	@ManyToMany(mappedBy = "readers")
+	private Collection<Goal> goals;
+
 	protected Reader() {
 	}
 
