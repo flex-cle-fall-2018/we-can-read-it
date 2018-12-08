@@ -42,7 +42,7 @@ i {
 
 .pendingFriendOf {
 	margin: 5px 0;
-	background-color: #efefefdd; 
+	background-color: #efefefdd;
 	width: 50%;
 	padding: 10px;
 }
@@ -112,7 +112,6 @@ body.modal-open {
 	#friendsGridContainer {
 		grid-template-columns: repeat(2, 1fr);
 	}
-	
 	.pendingFriendItem {
 		flex-direction: column;
 	}

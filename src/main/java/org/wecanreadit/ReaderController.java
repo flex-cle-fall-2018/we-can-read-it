@@ -53,6 +53,11 @@ public class ReaderController {
 
 	@Resource
 	AuthService auth;
+	
+	@RequestMapping("/ReaderLogin")
+	public String ReaderLoginPage() {
+		return ("ReaderLogin");
+	}
 
 	@PostMapping("/giveReaderPoints")
 	public String giveReaderPoints(@RequestParam(required = true) String userName, int points, long groupId) {

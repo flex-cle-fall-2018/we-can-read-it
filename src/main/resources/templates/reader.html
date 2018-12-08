@@ -23,7 +23,7 @@
 		<h1 th:text="${reader.firstName}"></h1>
 
 
-		
+
 		<section class="panel" th:if="${isOwner or isFriend or isLibrarian}">
 			<h2>Books</h2>
 			<div id="progressGridContainer">
@@ -35,16 +35,16 @@
 						<p th:text="${readerProgressRecord.groupBook.title}"></p>
 
 
-				<p th:text="${readerProgressRecord.groupBook.author}"></p>
-				<p>
-					Finished: <span
-						th:text="${readerProgressRecord.stringDateFinished}"
-						id="dateFinishedParagraph"></span>
-				</p>
-				
-				</a>
-				
-			</div>
+						<p th:text="${readerProgressRecord.groupBook.author}"></p>
+						<p>
+							Finished: <span
+								th:text="${readerProgressRecord.stringDateFinished}"
+								id="dateFinishedParagraph"></span>
+						</p>
+
+					</a>
+
+				</div>
 
 			</div>
 		</section>
@@ -61,22 +61,20 @@
 		<section class="panel" th:if="${isOwner or isFriend or isLibrarian}">
 			Points: <span th:text="${reader.points}"></span>
 		</section>
-		
+
 		<div id="exp" th:if="${points != null}">
 			<h2>Your Points:&nbsp</h2>
 			<h3 th:text="${points}"></h3>
 		</div>
-		
-		<!-- <section class="panel" th:if="not ${isOwner or isLibrarian or isFriend}">
-			<button>Add Friend</button>
-		</section> -->
+
+
 
 		<button id="logout">Logout</button>
 	</main>
 	<script src='./ProfilePutRequest.js'></script>
 	<script src='./xpBar.js'></script>
 	<script src='./readerlogout.js'></script>
-	
+
 
 </body>
 </html>
