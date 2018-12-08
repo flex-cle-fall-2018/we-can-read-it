@@ -43,7 +43,7 @@
 	 };
 	 
 		const acceptFriend = function() {
-		    const friendUsername = this.parentNode.getAttribute("data-requestor"); 
+		    const friendUsername = this.parentNode.parentNode.getAttribute("data-requestor"); 
 		    const readerId = document.querySelector('#readerId').value;
 		    const friend = {
 		    		friendUsername,
@@ -56,7 +56,7 @@
 		 };
 		 
 		 const declineFriend = function() {
-			 const friendUsername = this.parentNode.getAttribute("data-requestor"); 
+			 const friendUsername = this.parentNode.parentNode.getAttribute("data-requestor"); 
 			    const readerId = document.querySelector('#readerId').value;
 			    const declineFriend = {
 			    		friendUsername,
@@ -68,47 +68,6 @@
 			    
 			 };
 	  
-// sendFriendRequest = function(newFriend) {
-// const xhr = new XMLHttpRequest();
-//		  
-// xhr.onreadystatechange = function() {
-// if (this.status === 200 && this.readyState === 4) {
-// console.log(this.responseText);
-// const newFriend = JSON.parse(this.responseText);
-// console.log(newFriend);
-// const newFriendH2 = document.createElement('h2');
-// updateFriends(newFriendH2, newFriend);
-// }
-// };
-//		    
-// xhr.open('PUT', '/addFriend');
-// xhr.setRequestHeader('Content-Type', 'application/json');
-// const body = JSON.stringify(newFriend);
-// xhr.send(body);
-// };
-//		  
-// const updateFriends = function(newFriendH2, newFriend) {
-// console.log(newFriendH2);
-// newFriendH2.innerText = newFriend.friendUsername;
-// const friendsList = document.querySelector('#friendsList');
-// console.log(friendsList);
-// friendsList.appendChild(newFriendH2);
-//		
-//
-// }
-
-// const addFriend = function () {
-// const friendUsername = document.querySelector('#friendUsername').value;
-// const readerId = document.querySelector('#readerId').value;
-// const friend = {
-// friendUsername,
-// readerId,
-// };
-// console.log(friend);
-// sendFriendRequest(friend);
-//		
-// //alert("hello ");
-// };
 
 	sendFriendRequest = function (newFriend) {
 		const xhr = new XMLHttpRequest();
@@ -119,14 +78,12 @@
 				if (this.responseText) {
 					const newFriend = JSON.parse(this.responseText);
 					console.log(newFriend);
-					// Create a <p> element
-// const newFriendPara = document.createElement('P');
+					
 
 
 					var message = "";
 					if (newFriend.pendingFriend) {
 						console.log(newFriend.pendingFriend);
-// updatePendingFriends(newFriendPara, newFriend);
 						message = "This friend is pending, friend must add your username to confirm the connection";
 					} else if (newFriend.alreadyFriends) {
 						console.log(newFriend.alreadyFriends);
@@ -140,7 +97,6 @@
 					else {
 						message = "You and " + newFriend.friendUsername + " are now friends.";
 					}
-// updateFriends(newFriendPara, newFriend);
 				} else {
 					message = "There was no reader with that username";
 				}
@@ -149,15 +105,11 @@
 				addMessage(message);
 				
 
-				// window.location.reload();
-				// window.onload = addMessage(message);
+				
 				}
 			};
 
-			// var t = document.createTextNode("This is a paragraph"); // Create
-			// a text node
-			// para.appendChild(t); // Append the text to <p>
-			// document.body.appendChild(para);
+		
 			xhr.open('PUT', '/addFriend');
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			const body = JSON.stringify(newFriend);
@@ -173,46 +125,29 @@
 		
 					const declineFriend = JSON.parse(this.responseText);
 						console.log(declineFriend);
-						// Create a <p> element
-// const newFriendPara = document.createElement('P');
+						
 
 
 						var message = "";
 						message = "You have declined the friend request from " + declineFriend.friendUsername;
 						
-// updateFriends(newFriendPara, newFriend);
 					
 
 					console.log(message);
 					addMessage(message);
 
-					// window.location.reload();
-					// window.onload = addMessage(message);
 					
 				};
 			};
 
-				// var t = document.createTextNode("This is a paragraph"); //
-				// Create a text node
-				// para.appendChild(t); // Append the text to <p>
-				// document.body.appendChild(para);
+			
 				xhr.open('PUT', '/declineFriend');
 				xhr.setRequestHeader('Content-Type', 'application/json');
 				const body = JSON.stringify(declineFriend);
 				xhr.send(body);
 			};
 
-// const updateFriends = function (newFriendPara, newFriend) {
-// console.log(newFriendPara);
-// newFriendPara.innerText = newFriend.friendUsername;
-//
-// }
-//
-// const updatePendingFriends = function (newFriendPara, newFriend) {
-// console.log(newFriendPara);
-// newFriendPara.innerText = newFriend.friendUsername;
-//
-// }
+
 
 		const addMessage = function (message) {
 			const messagePara = document.createElement('P');

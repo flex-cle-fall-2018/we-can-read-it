@@ -1,0 +1,28 @@
+#mainGridContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#formContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+input[name="email"], input[name="library"], input[name="username"],
+	input[type="submit"] {
+	grid-column-end: span 2;
+}
+
+input[type="submit"] {
+	margin-top: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+	#formContainer {
+		grid-template-columns: 1fr;
+	}
+	input[name="email"], input[name="library"], input[name="username"],
+		input[type="submit"] {
+		grid-column-end: span 1;
+	}
+}

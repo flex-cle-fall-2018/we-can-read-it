@@ -41,23 +41,19 @@
 
 	<div class="panel">
 		<h2>Books</h2>
-		<table>
-
+		<div id="bookGridContainer">
 			<div th:each="book: ${books}">
-				<tr>
-					<th><i class="fas fa-book-reader"></i><a
-						th:href="@{'readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}" th:text="${book.title}"
-						id="stubborn"></a></th>
+				<a
+					th:href="@{'/readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}">
+					<div class="bookGridItem">
 
-					<th><span th:text="${book.author}"></span></th>
-				</tr>
-
+						<i class="fas fa-book-reader"></i> <span th:text="${book.title}"></span>
+						<span th:text="${book.author}"></span>
+					</div>
+				</a>
 			</div>
-		</table>
-
+		</div>
 	</div>
-
-
 
 
 
@@ -65,7 +61,9 @@
 
 		<h2>Goals</h2>
 		<div th:each="goal:${goals}">
-			<i class="fas fa-star"></i><span th:text="${goal.name}"></span>
+			<i class="fas fa-star"></i><span th:text="${goal.name}"></span> <a
+				th:href="@{'/goalComplete/' + ${group.id} + '/' + ${goal.id}}"
+				id="goalCompleteBtn"><button>Complete</button></a>
 		</div>
 
 	</div>
@@ -122,6 +120,14 @@
 
 	</div>
 	<button id="logout">Logout</button>
+	<br>
+	<br>
+
+	<div id="exp" th:if="${points != null}">
+		<h2 id="pointdisplay">Your Points:&nbsp</h2>
+		<h2 th:text="${points}"></h2>
+	</div>
+
 	</main>
 	<script src='./readerlogout.js'></script>
 </body>

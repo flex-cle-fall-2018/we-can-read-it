@@ -22,7 +22,7 @@
 				id="dateFinishedParagraph"></span>
 		</p>
 	</div>
-	<div class="panel">
+	<div class="panel" th:if="${isOwner}">
 
 		<input type="hidden" name="readerId" value=1 /> <input type="hidden"
 			name="readerProgressRecordId" id="readerProgressRecordId"
@@ -45,10 +45,15 @@
 		<a th:href="@{/reader(id=${reader.id})}">Back to all books.</a>
 	</div>
 	<button id="logout">Logout</button>
+
+	<div id="exp" th:if="${points != null}">
+		<h2>Your Points:&nbsp</h2>
+		<h2 th:text="${points}"></h2>
+	</div>
+
 	</main>
+
 	<script src='./readerlogout.js'></script>
-
-
 	<script src='./readerProgressRecord.js'></script>
 </body>
 </html>

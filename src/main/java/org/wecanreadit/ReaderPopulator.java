@@ -86,9 +86,9 @@ public class ReaderPopulator implements CommandLineRunner {
 		shane = readerRepo.save(shane);
 		doug = readerRepo.save(doug);
 
-		Librarian mike = new Librarian("Mike", "Myers", "Beachwood", "waynesworld.com", "waynesworld1", "password",
+		Librarian mike = new Librarian("Mike", "Myers", "Beachwood", "waynesworld.com", "Mike", "password",
 				"action");
-		Librarian angie = new Librarian("Angie", "Smith", "Heights", "smithtown.com", "smittylady5", "password5",
+		Librarian angie = new Librarian("Angie", "Smith", "Heights", "smithtown.com", "Angie", "password",
 				"biography");
 
 		Librarian ashley = new Librarian("Ashley", "Stanley", "South Euclid-Lyndhurst", "sheslays.com", "ash321",
@@ -100,10 +100,22 @@ public class ReaderPopulator implements CommandLineRunner {
 		mike = librarianRepo.save(mike);
 		angie = librarianRepo.save(angie);
 		ashley = librarianRepo.save(ashley);
-
 		
-		shane.setLibrarian(mike);
+		doug.setLibrarian(angie);
+		zack.setLibrarian(angie);
+		vi.setLibrarian(angie);
+		joe.setLibrarian(angie);
+		shane.setLibrarian(angie);
+		test1.setLibrarian(angie);
+		test2.setLibrarian(angie);
 		shane = readerRepo.save(shane);
+		doug = readerRepo.save(doug);
+		zack = readerRepo.save(zack);
+		joe = readerRepo.save(joe);
+		vi = readerRepo.save(vi);
+		test1 = groupRepo.save(test1);
+		test2 = groupRepo.save(test2);
+		
 
 	}
 

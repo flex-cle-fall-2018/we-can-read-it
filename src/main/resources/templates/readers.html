@@ -46,10 +46,12 @@
 
 	<div class="panel">
 		<h2>All Readers</h2>
+		
 		<div th:each="reader: ${readers}">
 			<a th:href="@{reader(id=${reader.id})}"><span
 				th:text="${reader.username}"></span></a>
 		</div>
+			
 	</div>
 
 

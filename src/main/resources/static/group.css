@@ -9,3 +9,40 @@
 .gridContainer {
 	text-align: left;
 }
+
+#bookGridContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
+}
+
+.bookGridItem {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	background: #efefef;
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 1.15em;
+	color: purple;
+}
+
+.bookGridItem:hover {
+	background: purple;
+	color: #efefef;
+}
+
+.fa-book-reader {
+	font-size: 2em;
+}
+
+@media only screen and (max-width: 900px) {
+	#bookGridContainer {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+@media only screen and (max-width: 600px) {
+	#bookGridContainer {
+	grid-template-columns: repeat(1, 1fr);
+}
+}
