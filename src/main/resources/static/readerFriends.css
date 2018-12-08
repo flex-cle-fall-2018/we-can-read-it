@@ -1,4 +1,4 @@
-#friends {
+#friends, #pendingFriendsList {
 	font-weight: 700;
 }
 
@@ -11,8 +11,6 @@
 	grid-template-columns: repeat(4, 1fr);
 	font-size: 1.15rem;
 }
-
-
 
 button {
 	font-family: Arial, Helvetica, sans-serif;
@@ -113,6 +111,10 @@ body.modal-open {
 @media only screen and (max-width: 700px) {
 	#friendsGridContainer {
 		grid-template-columns: repeat(2, 1fr);
+	}
+	
+	.pendingFriendItem {
+		flex-direction: column;
 	}
 }
 

@@ -43,7 +43,7 @@
 	 };
 	 
 		const acceptFriend = function() {
-		    const friendUsername = this.parentNode.getAttribute("data-requestor"); 
+		    const friendUsername = this.parentNode.parentNode.getAttribute("data-requestor"); 
 		    const readerId = document.querySelector('#readerId').value;
 		    const friend = {
 		    		friendUsername,
@@ -56,7 +56,7 @@
 		 };
 		 
 		 const declineFriend = function() {
-			 const friendUsername = this.parentNode.getAttribute("data-requestor"); 
+			 const friendUsername = this.parentNode.parentNode.getAttribute("data-requestor"); 
 			    const readerId = document.querySelector('#readerId').value;
 			    const declineFriend = {
 			    		friendUsername,
