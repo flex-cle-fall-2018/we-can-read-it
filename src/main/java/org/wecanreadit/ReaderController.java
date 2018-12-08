@@ -86,8 +86,9 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/singlegroupquestions")
-	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, Model model) {
+	public String getSingleGroupsQuestions(@RequestParam(required = true) long id, @CookieValue(value = "readerId") long readerId, Model model) {
 		ReadingGroup group = groupRepo.findById(id).get();
+		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 		
 		Optional<Reader> identity = auth.getReaderIdentity();
 		if (identity.isPresent()) {
@@ -366,8 +367,9 @@ public class ReaderController {
 	public String readerFriends(@PathVariable long readerId, Model model) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
-
+		
 		Cookie readerIdCookie = WebUtils.getCookie(request, "readerId");
+		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 
 		if (readerIdCookie != null) {
 			Long readerLoggedInId = new Long(readerIdCookie.getValue());

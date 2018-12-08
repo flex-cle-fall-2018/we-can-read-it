@@ -73,10 +73,14 @@
 			<button class="modal-button">Close</button>
 		</div>
 	</div>
+	<br>
+	
+	<div id="exp" th:if="${points != null}">
+		<h2>Your Points:&nbsp</h2>
+		<h3 th:text="${points}"></h3>
+	</div>	
 
 	<script src='../../readerlogout.js'></script>
-
-	
 	<script src='/addFriend.js'></script>
 
 </body>

@@ -44,6 +44,7 @@ public class ReaderProgressRecordController {
 	    		if(readerLoggedIn == profileOwner) {
 	    			isOwner = true;
 	    		}
+	    		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 	    	}
 	
 		if (readerProgressRecord.isPresent()) {
