@@ -66,6 +66,7 @@ public class ReaderController {
 	public String findQuestions(@CookieValue(value = "readerId") long readerId, Model model) {
 
 		model.addAttribute("groups", readerRepo.findById(readerId).get().getGroups());
+		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 		return "groupquestionlist";
 	}
 
@@ -146,7 +147,7 @@ public class ReaderController {
 	}
 
 	@RequestMapping("/reader")
-	public String findAReader(@RequestParam(required = true) long id, Model model) {
+	public String findAReader(@RequestParam(required = true) long id, @CookieValue(value = "readerId") long cookieId, Model model) {
 		boolean isOwner = false;
 		boolean isFriend = false;
 		boolean isLibrarian = false;
@@ -188,6 +189,7 @@ public class ReaderController {
 		model.addAttribute("isLibrarian", isLibrarian);
 		model.addAttribute("reader", profileOwner);
 		model.addAttribute("readerProgressRecords", readerProgressRecordRepo.findByReader(profileOwner));
+        model.addAttribute("points", readerRepo.findById(cookieId).get().getPoints());
 		return "reader";
 	    }
 	    return "notAuthorized";
