@@ -16,12 +16,6 @@
 <body>
 	<main>
 	<img id="icon" src="../../icon.svg">
-
-
-
-
-
-
 	<div class="panel" id="friends">
 		<h2>Friends</h2>
 		<div id="friendsGridContainer">
@@ -35,17 +29,18 @@
 	</div>
 	<div class="panel" id="pendingFriendOf">
 		<h2>Friend Requests</h2>
-		<div th:each="pendingFriendOf: ${pendingFriendOf}"
-			class="pendingFriendOf">
-			<div th:data-requestor="${pendingFriendOf.username}">
-				<a th:href="@{../../reader(id=${pendingFriendOf.id})}"
-					th:text="${pendingFriendOf.username}"></a>
+		<div th:each="pendingFriendOf: ${pendingFriendOf}" class="pendingFriendOf">
+			<div th:data-requestor="${pendingFriendOf.username}" class="pendingFriendItem">
+				<a th:href="@{../../reader(id=${pendingFriendOf.id})}"><i
+					class="fas fa-user-circle"></i><span th:text="${pendingFriendOf.username}"><</span></a>
+				<div>
 				<button class="acceptFriendRequestButton">
 					<i class="fas fa-user-check"></i>Accept
 				</button>
 				<button class="declineFriendRequestButton">
 					<i class="fas fa-user-times"></i>Decline
 				</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -55,15 +50,17 @@
 			connection</p>
 		<div th:each="pendingFriend: ${pendingFriends}"
 			id="pendingFriendsList">
-			<a th:href="@{../../reader(id=${pendingFriend.id})}"
-				th:text="${pendingFriend.username}"></a>
+			<a th:href="@{../../reader(id=${pendingFriend.id})}"><i
+					class="fas fa-user-circle"></i><span th:text="${pendingFriend.username}"></span></a>
 		</div>
 		<input type="text" placeholder="Friend's Username"
 			name="friendUsername" id="friendUsername"> <input
 			type="hidden" th:value="${reader.id}" name="id" id="readerId">
 		<button id="addFriendButton">Send Request</button>
 	</div>
+	<a th:href="@{../../reader(id=${reader.id})}"><button>Back to profile</button></a>
 	<button id="logout">Logout</button>
+	
 	</main>
 	<div id="backdrop">
 		<div id="modal">

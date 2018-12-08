@@ -10,3 +10,31 @@
 	text-align: left;
 }
 
+
+#bookGridContainer {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
+
+}
+
+.bookGridItem {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	background: #efefef;
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 1.15em;
+	color: purple;
+}
+
+.bookGridItem:hover {
+	background: purple;
+	color: #efefef;
+}
+
+.fa-book-reader {
+	font-size: 2em;
+}
+

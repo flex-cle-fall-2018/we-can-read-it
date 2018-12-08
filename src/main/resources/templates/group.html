@@ -32,6 +32,9 @@
 				<a th:href="@{reader(id=${reader.id})}"><i class="fas fa-user"></i><span
 					th:text="${reader.username}"></span></a>
 			</div>
+			<div th:if="${readers.isEmpty()}">
+				<p>Your group has no members yet</p>
+			</div>
 		</div>
 	</section>
 
@@ -74,18 +77,20 @@
 
 	<section class="panel">
 		<h2>Books</h2>
-		<table>
-
+	
+<div id="bookGridContainer">
 			<div th:each="groupBook: ${groupBooks}">
-				<tr>
-					<th><i class="fas fa-book-reader"></i><a
-						th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}"
-						th:text="${groupBook.title}" id="stubborn"></a></th>
-					<th><span th:text="${groupBook.author}"></span></th>
-				</tr>
-
+				<a th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}" id="stubborn">
+				<div class="bookGridItem">	
+					
+					<i class="fas fa-book-reader"></i>
+				<span th:text="${groupBook.title}"></span>
+				<span th:text="${groupBook.author}"></span>
+				</div>
+				</a>
+</div>
 			</div>
-		</table>
+		
 	</section>
 
 
@@ -238,9 +243,7 @@
 
 -->
 
-	<section class="panel">
-		<a href="http://localhost:8080/readers">Back to Readers</a>
-	</section>
+	<a href="http://localhost:8080/readers"><button>Back to Readers</button></a>
 	<button id="logout">Logout</button>
 	<script src="librarianlogout.js"></script> </main>
 	<script src='./group.js'></script>
