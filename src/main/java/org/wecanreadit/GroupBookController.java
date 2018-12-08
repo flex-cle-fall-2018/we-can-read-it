@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,8 @@ public class GroupBookController {
 	@Resource
 	ReadingGroupRepository groupRepo;
 
-
+	@Resource
+	ReaderRepository readerRepo;
 	
 	@RequestMapping("/group/{groupId}/groupBook/{groupBookId}")
 	public String findOneBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
@@ -49,8 +51,9 @@ public class GroupBookController {
 	}
 	
 	@RequestMapping("/readerViewGroupBook/{groupId}/groupBook/{groupBookId}")
-	public String findOneReaderGroupBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, Model model) throws GroupBookNotFoundException {
+	public String findOneReaderGroupBook(@PathVariable("groupId") long groupId, @PathVariable("groupBookId") long groupBookId, @CookieValue(value = "readerId") long readerId, Model model) throws GroupBookNotFoundException {
 		Optional<GroupBook> result = groupBookRepo.findById(groupBookId);
+		model.addAttribute("points", readerRepo.findById(readerId).get().getPoints());
 		GroupBook groupBook = result.get();
 		ReadingGroup group = groupRepo.findById(groupId).get();
 		if (result.isPresent()) {

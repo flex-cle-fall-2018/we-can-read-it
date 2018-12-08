@@ -120,6 +120,13 @@
 
 	</div>
 	<button id="logout">Logout</button>
+	<br><br>
+	
+	<div id="exp" th:if="${points != null}">
+		<h2>Your Points:&nbsp</h2>
+		<h3 th:text="${points}"></h3>
+	</div>
+	
 	</main>
 	<script src='./readerlogout.js'></script>
 </body>

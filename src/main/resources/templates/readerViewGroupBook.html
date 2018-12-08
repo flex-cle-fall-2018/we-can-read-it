@@ -52,9 +52,12 @@
 	</div>
 	<button id="logout">Logout</button>
 	
+	<div id="exp" th:if="${points != null}">
+		<h2>Your Points:&nbsp</h2>
+		<h3 th:text="${points}"></h3>
+	</div>
 
 	</main>
-
 	
 	<script src='/groupBook.js'></script>
 	<script src="../../../librarianlogout.js"></script>
