@@ -50,7 +50,7 @@ public class LibrarianController {
 	@PostMapping("/add-librarian")
 	public String addLibrarian(String firstName, String lastName, String email, String username, String password,
 			String library, String favoriteGenre) {
-		Librarian newLibrarian = new Librarian(firstName, lastName, email, username, password, library, favoriteGenre);
+		Librarian newLibrarian = new Librarian(firstName, lastName, library, email, username, password, favoriteGenre);
 		librarianRepo.save(newLibrarian);
 		return "redirect:/";
 	}
