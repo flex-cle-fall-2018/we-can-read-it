@@ -77,20 +77,22 @@
 
 	<section class="panel">
 		<h2>Books</h2>
-	
-<div id="bookGridContainer">
+
+		<div id="bookGridContainer">
 			<div th:each="groupBook: ${groupBooks}">
-				<a th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}" id="stubborn">
-				<div class="bookGridItem">	
-					
-					<i class="fas fa-book-reader"></i>
-				<span th:text="${groupBook.title}"></span>
-				<span th:text="${groupBook.author}"></span>
-				</div>
+				<a
+					th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}"
+					id="stubborn">
+					<div class="bookGridItem">
+
+						<i class="fas fa-book-reader"></i> <span
+							th:text="${groupBook.title}"></span> <span
+							th:text="${groupBook.author}"></span>
+					</div>
 				</a>
-</div>
 			</div>
-		
+		</div>
+
 	</section>
 
 
@@ -176,18 +178,6 @@
 
 	</section>
 
-	<!--  
-	<section class="panel">
-
-		<h2>Delete a goal</h2>
-		<form method="GET" th:action="@{/deleteGoal}">
-			<input type="text" placeholder="Group Name" name="name"> <input
-				type="hidden" th:value="${group.id}" name="id"> <input
-				type="submit">
-		</form>
-
-	</section>
-	-->
 
 	<div class="panel">
 
@@ -200,50 +190,12 @@
 
 		</div>
 
-		<!--  
-		<form method="POST" th:action="@{/savePost}">
-			<textarea rows="4" cols="75" name="newPost" placeholder="New Post"
-				required></textarea>
-			<input type="hidden" th:value="${group.id}" name="groupid"> <input
-				type="submit" id="messageBoardSubmit">
-
-		</form>
-		-->
 	</div>
 
-	<!--
-	<section class="panel">
-		<h2>Create a book</h2>
-		<div th:each="group: ${groups}">
-			<form id="bookForm" method="POST" th:action="@{/addBook}">
-				<input id="booktitle" type="text" placeholder="Enter book Title"
-					name="book"> <input type="text"
-					placeholder="Enter author name" name="author"> <input
-					type="hidden" th:value="${group.id}" name="id"> <input
-					id="pageCount" type="hidden" name="pageCount"> <input
-					id="button" type="button" value="Submit">
-			</form>
-		</div>
-	</section>
 
 
-	<section class="panel">
-		<h2>Add a book to this group</h2>
-		<div th:each="group: ${groups}">
-			<form method="POST" th:action="@{/addbooktogroup}">
-				<input type="text" placeholder="Book Title" name="title" required>
-				<input type="hidden" th:value="${group.id}" name="groupId">
-				<input type="submit">
-			</form>
-
-		</div>
-
-
-	</section>
-
--->
-
-	<a href="http://localhost:8080/readers"><button>Back to Readers</button></a>
+	<a href="http://localhost:8080/readers"><button>Back to
+			Readers</button></a>
 	<button id="logout">Logout</button>
 	<script src="librarianlogout.js"></script> </main>
 	<script src='./group.js'></script>

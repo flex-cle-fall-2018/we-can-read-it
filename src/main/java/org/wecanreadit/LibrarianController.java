@@ -37,16 +37,6 @@ public class LibrarianController {
 	@Resource
 	LibrarianRepository libRepo;
 
-	@RequestMapping("/librarian")
-	public String findOneLibrarian(@RequestParam(value = "id") long id, Model model) throws LibrarianNotFoundException {
-		Optional<Librarian> librarian = librarianRepo.findById(id);
-		if (librarian.isPresent()) {
-			model.addAttribute("librarian", librarian.get());
-			return "librarian";
-		}
-		throw new LibrarianNotFoundException();
-	}
-
 	@PostMapping("/add-librarian")
 	public String addLibrarian(String firstName, String lastName, String email, String username, String password,
 			String library, String favoriteGenre) {
@@ -77,7 +67,6 @@ public class LibrarianController {
 			}
 		}
 		return "redirect:/librarian-login";
-
 	}
 
 	@RequestMapping("/addBook")
