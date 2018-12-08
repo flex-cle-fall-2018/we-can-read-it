@@ -62,7 +62,7 @@
 			Points: <span th:text="${reader.points}"></span>
 		</section>
 		
-		<div id="exp">
+		<div id="exp" th:if="${points != null}">
 			<h2>Your Points:&nbsp</h2>
 			<h3 th:text="${points}"></h3>
 		</div>
