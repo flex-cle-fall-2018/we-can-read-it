@@ -39,21 +39,22 @@
 
 	</div>
 
-	<div class="panel">
+	<section class="panel">
 		<h2>Books</h2>
 		<div id="bookGridContainer">
 			<div th:each="book: ${books}">
 				<a
-					th:href="@{'/readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}">
+					th:href="@{'/readerViewGroupBook/' + ${group.id} + '/groupBook/' + ${book.id}}" class="stubborn">
 					<div class="bookGridItem">
 
-						<i class="fas fa-book-reader"></i> <span th:text="${book.title}"></span>
+						<i class="fas fa-book-reader"></i> 
+						<span th:text="${book.title}"></span>
 						<span th:text="${book.author}"></span>
 					</div>
 				</a>
 			</div>
 		</div>
-	</div>
+	</section>
 
 
 

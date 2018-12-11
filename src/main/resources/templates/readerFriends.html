@@ -58,8 +58,8 @@
 			type="hidden" th:value="${reader.id}" name="id" id="readerId">
 		<button id="addFriendButton">Send Request</button>
 	</div>
-	<a th:href="@{../../reader(id=${reader.id})}"><button>Back to profile</button></a>
-	<button id="logout">Logout</button>
+	<a th:href="@{../../reader(id=${reader.id})}" class="stubborn"><button>Back to profile</button></a>
+	<button id="logout" class="stubborn">Logout</button>
 	
 	</main>
 	<div id="backdrop">

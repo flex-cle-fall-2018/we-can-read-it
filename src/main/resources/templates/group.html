@@ -82,7 +82,7 @@
 			<div th:each="groupBook: ${groupBooks}">
 				<a
 					th:href="@{'/group/' + ${group.id} + '/groupBook/' + ${groupBook.id}}"
-					id="stubborn">
+					class="stubborn">
 					<div class="bookGridItem">
 
 						<i class="fas fa-book-reader"></i> <span
@@ -194,7 +194,7 @@
 
 
 
-	<a href="http://localhost:8080/readers"><button>Back to
+	<a href="/readers" class="stubborn"><button>Back to
 			Readers</button></a>
 	<button id="logout">Logout</button>
 	<script src="librarianlogout.js"></script> </main>

@@ -51,9 +51,9 @@
 
 
 		<section class="panel" id="readerNav" th:if="${isOwner}">
-			<a th:href="@{'/questionlist'}" class='navLink'><i
+			<a th:href="@{'/questionlist'}" class='navLink stubborn'><i
 				class="fas fa-users"></i>Groups</a> <a
-				th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink'>
+				th:href="@{'/reader/' + ${reader.id} + '/friends'}" class='navLink stubborn'>
 				<i class="fas fa-user-friends"></i>Friends
 			</a>
 		</section>
@@ -76,7 +76,7 @@
 
 
 
-		<button id="logout">Logout</button>
+		<button id="logout" >Logout</button>
 		<br>
 
 		<div id="exp" th:if="${points != null}">
