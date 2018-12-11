@@ -45,10 +45,11 @@
 
 
 
-		<a th:href="@{../../../singlegroupquestions(id=${group.id})}">Back
-			to Group</a>
+		
 
 	</div>
+	<a th:href="@{../../../singlegroupquestions(id=${group.id})}" class="stubborn"><button>Back
+			to Group</button></a>
 	<button id="logout">Logout</button>
 
 	<div id="exp" th:if="${points != null}">
